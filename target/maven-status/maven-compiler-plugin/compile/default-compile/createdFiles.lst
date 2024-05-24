@@ -1,0 +1,8 @@
+com\test\TUdipsaiApi\util\BCryptPasswordEncoderTest.class
+com\test\TUdipsaiApi\Controller\EspecialistaController.class
+com\test\TUdipsaiApi\Config\SecurityConfig.class
+com\test\TUdipsaiApi\Service\EspecialistaService.class
+com\test\TUdipsaiApi\TUdipsaiApiApplication.class
+com\test\TUdipsaiApi\Repository\EspecialistaRepositorio.class
+com\test\TUdipsaiApi\Model\Especialista.class
+com\test\TUdipsaiApi\Model\Especialidad.class
