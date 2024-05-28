@@ -23,5 +23,5 @@ public interface PacienteRepositorio  extends JpaRepository<Paciente, Integer> {
     Optional<Paciente> findById(Integer id);
 
     //Metodo para obtener todos los datos de paciente
-    List<Paciente> findAll();
+    List<Paciente> findByPacienteEstado(Integer pacienteEstado);
 }

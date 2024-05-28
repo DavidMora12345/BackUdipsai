@@ -34,6 +34,9 @@ public class Paciente {
     @Column(name= "fecha_apertura")
     private Date fechaApertura;
 
+    @Column(name= "paciente_estado")
+    private Integer pacienteEstado;
+
     @Column(name= "nombres_apellidos")
     private String nombresApellidos;
 
