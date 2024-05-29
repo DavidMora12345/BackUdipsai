@@ -1,12 +1,3 @@
-com\test\TUdipsaiApi\jmh_generated\PacienteControllerRendimientoTest_jmhType_B1.class
-com\test\TUdipsaiApi\PacienteControllerRendimientoTest$1.class
-com\test\TUdipsaiApi\jmh_generated\PacienteControllerRendimientoTest_jmhType_B3.class
-com\test\TUdipsaiApi\TUdipsaiApiApplicationTests.class
-META-INF\BenchmarkList
-com\test\TUdipsaiApi\jmh_generated\PacienteControllerRendimientoTest_jmhType_B2.class
-META-INF\CompilerHints
-com\test\TUdipsaiApi\PacienteControllerRendimientoTest.class
-com\test\TUdipsaiApi\PacienteControllerTest.class
-com\test\TUdipsaiApi\jmh_generated\PacienteControllerRendimientoTest_jmhType.class
 com\test\TUdipsaiApi\PacienteControllerTest$1.class
-com\test\TUdipsaiApi\jmh_generated\PacienteControllerRendimientoTest_testCreatePaciente_jmhTest.class
+com\test\TUdipsaiApi\TUdipsaiApiApplicationTests.class
+com\test\TUdipsaiApi\PacienteControllerTest.class
