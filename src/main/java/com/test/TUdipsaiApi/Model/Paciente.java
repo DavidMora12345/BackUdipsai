@@ -56,8 +56,9 @@ public class Paciente {
     private String domicilio;
 
     @Lob
-    @Column(name= "imagen")
+    @Column(name = "imagen", columnDefinition = "LONGBLOB")
     private byte[] imagen;
+
 
     @Column(name= "telefono")
     private String telefono;
