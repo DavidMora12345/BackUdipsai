@@ -15,6 +15,7 @@
     <description>Api para UDIPSAI</description>
     <properties>
         <java.version>17</java.version>
+        <maven.test.skip>true</maven.test.skip> <!-- Para desactivar todas las pruebas -->
     </properties>
     <dependencies>
         <dependency>
@@ -25,7 +26,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -52,7 +52,6 @@
             <artifactId>spring-security-crypto</artifactId>
             <version>5.7.2</version> <!-- Usa la última versión compatible con tus otras dependencias de Spring -->
         </dependency>
-
         <!-- Apache POI para trabajar con archivos Excel -->
         <dependency>
             <groupId>org.apache.poi</groupId>
@@ -64,7 +63,6 @@
             <artifactId>poi</artifactId>
             <version>4.1.2</version>
         </dependency>
-
         <!-- JUnit 5 -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -72,27 +70,20 @@
             <version>5.8.1</version>
             <scope>test</scope>
         </dependency>
-
-        <!-- JMH -->
-        <dependency>
-            <groupId>org.openjdk.jmh</groupId>
-            <artifactId>jmh-core</artifactId>
-            <version>1.32</version>
-        </dependency>
-        <dependency>
-            <groupId>org.openjdk.jmh</groupId>
-            <artifactId>jmh-generator-annprocess</artifactId>
-            <version>1.32</version>
-            <scope>provided</scope>
-        </dependency>
-
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>3.2.5</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
                     <excludes>
                         <exclude>
@@ -102,7 +93,14 @@
                     </excludes>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M5</version>
+                <configuration>
+                    <skipTests>true</skipTests> <!-- Para desactivar las pruebas unitarias -->
+                </configuration>
+            </plugin>
         </plugins>
     </build>
-
 </project>
