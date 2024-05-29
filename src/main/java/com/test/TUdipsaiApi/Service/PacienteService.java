@@ -76,4 +76,9 @@ public class PacienteService {
     public List<Paciente> getAllPacientes() {
         return pacienteRepositorio.findByPacienteEstado(1);
     }
+
+    // Método setter para la inyección manual del repositorio
+    public void setPacienteRepositorio(PacienteRepositorio pacienteRepositorio) {
+        this.pacienteRepositorio = pacienteRepositorio;
+    }
 }

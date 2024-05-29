@@ -11,6 +11,7 @@ import jakarta.persistence.Lob;
 import lombok.Getter;
 import lombok.Setter;
 import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
  * Class for managing a detailed entity with various attributes.
@@ -31,6 +32,7 @@ public class Paciente {
     @Column(name= "id")
     private Integer id;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @Column(name= "fecha_apertura")
     private Date fechaApertura;
 
@@ -43,6 +45,7 @@ public class Paciente {
     @Column(name= "ciudad")
     private String ciudad;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @Column(name= "fecha_nacimiento")
     private Date fechaNacimiento;
 

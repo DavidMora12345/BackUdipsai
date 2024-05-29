@@ -1,0 +1,1 @@
+JMH S 54 com.test.TUdipsaiApi.PacienteControllerRendimientoTest S 95 com.test.TUdipsaiApi.jmh_generated.PacienteControllerRendimientoTest_testCreatePaciente_jmhTest S 18 testCreatePaciente S 10 Throughput E A 1 1 1 E E E E E E E E E E E E E E U 7 SECONDS E E 
