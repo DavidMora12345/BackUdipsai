@@ -3,6 +3,7 @@ package com.test.TUdipsaiApi.Service;
 import com.test.TUdipsaiApi.Model.Paciente;
 import com.test.TUdipsaiApi.Repository.PacienteRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -71,7 +72,9 @@ public class PacienteService {
             return Optional.empty();
         }
     }
-
+    public List<Paciente> searchPacientes(String busqueda) {
+        return pacienteRepositorio.searchPacientes(busqueda, PageRequest.of(0, 100));
+    }
     // Metodo para listar pacientes con estado 1
     public List<Paciente> getAllPacientes() {
         return pacienteRepositorio.findByPacienteEstado(1);
