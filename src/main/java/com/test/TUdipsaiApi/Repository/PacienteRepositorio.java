@@ -28,7 +28,8 @@ public interface PacienteRepositorio  extends JpaRepository<Paciente, Integer> {
     //Metodo para obtener todos los datos de paciente
     List<Paciente> findByPacienteEstado(Integer pacienteEstado);
     @Query("SELECT p FROM Paciente p WHERE " +
-            "(LOWER(p.nombresApellidos) LIKE LOWER(CONCAT('%', :busqueda, '%')) OR " +
+            "(LOWER(CAST(p.id AS string)) LIKE LOWER(CONCAT('%', :busqueda, '%')) OR " +
+            "LOWER(p.nombresApellidos) LIKE LOWER(CONCAT('%', :busqueda, '%')) OR " +
             "LOWER(p.domicilio) LIKE LOWER(CONCAT('%', :busqueda, '%')) OR " +
             "LOWER(p.proyecto) LIKE LOWER(CONCAT('%', :busqueda, '%')) OR " +
             "LOWER(p.cedula) LIKE LOWER(CONCAT('%', :busqueda, '%')) OR " +
