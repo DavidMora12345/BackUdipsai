@@ -1,26 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.test.TUdipsaiApi.Model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.FetchType;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-/**
- *
- * @author Ing.David Esteban Mora Cabrera
- * Date:14/12/2023
- * Country: Cuenca-Ecuador
- * Class for the management of specialists
- */
+import java.time.LocalDate;
+
 @Entity
 @Table(name="especialista")
 @Setter
@@ -42,7 +27,6 @@ public class Especialista {
     @Column(name= "segundoApellido")
     private String segundoApellido;
 
-    // Esta columna es una clave foránea que hace referencia a una entidad de especialidad
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_especialidad", referencedColumnName = "id")
     private Especialidad especialidad;
@@ -50,11 +34,21 @@ public class Especialista {
     @Column(name= "esPasante")
     private Boolean esPasante;
 
-    // Esta relación indica que un especialista puede ser asignado a otro especialista
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "especialistaAsignado", referencedColumnName = "cedula")
     private Especialista especialistaAsignado;
 
     @Column(name= "contrasena")
     private String contrasena;
+
+    // Nuevos campos
+    @Column(name= "inicioPasantia")
+    private LocalDate inicioPasantia;
+
+    @Column(name= "finPasantia")
+    private LocalDate finPasantia;
+
+    @Lob
+    @Column(name= "imagen", columnDefinition="LONGBLOB")
+    private byte[] imagen;
 }
