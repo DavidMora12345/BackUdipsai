@@ -1,5 +1,7 @@
 package com.test.TUdipsaiApi.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.test.TUdipsaiApi.Model.Especialidad;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,6 +17,9 @@ public class Especialista {
     @Column(name= "cedula")
     private String cedula;
 
+    @Column(name= "especialista_estado")
+    private Integer especialistaEstado;
+
     @Column(name= "primerNombre")
     private String primerNombre;
 
@@ -27,6 +32,7 @@ public class Especialista {
     @Column(name= "segundoApellido")
     private String segundoApellido;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_especialidad", referencedColumnName = "id")
     private Especialidad especialidad;
@@ -34,6 +40,7 @@ public class Especialista {
     @Column(name= "esPasante")
     private Boolean esPasante;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "especialistaAsignado", referencedColumnName = "cedula")
     private Especialista especialistaAsignado;
@@ -41,7 +48,6 @@ public class Especialista {
     @Column(name= "contrasena")
     private String contrasena;
 
-    // Nuevos campos
     @Column(name= "inicioPasantia")
     private LocalDate inicioPasantia;
 
