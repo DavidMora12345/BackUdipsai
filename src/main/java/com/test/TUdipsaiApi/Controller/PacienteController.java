@@ -23,7 +23,11 @@ public class PacienteController {
 
     @Autowired
     private PacienteService pacienteService;
-
+    @PostMapping("/buscar")
+    public ResponseEntity<List<Paciente>> buscarPaciente(@RequestParam("search") String search) {
+        List<Paciente> pacientes = pacienteService.searchPacientes(search);
+        return ResponseEntity.ok(pacientes);
+    }
     @GetMapping("/listar")
     public ResponseEntity<List<Paciente>> getAllPacientes() {
         List<Paciente> pacientes = pacienteService.getAllPacientes();
