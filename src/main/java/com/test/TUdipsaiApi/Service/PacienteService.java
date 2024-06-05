@@ -14,22 +14,22 @@ public class PacienteService {
     @Autowired
     private PacienteRepositorio pacienteRepositorio;
 
-    // Metodo para obtener datos del paciente
+
     public Optional<Paciente> getPacienteById(Integer id) {
         return pacienteRepositorio.findById(id);
     }
 
-    // Metodo para crear un nuevo paciente
+
     public Paciente createPaciente(Paciente paciente) {
         return pacienteRepositorio.save(paciente);
     }
 
-    // Metodo para actualizar un paciente existente
+
     public Paciente updatePaciente(Integer id, Paciente pacienteDetails) {
         Optional<Paciente> optionalPaciente = pacienteRepositorio.findById(id);
         if (optionalPaciente.isPresent()) {
             Paciente paciente = optionalPaciente.get();
-            // Actualiza los campos necesarios del paciente
+
             paciente.setFechaApertura(pacienteDetails.getFechaApertura());
             paciente.setPacienteEstado(pacienteDetails.getPacienteEstado());
             paciente.setNombresApellidos(pacienteDetails.getNombresApellidos());
@@ -60,7 +60,6 @@ public class PacienteService {
         }
     }
 
-    // Metodo para "eliminar" un paciente cambiando su estado a 0
     public Optional<Paciente> deletePaciente(Integer id) {
         Optional<Paciente> optionalPaciente = pacienteRepositorio.findById(id);
         if (optionalPaciente.isPresent()) {

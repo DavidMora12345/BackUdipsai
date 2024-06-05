@@ -28,7 +28,7 @@ public class ExcelService {
         Sheet sheet = workbook.getSheetAt(0);
 
         for (Row row : sheet) {
-            if (row.getRowNum() == 0) { // Saltar la primera fila (cabecera)
+            if (row.getRowNum() == 0) {
                 continue;
             }
 
@@ -64,7 +64,7 @@ public class ExcelService {
 
             paciente.setPacienteEstado((int) row.getCell(22).getNumericCellValue());
 
-            // Establecer el campo de imagen como null
+
             paciente.setImagen(null);
 
             pacientes.add(paciente);

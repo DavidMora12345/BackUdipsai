@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface InstitucionEducativaRepositorio extends JpaRepository<InstitucionEducativa, Integer> {
     List<InstitucionEducativa> findByInstitucionEstado(Integer estado);
+
 }

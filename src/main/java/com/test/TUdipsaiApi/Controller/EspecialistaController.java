@@ -1,55 +1,57 @@
 package com.test.TUdipsaiApi.Controller;
 
-import com.test.TUdipsaiApi.Model.Especialista;
-import com.test.TUdipsaiApi.Service.EspecialistaService;
+import com.test.TUdipsaiApi.Model.Especialistas;
+import com.test.TUdipsaiApi.Service.EspecialistasService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/especialistas")
-@CrossOrigin(origins = "*")
 public class EspecialistaController {
 
     @Autowired
-    private EspecialistaService especialistaService;
+    private EspecialistasService especialistasService;
 
-
-    @GetMapping("/listar")
-    public ResponseEntity<List<Especialista>> getAllEspecialistas() {
-        List<Especialista> especialistas = especialistaService.findByEspecialistaEstado(1);
-        return ResponseEntity.ok(especialistas);
+    @GetMapping("/activos")
+    public List<Especialistas> listarEspecialistasActivos() {
+        return especialistasService.findAllActive();
     }
 
-    @GetMapping("/listar/{cedula}")
-    public ResponseEntity<Especialista> getEspecialistaById(@PathVariable String cedula) {
-        Optional<Especialista> especialista = especialistaService.findById(cedula);
-        return especialista.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    @GetMapping("/{cedula}")
+    public Optional<Especialistas> buscarPorCedula(@PathVariable String cedula) {
+        return especialistasService.findByCedula(cedula);
     }
 
     @PostMapping("/insertar")
-    public ResponseEntity<Especialista> createEspecialista(@RequestBody Especialista especialista) {
-        Especialista nuevoEspecialista = especialistaService.save(especialista);
-        return ResponseEntity.ok(nuevoEspecialista);
+    public Especialistas crearOActualizarEspecialista(@RequestBody Especialistas especialista) {
+        return especialistasService.saveOrUpdate(especialista);
     }
 
-    @PutMapping("/actualizar/{cedula}")
-    public ResponseEntity<Especialista> updateEspecialista(@PathVariable String cedula, @RequestBody Especialista especialistaDetails) {
-        Optional<Especialista> updatedEspecialista = especialistaService.updateEspecialista(cedula, especialistaDetails);
-        return updatedEspecialista.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    @DeleteMapping("/{cedula}")
+    public boolean eliminarEspecialista(@PathVariable String cedula) {
+        return especialistasService.deleteByCedula(cedula);
     }
 
-    @DeleteMapping("/eliminar/{cedula}")
-    public ResponseEntity<Especialista> deleteEspecialista(@PathVariable String cedula) {
-        Optional<Especialista> especialista = especialistaService.deleteById(cedula);
-        return especialista.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    @PostMapping("/login")
+    public ResponseEntity<Map<String, String>> login(@RequestBody Especialistas especialista) {
+        Especialistas resultadoLogin = especialistasService.login(especialista.getCedula(), especialista.getContrasena());
+        if (resultadoLogin != null) {
+            Map<String, String> respuesta = new HashMap<>();
+            respuesta.put("primerNombre", resultadoLogin.getPrimerNombre());
+            respuesta.put("segundoNombre", resultadoLogin.getSegundoNombre());
+            respuesta.put("primerApellido", resultadoLogin.getPrimerApellido());
+            respuesta.put("segundoApellido", resultadoLogin.getSegundoApellido());
+            return ResponseEntity.ok(respuesta);
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build(); // O devuelve otro código de estado si lo prefieres
+        }
     }
 
-    // Setter para inyección manual del servicio (opcional)
-    public void setEspecialistaService(EspecialistaService especialistaService) {
-        this.especialistaService = especialistaService;
-    }
 }
