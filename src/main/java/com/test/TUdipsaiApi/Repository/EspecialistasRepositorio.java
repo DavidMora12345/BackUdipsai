@@ -10,10 +10,13 @@ import java.util.List;
 @Repository
 public interface EspecialistasRepositorio extends JpaRepository<Especialistas, String> {
 
-    @Query("SELECT e FROM Especialistas e WHERE e.especialistaEstado = true") // Cambiado a true
+    @Query("SELECT e FROM Especialistas e WHERE e.especialistaEstado = true")
     List<Especialistas> findAllByEstado();
 
     Especialistas findByCedula(String cedula);
 
     Especialistas findByCedulaAndContrasena(String cedula, String contrasena);
+
+    @Query("SELECT e FROM Especialistas e WHERE e.especialistaEstado = true AND e.esPasante = false")
+    List<Especialistas> findAllByEspecialistaEstadoTrueAndEsPasanteFalse();
 }

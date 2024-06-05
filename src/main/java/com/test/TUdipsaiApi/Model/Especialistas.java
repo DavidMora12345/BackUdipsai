@@ -17,7 +17,7 @@ public class Especialistas {
     private String cedula;
 
     @Column(name = "especialista_estado")
-    private Boolean especialistaEstado; // Cambiado a Boolean
+    private Boolean especialistaEstado;
 
     @Column(name = "primerNombre")
     private String primerNombre;
@@ -53,5 +53,5 @@ public class Especialistas {
 
     @Lob
     @Column(name = "imagen")
-    private byte[] imagen; // Cambiado a byte[]
+    private byte[] imagen;
 }

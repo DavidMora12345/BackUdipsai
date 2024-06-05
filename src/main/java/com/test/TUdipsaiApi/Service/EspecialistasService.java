@@ -50,4 +50,8 @@ public class EspecialistasService {
     public Especialistas login(String cedula, String contrasena) {
         return especialistasRepositorio.findByCedulaAndContrasena(cedula, contrasena);
     }
+
+    public List<Especialistas> findAllActiveNonPasantes() {
+        return especialistasRepositorio.findAllByEspecialistaEstadoTrueAndEsPasanteFalse();
+    }
 }

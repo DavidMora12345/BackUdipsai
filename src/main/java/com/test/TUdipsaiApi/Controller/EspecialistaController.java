@@ -24,6 +24,12 @@ public class EspecialistaController {
         return especialistasService.findAllActive();
     }
 
+    @GetMapping("/activos/nopasantes")
+    public ResponseEntity<List<Especialistas>> getAllActiveNonPasantes() {
+        List<Especialistas> especialistas = especialistasService.findAllActiveNonPasantes();
+        return ResponseEntity.ok(especialistas);
+    }
+
     @GetMapping("/{cedula}")
     public Optional<Especialistas> buscarPorCedula(@PathVariable String cedula) {
         return especialistasService.findByCedula(cedula);

@@ -1,13 +1,6 @@
 package com.test.TUdipsaiApi.Model;
 
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.Lob;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import java.util.Date;
@@ -23,8 +16,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Table(name="Paciente")
 @Setter
 @Getter
-
-
 public class Paciente {
 
     @Id
@@ -62,27 +53,30 @@ public class Paciente {
     @Column(name = "imagen", columnDefinition = "LONGBLOB")
     private byte[] imagen;
 
-
     @Column(name= "telefono")
     private String telefono;
 
     @Column(name= "celular")
     private String celular;
 
-    @Column(name= "institucion_educativa")
-    private String institucionEducativa;
+    @ManyToOne
+    @JoinColumn(name = "id_institucion_educativa")
+    private InstitucionEducativa institucionEducativa;
 
-    @Column(name= "tipo_institucion")
-    private String tipoInstitucion;
+    @ManyToOne
+    @JoinColumn(name= "tipo_institucion_id")
+    private InstitucionEducativa tipoInstitucion;
 
     @Column(name= "proyecto")
     private String proyecto;
 
-    @Column(name= "jornada")
-    private String jornada;
+    @ManyToOne
+    @JoinColumn(name= "jornada_id")
+    private InstitucionEducativa jornada;
 
-    @Column(name= "direccion_institucion")
-    private String direccionInstitucion;
+    @ManyToOne
+    @JoinColumn(name= "direccion_institucion_id")
+    private InstitucionEducativa direccionInstitucion;
 
     @Column(name= "anio_educacion")
     private String anioEducacion;

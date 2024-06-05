@@ -10,4 +10,8 @@ import java.util.List;
 public interface InstitucionEducativaRepositorio extends JpaRepository<InstitucionEducativa, Integer> {
     List<InstitucionEducativa> findByInstitucionEstado(Integer estado);
 
+    InstitucionEducativa findByNombreInstitucion(String nombreInstitucion);
+    InstitucionEducativa findByTipoInstitucion (String tipoInstitucion);
+    InstitucionEducativa findByDireccion (String direccion);
+    InstitucionEducativa findByJornada (String jornada);
 }

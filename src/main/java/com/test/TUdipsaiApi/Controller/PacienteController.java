@@ -15,7 +15,6 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/api/pacientes")
 @CrossOrigin(origins = "*")
-
 public class PacienteController {
 
     @Autowired
@@ -23,11 +22,8 @@ public class PacienteController {
 
     @Autowired
     private PacienteService pacienteService;
-    @PostMapping("/buscar")
-    public ResponseEntity<List<Paciente>> buscarPaciente(@RequestParam("search") String search) {
-        List<Paciente> pacientes = pacienteService.searchPacientes(search);
-        return ResponseEntity.ok(pacientes);
-    }
+
+
     @GetMapping("/listar")
     public ResponseEntity<List<Paciente>> getAllPacientes() {
         List<Paciente> pacientes = pacienteService.getAllPacientes();
@@ -41,15 +37,8 @@ public class PacienteController {
     }
 
     @PostMapping("/insertar")
-    public ResponseEntity<Paciente> createPaciente(@RequestBody Paciente paciente) {
-        Paciente nuevoPaciente = pacienteService.createPaciente(paciente);
-        return ResponseEntity.ok(nuevoPaciente);
-    }
-
-
-
-    public void setPacienteService(PacienteService pacienteService) {
-        this.pacienteService = pacienteService;
+    public Paciente crearOActualizarPaciente(@RequestBody Paciente paciente) {
+        return pacienteService.saveOrUpdate(paciente);
     }
 
     @PutMapping("/actualizar/{id}")

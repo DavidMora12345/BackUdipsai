@@ -1,6 +1,8 @@
 package com.test.TUdipsaiApi.Service;
 
+import com.test.TUdipsaiApi.Model.InstitucionEducativa;
 import com.test.TUdipsaiApi.Model.Paciente;
+import com.test.TUdipsaiApi.Repository.InstitucionEducativaRepositorio;
 import com.test.TUdipsaiApi.Repository.PacienteRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -14,9 +16,37 @@ public class PacienteService {
     @Autowired
     private PacienteRepositorio pacienteRepositorio;
 
+    @Autowired
+    private InstitucionEducativaRepositorio institucionEducativaRepositorio;
 
     public Optional<Paciente> getPacienteById(Integer id) {
         return pacienteRepositorio.findById(id);
+    }
+
+    // Crear o actualizar un paciente
+    public Paciente saveOrUpdate(Paciente paciente) {
+        // Asignar la institución educativa
+        if (paciente.getInstitucionEducativa() != null && paciente.getInstitucionEducativa().getId() != null) {
+            Optional<InstitucionEducativa> institucion = institucionEducativaRepositorio.findById(paciente.getInstitucionEducativa().getId());
+            institucion.ifPresent(paciente::setInstitucionEducativa);
+        }
+        // Asignar el tipo de institución
+        if (paciente.getTipoInstitucion() != null && paciente.getTipoInstitucion().getId() != null) {
+            Optional<InstitucionEducativa> tipoInstitucion = institucionEducativaRepositorio.findById(paciente.getTipoInstitucion().getId());
+            tipoInstitucion.ifPresent(paciente::setTipoInstitucion);
+        }
+        // Asignar la jornada
+        if (paciente.getJornada() != null && paciente.getJornada().getId() != null) {
+            Optional<InstitucionEducativa> jornada = institucionEducativaRepositorio.findById(paciente.getJornada().getId());
+            jornada.ifPresent(paciente::setJornada);
+        }
+        // Asignar la dirección de la institución
+        if (paciente.getDireccionInstitucion() != null && paciente.getDireccionInstitucion().getId() != null) {
+            Optional<InstitucionEducativa> direccionInstitucion = institucionEducativaRepositorio.findById(paciente.getDireccionInstitucion().getId());
+            direccionInstitucion.ifPresent(paciente::setDireccionInstitucion);
+        }
+
+        return pacienteRepositorio.save(paciente);
     }
 
 
@@ -24,12 +54,11 @@ public class PacienteService {
         return pacienteRepositorio.save(paciente);
     }
 
-
+    // Método específico para actualizar un paciente existente
     public Paciente updatePaciente(Integer id, Paciente pacienteDetails) {
-        Optional<Paciente> optionalPaciente = pacienteRepositorio.findById(id);
-        if (optionalPaciente.isPresent()) {
-            Paciente paciente = optionalPaciente.get();
-
+        Optional<Paciente> pacienteOptional = pacienteRepositorio.findById(id);
+        if (pacienteOptional.isPresent()) {
+            Paciente paciente = pacienteOptional.get();
             paciente.setFechaApertura(pacienteDetails.getFechaApertura());
             paciente.setPacienteEstado(pacienteDetails.getPacienteEstado());
             paciente.setNombresApellidos(pacienteDetails.getNombresApellidos());
@@ -41,11 +70,7 @@ public class PacienteService {
             paciente.setImagen(pacienteDetails.getImagen());
             paciente.setTelefono(pacienteDetails.getTelefono());
             paciente.setCelular(pacienteDetails.getCelular());
-            paciente.setInstitucionEducativa(pacienteDetails.getInstitucionEducativa());
-            paciente.setTipoInstitucion(pacienteDetails.getTipoInstitucion());
             paciente.setProyecto(pacienteDetails.getProyecto());
-            paciente.setJornada(pacienteDetails.getJornada());
-            paciente.setDireccionInstitucion(pacienteDetails.getDireccionInstitucion());
             paciente.setAnioEducacion(pacienteDetails.getAnioEducacion());
             paciente.setParalelo(pacienteDetails.getParalelo());
             paciente.setPerteneceInclusion(pacienteDetails.getPerteneceInclusion());
@@ -54,7 +79,14 @@ public class PacienteService {
             paciente.setDiagnostico(pacienteDetails.getDiagnostico());
             paciente.setMotivoConsulta(pacienteDetails.getMotivoConsulta());
             paciente.setObservaciones(pacienteDetails.getObservaciones());
-            return pacienteRepositorio.save(paciente);
+
+            // Actualizar relaciones
+            paciente.setInstitucionEducativa(pacienteDetails.getInstitucionEducativa());
+            paciente.setTipoInstitucion(pacienteDetails.getTipoInstitucion());
+            paciente.setJornada(pacienteDetails.getJornada());
+            paciente.setDireccionInstitucion(pacienteDetails.getDireccionInstitucion());
+
+            return saveOrUpdate(paciente);
         } else {
             return null;
         }
@@ -71,15 +103,17 @@ public class PacienteService {
             return Optional.empty();
         }
     }
+
     public List<Paciente> searchPacientes(String busqueda) {
         return pacienteRepositorio.searchPacientes(busqueda, PageRequest.of(0, 100));
     }
-    // Metodo para listar pacientes con estado 1
+
+
     public List<Paciente> getAllPacientes() {
         return pacienteRepositorio.findByPacienteEstado(1);
     }
 
-    // Método setter para la inyección manual del repositorio
+
     public void setPacienteRepositorio(PacienteRepositorio pacienteRepositorio) {
         this.pacienteRepositorio = pacienteRepositorio;
     }

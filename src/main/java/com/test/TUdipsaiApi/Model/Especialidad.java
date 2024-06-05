@@ -16,12 +16,10 @@ public class Especialidad {
 
     private String area;
 
-    // Constructor que acepta un entero
     public Especialidad(int id) {
         this.id = (long) id;
     }
 
-    // Constructor sin argumentos
     public Especialidad() {
     }
 }

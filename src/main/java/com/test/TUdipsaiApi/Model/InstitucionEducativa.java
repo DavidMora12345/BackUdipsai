@@ -28,4 +28,27 @@ public class InstitucionEducativa {
 
     @Column(name = "InstitucionEstado")
     private Integer institucionEstado;
+
+    public InstitucionEducativa() {
+    }
+
+    public InstitucionEducativa(Integer id) {
+        this.id = id;
+    }
+
+    public InstitucionEducativa(String nombreInstitucion) {
+        this.nombreInstitucion = nombreInstitucion;
+    }
+
+    public InstitucionEducativa(String direccion, boolean isDireccion) {
+        this.direccion = direccion;
+    }
+
+    public InstitucionEducativa(String jornada, int isJornada) {
+        this.jornada = jornada;
+    }
+
+    public InstitucionEducativa(String tipoInstitucion, float isTipo) {
+        this.tipoInstitucion = tipoInstitucion;
+    }
 }

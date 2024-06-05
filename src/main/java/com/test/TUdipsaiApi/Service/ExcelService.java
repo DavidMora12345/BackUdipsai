@@ -1,6 +1,8 @@
 package com.test.TUdipsaiApi.Service;
 
+import com.test.TUdipsaiApi.Model.InstitucionEducativa;
 import com.test.TUdipsaiApi.Model.Paciente;
+import com.test.TUdipsaiApi.Repository.InstitucionEducativaRepositorio;
 import com.test.TUdipsaiApi.Repository.PacienteRepositorio;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -19,6 +21,9 @@ public class ExcelService {
 
     @Autowired
     private PacienteRepositorio pacienteRepository;
+
+    @Autowired
+    private InstitucionEducativaRepositorio institucionEducativaRepositorio;
 
     public void savePatientsFromExcel(MultipartFile file) throws IOException {
         List<Paciente> pacientes = new ArrayList<>();
@@ -41,11 +46,26 @@ public class ExcelService {
             paciente.setCiudad(getCellValueAsString(row.getCell(4)));
             paciente.setTelefono(getCellValueAsString(row.getCell(5)));
             paciente.setCelular(getCellValueAsString(row.getCell(6)));
-            paciente.setInstitucionEducativa(getCellValueAsString(row.getCell(7)));
-            paciente.setTipoInstitucion(getCellValueAsString(row.getCell(8)));
+
+            // Obtener y asignar InstitucionEducativa
+            String institucionNombre = getCellValueAsString(row.getCell(7));
+            InstitucionEducativa institucion = institucionEducativaRepositorio.findByNombreInstitucion(institucionNombre);
+            paciente.setInstitucionEducativa(institucion);
+
+            String institucionTipo = getCellValueAsString(row.getCell(8));
+            InstitucionEducativa institucionT = institucionEducativaRepositorio.findByTipoInstitucion(institucionTipo);
+            paciente.setTipoInstitucion(institucionT);
+
             paciente.setProyecto(getCellValueAsString(row.getCell(9)));
-            paciente.setJornada(getCellValueAsString(row.getCell(10)));
-            paciente.setDireccionInstitucion(getCellValueAsString(row.getCell(11)));
+
+            String institucionJornada = getCellValueAsString(row.getCell(10));
+            InstitucionEducativa institucionJ = institucionEducativaRepositorio.findByJornada(institucionJornada);
+            paciente.setJornada(institucionJ);
+
+            String institucionDireccion = getCellValueAsString(row.getCell(11));
+            InstitucionEducativa institucionD = institucionEducativaRepositorio.findByDireccion(institucionDireccion);
+            paciente.setDireccionInstitucion(institucionD);
+
             paciente.setAnioEducacion(getCellValueAsString(row.getCell(12)));
             paciente.setParalelo(getCellValueAsString(row.getCell(13)));
             paciente.setPerteneceInclusion(getCellValueAsString(row.getCell(14)));
@@ -63,15 +83,12 @@ public class ExcelService {
             }
 
             paciente.setPacienteEstado((int) row.getCell(22).getNumericCellValue());
-
-
             paciente.setImagen(null);
 
             pacientes.add(paciente);
         }
 
         workbook.close();
-
         pacienteRepository.saveAll(pacientes);
     }
 
