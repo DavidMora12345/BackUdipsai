@@ -11,6 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/instituciones")
+@CrossOrigin(origins = "*")
 public class InstitucionEducativaController {
 
     private final InstitucionEducativaService institucionEducativaService;
