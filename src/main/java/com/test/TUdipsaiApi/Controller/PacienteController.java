@@ -50,6 +50,11 @@ public class PacienteController {
             return ResponseEntity.notFound().build();
         }
     }
+    @PostMapping("/buscar")
+    public ResponseEntity<List<Paciente>> buscarPaciente(@RequestParam("search") String search) {
+        List<Paciente> pacientes = pacienteService.searchPacientes(search);
+        return ResponseEntity.ok(pacientes);
+    }
 
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<Paciente> deletePaciente(@PathVariable Integer id) {
