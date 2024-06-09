@@ -54,4 +54,29 @@ public class EspecialistasService {
     public List<Especialistas> findAllActiveNonPasantes() {
         return especialistasRepositorio.findAllByEspecialistaEstadoTrueAndEsPasanteFalse();
     }
+
+    public Optional<Especialistas> updateEspecialista(String cedula, Especialistas updatedEspecialista) {
+        Optional<Especialistas> existingEspecialista = especialistasRepositorio.findById(cedula);
+        if (existingEspecialista.isPresent()) {
+            Especialistas especialista = existingEspecialista.get();
+            especialista.setPrimerNombre(updatedEspecialista.getPrimerNombre());
+            especialista.setSegundoNombre(updatedEspecialista.getSegundoNombre());
+            especialista.setPrimerApellido(updatedEspecialista.getPrimerApellido());
+            especialista.setSegundoApellido(updatedEspecialista.getSegundoApellido());
+            especialista.setEspecialidad(updatedEspecialista.getEspecialidad());
+            especialista.setEsPasante(updatedEspecialista.getEsPasante());
+            especialista.setEspecialistaEstado(updatedEspecialista.getEspecialistaEstado());
+            especialista.setContrasena(updatedEspecialista.getContrasena());
+            especialista.setInicioPasantia(updatedEspecialista.getInicioPasantia());
+            especialista.setFinPasantia(updatedEspecialista.getFinPasantia());
+            especialista.setImagen(updatedEspecialista.getImagen());
+            especialistasRepositorio.save(especialista);
+            return Optional.of(especialista);
+        }
+        return Optional.empty();
+    }
+
+
+
+
 }

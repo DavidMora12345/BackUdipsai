@@ -61,4 +61,14 @@ public class EspecialistaController {
         }
     }
 
+    @PutMapping("/actualizar/{cedula}")
+    public ResponseEntity<Especialistas> actualizarEspecialista(@PathVariable String cedula, @RequestBody Especialistas updatedEspecialista) {
+        Optional<Especialistas> especialistaOptional = especialistasService.updateEspecialista(cedula, updatedEspecialista);
+        if (especialistaOptional.isPresent()) {
+            return ResponseEntity.ok(especialistaOptional.get());
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
 }
