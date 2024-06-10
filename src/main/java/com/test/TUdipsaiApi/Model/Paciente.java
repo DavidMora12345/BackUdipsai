@@ -5,18 +5,14 @@ import lombok.Getter;
 import lombok.Setter;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-/**
- * Class for managing a detailed entity with various attributes.
- * Author: Ing.David Esteban Mora Cabrera
- * Date: 14/12/2023
- * Country: Cuenca-Ecuador
- */
 @Entity
 @Table(name="Paciente")
 @Setter
 @Getter
-public class Paciente {
+@EntityListeners(AuditingEntityListener.class)
+public class Paciente extends Auditable<String> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -63,20 +59,12 @@ public class Paciente {
     @JoinColumn(name = "id_institucion_educativa")
     private InstitucionEducativa institucionEducativa;
 
-    @ManyToOne
-    @JoinColumn(name= "tipo_institucion_id")
-    private InstitucionEducativa tipoInstitucion;
-
     @Column(name= "proyecto")
     private String proyecto;
 
     @ManyToOne
     @JoinColumn(name= "jornada_id")
-    private InstitucionEducativa jornada;
-
-    @ManyToOne
-    @JoinColumn(name= "direccion_institucion_id")
-    private InstitucionEducativa direccionInstitucion;
+    private Jornada jornada;
 
     @Column(name= "anio_educacion")
     private String anioEducacion;
@@ -101,4 +89,28 @@ public class Paciente {
 
     @Column(name= "observaciones")
     private String observaciones;
+
+    @Column(name = "tipo_discapacidad")
+    private String tipoDiscapacidad;
+
+    @Column(name= "detalle_discapacidad")
+    private String detalleDiscapacidad;
+
+    @Column (name = "porcentaje_discapacidad")
+    private  Integer porcentajeDiscapacidad;
+
+    // Métodos setInstitucionEducativaId y setJornadaId
+    public void setInstitucionEducativaId(Integer institucionEducativaId) {
+        if (institucionEducativaId != null) {
+            this.institucionEducativa = new InstitucionEducativa();
+            this.institucionEducativa.setId(institucionEducativaId);
+        }
+    }
+
+    public void setJornadaId(Integer jornadaId) {
+        if (jornadaId != null) {
+            this.jornada = new Jornada();
+            this.jornada.setId(jornadaId);
+        }
+    }
 }

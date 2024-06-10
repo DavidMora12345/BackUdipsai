@@ -45,7 +45,7 @@ public class InstitucionEducativaService {
             InstitucionEducativa institucionExistente = institucionOpt.get();
             institucionExistente.setNombreInstitucion(nuevaInstitucion.getNombreInstitucion());
             institucionExistente.setDireccion(nuevaInstitucion.getDireccion());
-            institucionExistente.setJornada(nuevaInstitucion.getJornada());
+            institucionExistente.setJornadas(nuevaInstitucion.getJornadas());
             institucionExistente.setTipoInstitucion(nuevaInstitucion.getTipoInstitucion());
             institucionExistente.setInstitucionEstado(nuevaInstitucion.getInstitucionEstado());
             return institucionEducativaRepositorio.save(institucionExistente);

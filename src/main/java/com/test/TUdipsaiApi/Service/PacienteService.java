@@ -1,13 +1,16 @@
 package com.test.TUdipsaiApi.Service;
 
 import com.test.TUdipsaiApi.Model.InstitucionEducativa;
+import com.test.TUdipsaiApi.Model.Jornada;
 import com.test.TUdipsaiApi.Model.Paciente;
 import com.test.TUdipsaiApi.Repository.InstitucionEducativaRepositorio;
+import com.test.TUdipsaiApi.Repository.JornadaRepositorio;
 import com.test.TUdipsaiApi.Repository.PacienteRepositorio;
+import com.test.TUdipsaiApi.dto.PacienteDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,74 +22,95 @@ public class PacienteService {
     @Autowired
     private InstitucionEducativaRepositorio institucionEducativaRepositorio;
 
+    @Autowired
+    private JornadaRepositorio jornadaRepositorio;
+
     public Optional<Paciente> getPacienteById(Integer id) {
         return pacienteRepositorio.findById(id);
     }
 
-    // Crear o actualizar un paciente
     public Paciente saveOrUpdate(Paciente paciente) {
-        // Asignar la institución educativa
-        if (paciente.getInstitucionEducativa() != null && paciente.getInstitucionEducativa().getId() != null) {
-            Optional<InstitucionEducativa> institucion = institucionEducativaRepositorio.findById(paciente.getInstitucionEducativa().getId());
+        return pacienteRepositorio.save(paciente);
+    }
+
+    public Paciente convertToEntity(PacienteDTO pacienteDTO) {
+        Paciente paciente = new Paciente();
+        paciente.setId(pacienteDTO.getId());
+        paciente.setFechaApertura(pacienteDTO.getFechaApertura());
+        paciente.setPacienteEstado(pacienteDTO.getPacienteEstado());
+        paciente.setNombresApellidos(pacienteDTO.getNombresApellidos());
+        paciente.setCiudad(pacienteDTO.getCiudad());
+        paciente.setFechaNacimiento(pacienteDTO.getFechaNacimiento());
+        paciente.setEdad(pacienteDTO.getEdad());
+        paciente.setCedula(pacienteDTO.getCedula());
+        paciente.setDomicilio(pacienteDTO.getDomicilio());
+        paciente.setImagen(pacienteDTO.getImagen());
+        paciente.setTelefono(pacienteDTO.getTelefono());
+        paciente.setCelular(pacienteDTO.getCelular());
+        paciente.setProyecto(pacienteDTO.getProyecto());
+        paciente.setAnioEducacion(pacienteDTO.getAnioEducacion());
+        paciente.setParalelo(pacienteDTO.getParalelo());
+        paciente.setPerteneceInclusion(pacienteDTO.getPerteneceInclusion());
+        paciente.setTieneDiscapacidad(pacienteDTO.getTieneDiscapacidad());
+        paciente.setPortadorCarnet(pacienteDTO.isPortadorCarnet());
+        paciente.setDiagnostico(pacienteDTO.getDiagnostico());
+        paciente.setMotivoConsulta(pacienteDTO.getMotivoConsulta());
+        paciente.setObservaciones(pacienteDTO.getObservaciones());
+        paciente.setTipoDiscapacidad(pacienteDTO.getTipoDiscapacidad());
+        paciente.setDetalleDiscapacidad(pacienteDTO.getDetalleDiscapacidad());
+        paciente.setPorcentajeDiscapacidad(pacienteDTO.getPorcentajeDiscapacidad());
+
+        if (pacienteDTO.getInstitucionEducativa() != null) {
+            Optional<InstitucionEducativa> institucion = institucionEducativaRepositorio.findById(pacienteDTO.getInstitucionEducativa());
             institucion.ifPresent(paciente::setInstitucionEducativa);
         }
-        // Asignar el tipo de institución
-        if (paciente.getTipoInstitucion() != null && paciente.getTipoInstitucion().getId() != null) {
-            Optional<InstitucionEducativa> tipoInstitucion = institucionEducativaRepositorio.findById(paciente.getTipoInstitucion().getId());
-            tipoInstitucion.ifPresent(paciente::setTipoInstitucion);
-        }
-        // Asignar la jornada
-        if (paciente.getJornada() != null && paciente.getJornada().getId() != null) {
-            Optional<InstitucionEducativa> jornada = institucionEducativaRepositorio.findById(paciente.getJornada().getId());
+        if (pacienteDTO.getJornada() != null) {
+            Optional<Jornada> jornada = jornadaRepositorio.findById(pacienteDTO.getJornada());
             jornada.ifPresent(paciente::setJornada);
         }
-        // Asignar la dirección de la institución
-        if (paciente.getDireccionInstitucion() != null && paciente.getDireccionInstitucion().getId() != null) {
-            Optional<InstitucionEducativa> direccionInstitucion = institucionEducativaRepositorio.findById(paciente.getDireccionInstitucion().getId());
-            direccionInstitucion.ifPresent(paciente::setDireccionInstitucion);
-        }
 
-        return pacienteRepositorio.save(paciente);
+        return paciente;
     }
 
-
-    public Paciente createPaciente(Paciente paciente) {
-        return pacienteRepositorio.save(paciente);
-    }
-
-    // Método específico para actualizar un paciente existente
-    public Paciente updatePaciente(Integer id, Paciente pacienteDetails) {
+    public Paciente updatePaciente(Integer id, PacienteDTO pacienteDTO) {
         Optional<Paciente> pacienteOptional = pacienteRepositorio.findById(id);
         if (pacienteOptional.isPresent()) {
             Paciente paciente = pacienteOptional.get();
-            paciente.setFechaApertura(pacienteDetails.getFechaApertura());
-            paciente.setPacienteEstado(pacienteDetails.getPacienteEstado());
-            paciente.setNombresApellidos(pacienteDetails.getNombresApellidos());
-            paciente.setCiudad(pacienteDetails.getCiudad());
-            paciente.setFechaNacimiento(pacienteDetails.getFechaNacimiento());
-            paciente.setEdad(pacienteDetails.getEdad());
-            paciente.setCedula(pacienteDetails.getCedula());
-            paciente.setDomicilio(pacienteDetails.getDomicilio());
-            paciente.setImagen(pacienteDetails.getImagen());
-            paciente.setTelefono(pacienteDetails.getTelefono());
-            paciente.setCelular(pacienteDetails.getCelular());
-            paciente.setProyecto(pacienteDetails.getProyecto());
-            paciente.setAnioEducacion(pacienteDetails.getAnioEducacion());
-            paciente.setParalelo(pacienteDetails.getParalelo());
-            paciente.setPerteneceInclusion(pacienteDetails.getPerteneceInclusion());
-            paciente.setTieneDiscapacidad(pacienteDetails.getTieneDiscapacidad());
-            paciente.setPortadorCarnet(pacienteDetails.isPortadorCarnet());
-            paciente.setDiagnostico(pacienteDetails.getDiagnostico());
-            paciente.setMotivoConsulta(pacienteDetails.getMotivoConsulta());
-            paciente.setObservaciones(pacienteDetails.getObservaciones());
+            paciente.setFechaApertura(pacienteDTO.getFechaApertura());
+            paciente.setPacienteEstado(pacienteDTO.getPacienteEstado());
+            paciente.setNombresApellidos(pacienteDTO.getNombresApellidos());
+            paciente.setCiudad(pacienteDTO.getCiudad());
+            paciente.setFechaNacimiento(pacienteDTO.getFechaNacimiento());
+            paciente.setEdad(pacienteDTO.getEdad());
+            paciente.setCedula(pacienteDTO.getCedula());
+            paciente.setDomicilio(pacienteDTO.getDomicilio());
+            paciente.setImagen(pacienteDTO.getImagen());
+            paciente.setTelefono(pacienteDTO.getTelefono());
+            paciente.setCelular(pacienteDTO.getCelular());
+            paciente.setProyecto(pacienteDTO.getProyecto());
+            paciente.setAnioEducacion(pacienteDTO.getAnioEducacion());
+            paciente.setParalelo(pacienteDTO.getParalelo());
+            paciente.setPerteneceInclusion(pacienteDTO.getPerteneceInclusion());
+            paciente.setTieneDiscapacidad(pacienteDTO.getTieneDiscapacidad());
+            paciente.setPortadorCarnet(pacienteDTO.isPortadorCarnet());
+            paciente.setDiagnostico(pacienteDTO.getDiagnostico());
+            paciente.setMotivoConsulta(pacienteDTO.getMotivoConsulta());
+            paciente.setObservaciones(pacienteDTO.getObservaciones());
+            paciente.setTipoDiscapacidad(pacienteDTO.getTipoDiscapacidad());
+            paciente.setDetalleDiscapacidad(pacienteDTO.getDetalleDiscapacidad());
+            paciente.setPorcentajeDiscapacidad(pacienteDTO.getPorcentajeDiscapacidad());
 
-            // Actualizar relaciones
-            paciente.setInstitucionEducativa(pacienteDetails.getInstitucionEducativa());
-            paciente.setTipoInstitucion(pacienteDetails.getTipoInstitucion());
-            paciente.setJornada(pacienteDetails.getJornada());
-            paciente.setDireccionInstitucion(pacienteDetails.getDireccionInstitucion());
+            if (pacienteDTO.getInstitucionEducativa() != null) {
+                Optional<InstitucionEducativa> institucion = institucionEducativaRepositorio.findById(pacienteDTO.getInstitucionEducativa());
+                institucion.ifPresent(paciente::setInstitucionEducativa);
+            }
 
-            return saveOrUpdate(paciente);
+            if (pacienteDTO.getJornada() != null) {
+                Optional<Jornada> jornada = jornadaRepositorio.findById(pacienteDTO.getJornada());
+                jornada.ifPresent(paciente::setJornada);
+            }
+
+            return pacienteRepositorio.save(paciente);
         } else {
             return null;
         }
@@ -96,7 +120,7 @@ public class PacienteService {
         Optional<Paciente> optionalPaciente = pacienteRepositorio.findById(id);
         if (optionalPaciente.isPresent()) {
             Paciente paciente = optionalPaciente.get();
-            paciente.setPacienteEstado(0); // Cambia el estado a 0
+            paciente.setPacienteEstado(0);
             pacienteRepositorio.save(paciente);
             return Optional.of(paciente);
         } else {
@@ -105,14 +129,13 @@ public class PacienteService {
     }
 
     public List<Paciente> searchPacientes(String busqueda) {
-        return pacienteRepositorio.searchPacientes(busqueda, PageRequest.of(0, 100));
+        Pageable pageable = PageRequest.of(0, 100);
+        return pacienteRepositorio.searchPacientes(busqueda, pageable);
     }
-
 
     public List<Paciente> getAllPacientes() {
         return pacienteRepositorio.findByPacienteEstado(1);
     }
-
 
     public void setPacienteRepositorio(PacienteRepositorio pacienteRepositorio) {
         this.pacienteRepositorio = pacienteRepositorio;

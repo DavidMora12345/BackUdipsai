@@ -39,50 +39,67 @@ public class ExcelService {
 
             Paciente paciente = new Paciente();
 
-            paciente.setCedula(getCellValueAsString(row.getCell(0)));
-            paciente.setNombresApellidos(getCellValueAsString(row.getCell(1)));
-            paciente.setEdad(getCellValueAsString(row.getCell(2)));
-            paciente.setDomicilio(getCellValueAsString(row.getCell(3)));
-            paciente.setCiudad(getCellValueAsString(row.getCell(4)));
-            paciente.setTelefono(getCellValueAsString(row.getCell(5)));
-            paciente.setCelular(getCellValueAsString(row.getCell(6)));
+            paciente.setId((int)row.getCell(0).getNumericCellValue());
+            paciente.setCedula(getCellValueAsString(row.getCell(1)));
+            paciente.setNombresApellidos(getCellValueAsString(row.getCell(2)));
+            paciente.setEdad(getCellValueAsString(row.getCell(3)));
+            paciente.setDomicilio(getCellValueAsString(row.getCell(4)));
+            paciente.setCiudad(getCellValueAsString(row.getCell(5)));
+            paciente.setTelefono(getCellValueAsString(row.getCell(6)));
+            paciente.setCelular(getCellValueAsString(row.getCell(7)));
 
             // Obtener y asignar InstitucionEducativa
-            String institucionNombre = getCellValueAsString(row.getCell(7));
+            String institucionNombre = getCellValueAsString(row.getCell(8));
             InstitucionEducativa institucion = institucionEducativaRepositorio.findByNombreInstitucion(institucionNombre);
-            paciente.setInstitucionEducativa(institucion);
+            if (institucion != null) {
+                paciente.setInstitucionEducativaId(institucion.getId());
+            }
 
-            String institucionTipo = getCellValueAsString(row.getCell(8));
+            String institucionTipo = getCellValueAsString(row.getCell(9));
             InstitucionEducativa institucionT = institucionEducativaRepositorio.findByTipoInstitucion(institucionTipo);
-            paciente.setTipoInstitucion(institucionT);
+            if (institucionT != null) {
+                paciente.setInstitucionEducativaId(institucionT.getId());
+            }
 
-            paciente.setProyecto(getCellValueAsString(row.getCell(9)));
+            paciente.setProyecto(getCellValueAsString(row.getCell(10)));
 
-            String institucionJornada = getCellValueAsString(row.getCell(10));
-            InstitucionEducativa institucionJ = institucionEducativaRepositorio.findByJornada(institucionJornada);
-            paciente.setJornada(institucionJ);
+            String institucionJornada = getCellValueAsString(row.getCell(11));
+            try {
+                Integer jornadaId = Integer.parseInt(institucionJornada);
+                List<InstitucionEducativa> instituciones = institucionEducativaRepositorio.findByJornadasContains(jornadaId);
+                if (!instituciones.isEmpty()) {
+                    paciente.setJornadaId(instituciones.get(0).getId());
+                }
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
 
-            String institucionDireccion = getCellValueAsString(row.getCell(11));
+            String institucionDireccion = getCellValueAsString(row.getCell(12));
             InstitucionEducativa institucionD = institucionEducativaRepositorio.findByDireccion(institucionDireccion);
-            paciente.setDireccionInstitucion(institucionD);
+            if (institucionD != null) {
+                paciente.setInstitucionEducativaId(institucionD.getId());
+            }
 
-            paciente.setAnioEducacion(getCellValueAsString(row.getCell(12)));
-            paciente.setParalelo(getCellValueAsString(row.getCell(13)));
-            paciente.setPerteneceInclusion(getCellValueAsString(row.getCell(14)));
-            paciente.setTieneDiscapacidad(getCellValueAsString(row.getCell(15)));
-            paciente.setPortadorCarnet(getCellValueAsBoolean(row.getCell(16)));
-            paciente.setDiagnostico(getCellValueAsString(row.getCell(17)));
-            paciente.setMotivoConsulta(getCellValueAsString(row.getCell(18)));
-            paciente.setObservaciones(getCellValueAsString(row.getCell(19)));
+            paciente.setAnioEducacion(getCellValueAsString(row.getCell(13)));
+            paciente.setParalelo(getCellValueAsString(row.getCell(14)));
+            paciente.setPerteneceInclusion(getCellValueAsString(row.getCell(15)));
+            paciente.setTieneDiscapacidad(getCellValueAsString(row.getCell(16)));
+            paciente.setPortadorCarnet(getCellValueAsBoolean(row.getCell(17)));
+            paciente.setDiagnostico(getCellValueAsString(row.getCell(18)));
+            paciente.setMotivoConsulta(getCellValueAsString(row.getCell(19)));
+            paciente.setObservaciones(getCellValueAsString(row.getCell(20)));
+            paciente.setTipoDiscapacidad(getCellValueAsString(row.getCell(21)));
+            paciente.setDetalleDiscapacidad(getCellValueAsString(row.getCell(22)));
+            paciente.setPorcentajeDiscapacidad((int)row.getCell(23).getNumericCellValue());
 
             try {
-                paciente.setFechaApertura(dateFormat.parse(getCellValueAsString(row.getCell(20))));
-                paciente.setFechaNacimiento(dateFormat.parse(getCellValueAsString(row.getCell(21))));
+                paciente.setFechaApertura(dateFormat.parse(getCellValueAsString(row.getCell(24))));
+                paciente.setFechaNacimiento(dateFormat.parse(getCellValueAsString(row.getCell(25))));
             } catch (ParseException e) {
                 e.printStackTrace();
             }
 
-            paciente.setPacienteEstado((int) row.getCell(22).getNumericCellValue());
+            paciente.setPacienteEstado((int) row.getCell(26).getNumericCellValue());
             paciente.setImagen(null);
 
             pacientes.add(paciente);

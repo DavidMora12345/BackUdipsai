@@ -3,6 +3,8 @@ package com.test.TUdipsaiApi.Model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "InstitucionesEducativas")
@@ -20,8 +22,10 @@ public class InstitucionEducativa {
     @Column(name = "Direccion")
     private String direccion;
 
-    @Column(name = "Jornada")
-    private String jornada;
+    @ElementCollection
+    @CollectionTable(name = "InstitucionJornadas", joinColumns = @JoinColumn(name = "institucion_id"))
+    @Column(name = "jornada")
+    private List<Integer> jornadas = new ArrayList<>();
 
     @Column(name = "TipoInstitucion")
     private String tipoInstitucion;
@@ -32,23 +36,19 @@ public class InstitucionEducativa {
     public InstitucionEducativa() {
     }
 
-    public InstitucionEducativa(Integer id) {
-        this.id = id;
+    public void addJornada(Integer jornada) {
+        this.jornadas.add(jornada);
     }
 
-    public InstitucionEducativa(String nombreInstitucion) {
-        this.nombreInstitucion = nombreInstitucion;
+    public void removeJornada(Integer jornada) {
+        this.jornadas.remove(jornada);
     }
 
-    public InstitucionEducativa(String direccion, boolean isDireccion) {
-        this.direccion = direccion;
+    public List<Integer> getJornadas() {
+        return this.jornadas;
     }
 
-    public InstitucionEducativa(String jornada, int isJornada) {
-        this.jornada = jornada;
-    }
-
-    public InstitucionEducativa(String tipoInstitucion, float isTipo) {
-        this.tipoInstitucion = tipoInstitucion;
+    public void setJornadas(List<Integer> jornadas) {
+        this.jornadas = jornadas;
     }
 }

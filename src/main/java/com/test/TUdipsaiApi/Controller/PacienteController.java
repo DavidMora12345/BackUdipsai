@@ -2,11 +2,15 @@ package com.test.TUdipsaiApi.Controller;
 
 import com.test.TUdipsaiApi.Model.Paciente;
 import com.test.TUdipsaiApi.Service.PacienteService;
+import com.test.TUdipsaiApi.dto.PacienteDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.test.TUdipsaiApi.Service.ExcelService;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,7 +27,6 @@ public class PacienteController {
     @Autowired
     private PacienteService pacienteService;
 
-
     @GetMapping("/listar")
     public ResponseEntity<List<Paciente>> getAllPacientes() {
         List<Paciente> pacientes = pacienteService.getAllPacientes();
@@ -37,25 +40,21 @@ public class PacienteController {
     }
 
     @PostMapping("/insertar")
-    public Paciente crearOActualizarPaciente(@RequestBody Paciente paciente) {
-        return pacienteService.saveOrUpdate(paciente);
+    public ResponseEntity<Paciente> crearOActualizarPaciente(@RequestBody PacienteDTO pacienteDTO) {
+        Paciente paciente = pacienteService.convertToEntity(pacienteDTO);
+        Paciente savedPaciente = pacienteService.saveOrUpdate(paciente);
+        return ResponseEntity.ok(savedPaciente);
     }
 
     @PutMapping("/actualizar/{id}")
-    public ResponseEntity<Paciente> updatePaciente(@PathVariable Integer id, @RequestBody Paciente pacienteDetails) {
-        Paciente updatedPaciente = pacienteService.updatePaciente(id, pacienteDetails);
+    public ResponseEntity<Paciente> updatePaciente(@PathVariable Integer id, @RequestBody PacienteDTO pacienteDTO) {
+        Paciente updatedPaciente = pacienteService.updatePaciente(id, pacienteDTO);
         if (updatedPaciente != null) {
             return ResponseEntity.ok(updatedPaciente);
         } else {
             return ResponseEntity.notFound().build();
         }
     }
-    @PostMapping("/buscar")
-    public ResponseEntity<List<Paciente>> buscarPaciente(@RequestParam("search") String search) {
-        List<Paciente> pacientes = pacienteService.searchPacientes(search);
-        return ResponseEntity.ok(pacientes);
-    }
-
 
     @PostMapping("/buscar")
     public ResponseEntity<List<Paciente>> buscarPaciente(@RequestParam("search") String search) {
@@ -76,6 +75,22 @@ public class PacienteController {
             return ResponseEntity.ok("Archivo subido y procesado exitosamente.");
         } catch (IOException e) {
             return ResponseEntity.status(500).body("Error al procesar el archivo: " + e.getMessage());
+        }
+    }
+
+    @GetMapping("/historial/{id}")
+    public ResponseEntity<Map<String, Object>> getHistorialPaciente(@PathVariable Integer id) {
+        Optional<Paciente> pacienteOpt = pacienteService.getPacienteById(id);
+        if (pacienteOpt.isPresent()) {
+            Paciente paciente = pacienteOpt.get();
+            Map<String, Object> historial = new HashMap<>();
+            historial.put("createdBy", paciente.getCreatedBy());
+            historial.put("createdDate", paciente.getCreatedDate());
+            historial.put("lastModifiedBy", paciente.getLastModifiedBy());
+            historial.put("lastModifiedDate", paciente.getLastModifiedDate());
+            return ResponseEntity.ok(historial);
+        } else {
+            return ResponseEntity.notFound().build();
         }
     }
 }
