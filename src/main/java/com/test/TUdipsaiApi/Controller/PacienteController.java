@@ -1,6 +1,7 @@
 package com.test.TUdipsaiApi.Controller;
 
 import com.test.TUdipsaiApi.Model.Paciente;
+import com.test.TUdipsaiApi.Service.LogService;
 import com.test.TUdipsaiApi.Service.PacienteService;
 import com.test.TUdipsaiApi.dto.PacienteDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,9 @@ public class PacienteController {
     @Autowired
     private PacienteService pacienteService;
 
+    @Autowired
+    private LogService logService;
+
     @GetMapping("/listar")
     public ResponseEntity<List<Paciente>> getAllPacientes() {
         List<Paciente> pacientes = pacienteService.getAllPacientes();
@@ -34,13 +38,23 @@ public class PacienteController {
     public ResponseEntity<Paciente> crearOActualizarPaciente(@RequestBody PacienteDTO pacienteDTO) {
         Paciente paciente = pacienteService.convertToEntity(pacienteDTO);
         Paciente savedPaciente = pacienteService.saveOrUpdate(paciente);
+        logService.logChange("Paciente", savedPaciente.getId().longValue(), "INSERT", null, savedPaciente.toString());
         return ResponseEntity.ok(savedPaciente);
     }
 
     @PutMapping("/actualizar/{id}")
     public ResponseEntity<Paciente> updatePaciente(@PathVariable Integer id, @RequestBody PacienteDTO pacienteDTO) {
-        Paciente updatedPaciente = pacienteService.updatePaciente(id, pacienteDTO);
-        if (updatedPaciente != null) {
+        Optional<Paciente> pacienteOpt = pacienteService.getPacienteById(id);
+        if (pacienteOpt.isPresent()) {
+            Paciente paciente = pacienteOpt.get();
+            String valorAnterior = paciente.toString();
+
+            paciente.setNombresApellidos(pacienteDTO.getNombresApellidos());
+            paciente.setCiudad(pacienteDTO.getCiudad());
+            // ... actualiza otros campos ...
+
+            Paciente updatedPaciente = pacienteService.saveOrUpdate(paciente);
+            logService.logChange("Paciente", updatedPaciente.getId().longValue(), "UPDATE", valorAnterior, updatedPaciente.toString());
             return ResponseEntity.ok(updatedPaciente);
         } else {
             return ResponseEntity.notFound().build();
@@ -55,7 +69,14 @@ public class PacienteController {
 
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<Paciente> deletePaciente(@PathVariable Integer id) {
-        Optional<Paciente> paciente = pacienteService.deletePaciente(id);
-        return paciente.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        Optional<Paciente> pacienteOpt = pacienteService.getPacienteById(id);
+        if (pacienteOpt.isPresent()) {
+            Paciente paciente = pacienteOpt.get();
+            pacienteService.deletePaciente(id);
+            logService.logChange("Paciente", id.longValue(), "DELETE", paciente.toString(), null);
+            return ResponseEntity.ok(paciente);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
