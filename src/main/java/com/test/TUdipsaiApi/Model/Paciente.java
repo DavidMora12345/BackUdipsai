@@ -1,6 +1,5 @@
 package com.test.TUdipsaiApi.Model;
 
-import com.test.TUdipsaiApi.Listener.AuditingEntityListener;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,9 +11,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Table(name="Paciente")
 @Setter
 @Getter
-@EntityListeners(AuditingEntityListener.class)
 
-public class Paciente implements HistorialCambiosAware{
+public class Paciente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
