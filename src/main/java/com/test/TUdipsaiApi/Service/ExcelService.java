@@ -63,16 +63,7 @@ public class ExcelService {
 
             paciente.setProyecto(getCellValueAsString(row.getCell(10)));
 
-            String institucionJornada = getCellValueAsString(row.getCell(11));
-            try {
-                Integer jornadaId = Integer.parseInt(institucionJornada);
-                List<InstitucionEducativa> instituciones = institucionEducativaRepositorio.findByJornadasContains(jornadaId);
-                if (!instituciones.isEmpty()) {
-                    paciente.setJornadaId(instituciones.get(0).getId());
-                }
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
-            }
+
 
             String institucionDireccion = getCellValueAsString(row.getCell(12));
             InstitucionEducativa institucionD = institucionEducativaRepositorio.findByDireccion(institucionDireccion);

@@ -22,10 +22,6 @@ public class InstitucionEducativa {
     @Column(name = "Direccion")
     private String direccion;
 
-    @ElementCollection
-    @CollectionTable(name = "InstitucionJornadas", joinColumns = @JoinColumn(name = "institucion_id"))
-    @Column(name = "jornada")
-    private List<Integer> jornadas = new ArrayList<>();
 
     @Column(name = "TipoInstitucion")
     private String tipoInstitucion;
@@ -36,19 +32,5 @@ public class InstitucionEducativa {
     public InstitucionEducativa() {
     }
 
-    public void addJornada(Integer jornada) {
-        this.jornadas.add(jornada);
-    }
 
-    public void removeJornada(Integer jornada) {
-        this.jornadas.remove(jornada);
-    }
-
-    public List<Integer> getJornadas() {
-        return this.jornadas;
-    }
-
-    public void setJornadas(List<Integer> jornadas) {
-        this.jornadas = jornadas;
-    }
 }

@@ -9,7 +9,6 @@ import java.util.List;
 @Repository
 public interface InstitucionEducativaRepositorio extends JpaRepository<InstitucionEducativa, Integer> {
     List<InstitucionEducativa> findByInstitucionEstado(Integer estado);
-    List<InstitucionEducativa> findByJornadasContains(Integer jornada); // Este está correcto si jornadas es una lista de enteros.
     InstitucionEducativa findByNombreInstitucion(String nombreInstitucion);
     InstitucionEducativa findByTipoInstitucion(String tipoInstitucion);
     InstitucionEducativa findByDireccion(String direccion);

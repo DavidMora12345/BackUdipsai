@@ -38,9 +38,8 @@ public class Especialistas {
     @Column(name = "esPasante")
     private Boolean esPasante;
 
-    @ManyToOne
-    @JoinColumn(name = "especialistaAsignado", referencedColumnName = "cedula")
-    private Especialistas especialistaAsignado;
+    @Column(name = "especialistaAsignado")
+    private String especialistaAsignado;
 
     @Column(name = "contrasena")
     private String contrasena;

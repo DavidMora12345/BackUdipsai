@@ -47,17 +47,21 @@ public class EspecialistaController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Map<String, String>> login(@RequestBody Especialistas especialista) {
+    public ResponseEntity<Map<String, Object>> login(@RequestBody Especialistas especialista) {
         Especialistas resultadoLogin = especialistasService.login(especialista.getCedula(), especialista.getContrasena());
         if (resultadoLogin != null) {
-            Map<String, String> respuesta = new HashMap<>();
+            Map<String, Object> respuesta = new HashMap<>();
             respuesta.put("primerNombre", resultadoLogin.getPrimerNombre());
             respuesta.put("segundoNombre", resultadoLogin.getSegundoNombre());
             respuesta.put("primerApellido", resultadoLogin.getPrimerApellido());
             respuesta.put("segundoApellido", resultadoLogin.getSegundoApellido());
+            Map<String, Object> especialidad = new HashMap<>();
+            especialidad.put("id", resultadoLogin.getEspecialidad().getId());
+            especialidad.put("area", resultadoLogin.getEspecialidad().getArea());
+            respuesta.put("especialidad", especialidad);
             return ResponseEntity.ok(respuesta);
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build(); // O devuelve otro código de estado si lo prefieres
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
 
@@ -70,5 +74,4 @@ public class EspecialistaController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
-
 }

@@ -1,18 +1,20 @@
 package com.test.TUdipsaiApi.Model;
 
+import com.test.TUdipsaiApi.Listener.AuditingEntityListener;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 
 @Entity
 @Table(name="Paciente")
 @Setter
 @Getter
 @EntityListeners(AuditingEntityListener.class)
-public class Paciente extends Auditable<String> {
+
+public class Paciente implements HistorialCambiosAware{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
