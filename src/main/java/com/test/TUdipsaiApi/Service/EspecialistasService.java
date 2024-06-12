@@ -59,6 +59,7 @@ public class EspecialistasService {
             especialista.setSegundoApellido(updatedEspecialista.getSegundoApellido());
             especialista.setEspecialidad(updatedEspecialista.getEspecialidad());
             especialista.setEsPasante(updatedEspecialista.getEsPasante());
+            especialista.setEspecialistaAsignado(updatedEspecialista.getEspecialistaAsignado());
             especialista.setEspecialistaEstado(updatedEspecialista.getEspecialistaEstado());
             especialista.setContrasena(updatedEspecialista.getContrasena());
             especialista.setInicioPasantia(updatedEspecialista.getInicioPasantia());

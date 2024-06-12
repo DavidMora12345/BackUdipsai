@@ -8,6 +8,7 @@ com\test\TUdipsaiApi\Service\LogService.class
 com\test\TUdipsaiApi\TUdipsaiApiApplication.class
 com\test\TUdipsaiApi\Service\ExcelService.class
 com\test\TUdipsaiApi\Model\InstitucionEducativa.class
+com\test\TUdipsaiApi\Repository\JornadaRepositorio.class
 com\test\TUdipsaiApi\Model\Especialidad.class
 com\test\TUdipsaiApi\Model\Paciente.class
 com\test\TUdipsaiApi\Repository\PacienteRepositorio.class
