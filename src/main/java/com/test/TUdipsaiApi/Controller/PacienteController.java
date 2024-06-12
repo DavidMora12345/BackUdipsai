@@ -44,22 +44,15 @@ public class PacienteController {
 
     @PutMapping("/actualizar/{id}")
     public ResponseEntity<Paciente> updatePaciente(@PathVariable Integer id, @RequestBody PacienteDTO pacienteDTO) {
-        Optional<Paciente> pacienteOpt = pacienteService.getPacienteById(id);
-        if (pacienteOpt.isPresent()) {
-            Paciente paciente = pacienteOpt.get();
-            String valorAnterior = paciente.toString();
-
-            paciente.setNombresApellidos(pacienteDTO.getNombresApellidos());
-            paciente.setCiudad(pacienteDTO.getCiudad());
-            // ... actualiza otros campos ...
-
-            Paciente updatedPaciente = pacienteService.saveOrUpdate(paciente);
-            logService.logChange("Paciente", updatedPaciente.getId().longValue(), "UPDATE", valorAnterior, updatedPaciente.toString());
+        Paciente updatedPaciente = pacienteService.updatePaciente(id, pacienteDTO);
+        if (updatedPaciente != null) {
+            logService.logChange("Paciente", updatedPaciente.getId().longValue(), "UPDATE", null, updatedPaciente.toString());
             return ResponseEntity.ok(updatedPaciente);
         } else {
             return ResponseEntity.notFound().build();
         }
     }
+
 
     @PostMapping("/buscar")
     public ResponseEntity<List<Paciente>> buscarPaciente(@RequestParam("search") String search) {

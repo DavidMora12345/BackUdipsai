@@ -1,8 +1,10 @@
 package com.test.TUdipsaiApi.Service;
 
 import com.test.TUdipsaiApi.Model.InstitucionEducativa;
+import com.test.TUdipsaiApi.Model.Jornada;
 import com.test.TUdipsaiApi.Model.Paciente;
 import com.test.TUdipsaiApi.Repository.InstitucionEducativaRepositorio;
+import com.test.TUdipsaiApi.Repository.JornadaRepositorio;
 import com.test.TUdipsaiApi.Repository.PacienteRepositorio;
 import com.test.TUdipsaiApi.dto.PacienteDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,9 @@ public class PacienteService {
 
     @Autowired
     private InstitucionEducativaRepositorio institucionEducativaRepositorio;
+
+    @Autowired
+    private JornadaRepositorio jornadaRepositorio;
 
 
     public Optional<Paciente> getPacienteById(Integer id) {
@@ -100,6 +105,15 @@ public class PacienteService {
             if (pacienteDTO.getInstitucionEducativa() != null) {
                 Optional<InstitucionEducativa> institucion = institucionEducativaRepositorio.findById(pacienteDTO.getInstitucionEducativa());
                 institucion.ifPresent(paciente::setInstitucionEducativa);
+            } else {
+                paciente.setInstitucionEducativa(null);
+            }
+
+            if (pacienteDTO.getJornada() != null) {
+                Optional<Jornada> jornada = jornadaRepositorio.findById(pacienteDTO.getJornada());
+                jornada.ifPresent(paciente::setJornada);
+            } else {
+                paciente.setJornada(null);
             }
 
             return pacienteRepositorio.save(paciente);
