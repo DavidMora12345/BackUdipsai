@@ -5,6 +5,7 @@ import com.test.TUdipsaiApi.Service.LogService;
 import com.test.TUdipsaiApi.Service.PacienteService;
 import com.test.TUdipsaiApi.dto.PacienteDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,24 +36,33 @@ public class PacienteController {
     }
 
     @PostMapping("/insertar")
-    public ResponseEntity<Paciente> crearOActualizarPaciente(@RequestBody PacienteDTO pacienteDTO) {
-        Paciente paciente = pacienteService.convertToEntity(pacienteDTO);
-        Paciente savedPaciente = pacienteService.saveOrUpdate(paciente);
-        logService.logChange("Paciente", savedPaciente.getId().longValue(), "INSERT", null, savedPaciente.toString());
-        return ResponseEntity.ok(savedPaciente);
-    }
-
-    @PutMapping("/actualizar/{id}")
-    public ResponseEntity<Paciente> updatePaciente(@PathVariable Integer id, @RequestBody PacienteDTO pacienteDTO) {
-        Paciente updatedPaciente = pacienteService.updatePaciente(id, pacienteDTO);
-        if (updatedPaciente != null) {
-            logService.logChange("Paciente", updatedPaciente.getId().longValue(), "UPDATE", null, updatedPaciente.toString());
-            return ResponseEntity.ok(updatedPaciente);
-        } else {
-            return ResponseEntity.notFound().build();
+    public ResponseEntity<?> crearOActualizarPaciente(@RequestBody PacienteDTO pacienteDTO) {
+        try {
+            Paciente paciente = pacienteService.convertToEntity(pacienteDTO);
+            Paciente savedPaciente = pacienteService.saveOrUpdate(paciente);
+            logService.logChange("Paciente", savedPaciente.getId().longValue(), "INSERT", null, savedPaciente.toString());
+            return ResponseEntity.ok(savedPaciente);
+        } catch (Exception e) {
+            logService.logError("Error al insertar paciente", e);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al insertar paciente: " + e.getMessage());
         }
     }
 
+    @PutMapping("/actualizar/{id}")
+    public ResponseEntity<?> updatePaciente(@PathVariable Integer id, @RequestBody PacienteDTO pacienteDTO) {
+        try {
+            Paciente updatedPaciente = pacienteService.updatePaciente(id, pacienteDTO);
+            if (updatedPaciente != null) {
+                logService.logChange("Paciente", updatedPaciente.getId().longValue(), "UPDATE", null, updatedPaciente.toString());
+                return ResponseEntity.ok(updatedPaciente);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Paciente no encontrado con ID: " + id);
+            }
+        } catch (Exception e) {
+            logService.logError("Error al actualizar paciente", e);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al actualizar paciente: " + e.getMessage());
+        }
+    }
 
     @PostMapping("/buscar")
     public ResponseEntity<List<Paciente>> buscarPaciente(@RequestParam("search") String search) {
@@ -61,15 +71,20 @@ public class PacienteController {
     }
 
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<Paciente> deletePaciente(@PathVariable Integer id) {
-        Optional<Paciente> pacienteOpt = pacienteService.getPacienteById(id);
-        if (pacienteOpt.isPresent()) {
-            Paciente paciente = pacienteOpt.get();
-            pacienteService.deletePaciente(id);
-            logService.logChange("Paciente", id.longValue(), "DELETE", paciente.toString(), null);
-            return ResponseEntity.ok(paciente);
-        } else {
-            return ResponseEntity.notFound().build();
+    public ResponseEntity<?> deletePaciente(@PathVariable Integer id) {
+        try {
+            Optional<Paciente> pacienteOpt = pacienteService.getPacienteById(id);
+            if (pacienteOpt.isPresent()) {
+                Paciente paciente = pacienteOpt.get();
+                pacienteService.deletePaciente(id);
+                logService.logChange("Paciente", id.longValue(), "DELETE", paciente.toString(), null);
+                return ResponseEntity.ok(paciente);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Paciente no encontrado con ID: " + id);
+            }
+        } catch (Exception e) {
+            logService.logError("Error al eliminar paciente", e);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al eliminar paciente: " + e.getMessage());
         }
     }
 }

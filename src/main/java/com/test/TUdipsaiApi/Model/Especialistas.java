@@ -51,6 +51,7 @@ public class Especialistas {
     private LocalDate finPasantia;
 
     @Lob
-    @Column(name = "imagen")
+    @Column(name = "imagen", columnDefinition = "LONGBLOB")
     private byte[] imagen;
+
 }

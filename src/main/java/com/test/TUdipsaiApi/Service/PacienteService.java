@@ -39,7 +39,6 @@ public class PacienteService {
 
     public Paciente convertToEntity(PacienteDTO pacienteDTO) {
         Paciente paciente = new Paciente();
-        // Set all fields from PacienteDTO to Paciente entity
         paciente.setFechaApertura(pacienteDTO.getFechaApertura());
         paciente.setPacienteEstado(pacienteDTO.getPacienteEstado());
         paciente.setNombresApellidos(pacienteDTO.getNombresApellidos());
@@ -67,11 +66,19 @@ public class PacienteService {
         if (pacienteDTO.getInstitucionEducativa() != null) {
             Optional<InstitucionEducativa> institucion = institucionEducativaRepositorio.findById(pacienteDTO.getInstitucionEducativa());
             institucion.ifPresent(paciente::setInstitucionEducativa);
+        } else {
+            paciente.setInstitucionEducativa(null);
+        }
+
+        if (pacienteDTO.getJornada() != null) {
+            Optional<Jornada> jornada = jornadaRepositorio.findById(pacienteDTO.getJornada());
+            jornada.ifPresent(paciente::setJornada);
+        } else {
+            paciente.setJornada(null);
         }
 
         return paciente;
     }
-
     public Paciente updatePaciente(Integer id, PacienteDTO pacienteDTO) {
         Optional<Paciente> pacienteOptional = pacienteRepositorio.findById(id);
         if (pacienteOptional.isPresent()) {
