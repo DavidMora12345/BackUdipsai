@@ -6,12 +6,10 @@ import lombok.Setter;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-
 @Entity
 @Table(name="Paciente")
 @Setter
 @Getter
-
 public class Paciente {
 
     @Id
@@ -98,6 +96,9 @@ public class Paciente {
 
     @Column (name = "porcentaje_discapacidad")
     private  Integer porcentajeDiscapacidad;
+
+    @Column(name = "pertenece_a_proyecto")
+    private Boolean perteneceAProyecto;
 
     // Métodos setInstitucionEducativaId y setJornadaId
     public void setInstitucionEducativaId(Integer institucionEducativaId) {

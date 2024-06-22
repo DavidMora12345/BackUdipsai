@@ -1,11 +1,7 @@
 package com.test.TUdipsaiApi.Service;
 
-import com.test.TUdipsaiApi.Model.InstitucionEducativa;
-import com.test.TUdipsaiApi.Model.Jornada;
-import com.test.TUdipsaiApi.Model.Paciente;
-import com.test.TUdipsaiApi.Repository.InstitucionEducativaRepositorio;
-import com.test.TUdipsaiApi.Repository.JornadaRepositorio;
-import com.test.TUdipsaiApi.Repository.PacienteRepositorio;
+import com.test.TUdipsaiApi.Model.*;
+import com.test.TUdipsaiApi.Repository.*;
 import com.test.TUdipsaiApi.dto.PacienteDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -62,6 +58,7 @@ public class PacienteService {
         paciente.setTipoDiscapacidad(pacienteDTO.getTipoDiscapacidad());
         paciente.setDetalleDiscapacidad(pacienteDTO.getDetalleDiscapacidad());
         paciente.setPorcentajeDiscapacidad(pacienteDTO.getPorcentajeDiscapacidad());
+        paciente.setPerteneceAProyecto(pacienteDTO.getPerteneceAProyecto());
 
         if (pacienteDTO.getInstitucionEducativa() != null) {
             Optional<InstitucionEducativa> institucion = institucionEducativaRepositorio.findById(pacienteDTO.getInstitucionEducativa());
@@ -79,6 +76,7 @@ public class PacienteService {
 
         return paciente;
     }
+
     public Paciente updatePaciente(Integer id, PacienteDTO pacienteDTO) {
         Optional<Paciente> pacienteOptional = pacienteRepositorio.findById(id);
         if (pacienteOptional.isPresent()) {
@@ -108,6 +106,7 @@ public class PacienteService {
             paciente.setTipoDiscapacidad(pacienteDTO.getTipoDiscapacidad());
             paciente.setDetalleDiscapacidad(pacienteDTO.getDetalleDiscapacidad());
             paciente.setPorcentajeDiscapacidad(pacienteDTO.getPorcentajeDiscapacidad());
+            paciente.setPerteneceAProyecto(pacienteDTO.getPerteneceAProyecto());
 
             if (pacienteDTO.getInstitucionEducativa() != null) {
                 Optional<InstitucionEducativa> institucion = institucionEducativaRepositorio.findById(pacienteDTO.getInstitucionEducativa());
@@ -129,8 +128,6 @@ public class PacienteService {
         }
     }
 
-
-
     public Optional<Paciente> deletePaciente(Integer id) {
         Optional<Paciente> optionalPaciente = pacienteRepositorio.findById(id);
         if (optionalPaciente.isPresent()) {
@@ -147,7 +144,6 @@ public class PacienteService {
         Pageable pageable = PageRequest.of(0, 100);
         return pacienteRepositorio.searchPacientes(busqueda, pageable);
     }
-
 
     public List<Paciente> getAllPacientes() {
         return pacienteRepositorio.findByPacienteEstado(1);

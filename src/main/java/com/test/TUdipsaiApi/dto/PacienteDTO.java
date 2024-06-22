@@ -2,7 +2,6 @@ package com.test.TUdipsaiApi.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-
 import java.util.Date;
 
 @Getter
@@ -35,6 +34,5 @@ public class PacienteDTO {
     private String tipoDiscapacidad;
     private String detalleDiscapacidad;
     private Integer porcentajeDiscapacidad;
-
-
+    private Boolean perteneceAProyecto;
 }
