@@ -2,6 +2,7 @@ package com.test.TUdipsaiApi.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+
 import java.util.Date;
 
 @Getter
@@ -20,9 +21,9 @@ public class PacienteDTO {
     private byte[] imagen;
     private String telefono;
     private String celular;
-    private Integer institucionEducativa;
+    private InstitucionEducativaDTO institucionEducativa;
     private String proyecto;
-    private Integer jornada;
+    private JornadaDTO jornada;
     private String anioEducacion;
     private String paralelo;
     private String perteneceInclusion;

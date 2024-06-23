@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface SeguimientoRepositorio extends JpaRepository<Seguimiento, Integer> {
     List<Seguimiento> findByEstado(Integer estado);
+    List<Seguimiento> findByPacienteIdAndEstado(Integer pacienteId, Integer estado);
 }
