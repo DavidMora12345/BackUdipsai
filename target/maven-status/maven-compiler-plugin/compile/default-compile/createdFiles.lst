@@ -3,8 +3,10 @@ com\test\TUdipsaiApi\Model\Especialistas.class
 com\test\TUdipsaiApi\util\BCryptPasswordEncoderTest.class
 com\test\TUdipsaiApi\Controller\EspecialistaController.class
 com\test\TUdipsaiApi\Controller\InstitucionEducativaController.class
+com\test\TUdipsaiApi\dto\EspecialistasDTO.class
 com\test\TUdipsaiApi\Service\ExcelService.class
 com\test\TUdipsaiApi\Model\InstitucionEducativa.class
+com\test\TUdipsaiApi\dto\JornadaDTO.class
 com\test\TUdipsaiApi\Model\Especialidad.class
 com\test\TUdipsaiApi\Model\Paciente.class
 com\test\TUdipsaiApi\Repository\PacienteRepositorio.class
@@ -17,6 +19,8 @@ com\test\TUdipsaiApi\Model\Seguimiento.class
 com\test\TUdipsaiApi\Service\LogService.class
 com\test\TUdipsaiApi\TUdipsaiApiApplication.class
 com\test\TUdipsaiApi\Repository\JornadaRepositorio.class
+com\test\TUdipsaiApi\dto\InstitucionEducativaDTO.class
+com\test\TUdipsaiApi\dto\EspecialidadDTO.class
 com\test\TUdipsaiApi\dto\PacienteDTO.class
 com\test\TUdipsaiApi\Service\InstitucionEducativaService.class
 com\test\TUdipsaiApi\Model\LogEntry.class
@@ -24,3 +28,4 @@ com\test\TUdipsaiApi\Repository\InstitucionEducativaRepositorio.class
 com\test\TUdipsaiApi\Repository\EspecialistasRepositorio.class
 com\test\TUdipsaiApi\Service\SeguimientoService.class
 com\test\TUdipsaiApi\Repository\LogEntryRepository.class
+com\test\TUdipsaiApi\dto\SeguimientoDTO.class
