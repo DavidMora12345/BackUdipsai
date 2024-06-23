@@ -51,6 +51,7 @@ public class EspecialistaController {
         Especialistas resultadoLogin = especialistasService.login(especialista.getCedula(), especialista.getContrasena());
         if (resultadoLogin != null) {
             Map<String, Object> respuesta = new HashMap<>();
+            respuesta.put("cedula", resultadoLogin.getCedula());
             respuesta.put("primerNombre", resultadoLogin.getPrimerNombre());
             respuesta.put("segundoNombre", resultadoLogin.getSegundoNombre());
             respuesta.put("primerApellido", resultadoLogin.getPrimerApellido());
