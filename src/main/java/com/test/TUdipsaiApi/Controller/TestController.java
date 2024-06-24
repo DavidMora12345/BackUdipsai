@@ -37,11 +37,7 @@ public class TestController {
     @PutMapping("/{id}")
     public ResponseEntity<Test> updateTest(@PathVariable Long id, @RequestBody TestDTO testDTO) {
         Test updatedTest = testService.updateTest(id, testDTO);
-        if (updatedTest != null) {
-            return ResponseEntity.ok(updatedTest);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return ResponseEntity.ok(updatedTest);
     }
 
     @DeleteMapping("/{id}")
@@ -53,5 +49,11 @@ public class TestController {
     @GetMapping("/paciente/{pacienteId}")
     public List<TestDTO> getTestsByPacienteId(@PathVariable Long pacienteId) {
         return testService.getTestsByPacienteId(pacienteId);
+    }
+
+    // Nuevo endpoint
+    @GetMapping("/paciente/{pacienteId}/especialista/{cedula}")
+    public List<TestDTO> getTestsByPacienteIdAndEspecialistaCedula(@PathVariable Long pacienteId, @PathVariable String cedula) {
+        return testService.getTestsByPacienteIdAndEspecialistaCedula(pacienteId, cedula);
     }
 }

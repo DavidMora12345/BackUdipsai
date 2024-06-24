@@ -21,7 +21,7 @@ public class TestService {
     private DocumentoRepositorio documentoRepositorio;
 
     public List<TestDTO> getAllTests() {
-        return testRepositorio.findByActivo(1).stream() // Cambiado a findByActivo(1)
+        return testRepositorio.findByActivo(1).stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
@@ -32,7 +32,7 @@ public class TestService {
 
     public Test saveTest(TestDTO testDTO) {
         Test test = convertToEntity(testDTO);
-        test.setActivo(1); // Asegurar que el estado se establece a 1
+        test.setActivo(1);
 
         Documento documento = new Documento();
         documento.setContenido(testDTO.getContenido());
@@ -66,7 +66,14 @@ public class TestService {
     }
 
     public List<TestDTO> getTestsByPacienteId(Long pacienteId) {
-        return testRepositorio.findByPacienteIdAndActivo(pacienteId, 1).stream() // Cambiado a findByPacienteIdAndActivo(pacienteId, 1)
+        return testRepositorio.findByPacienteIdAndActivo(pacienteId, 1).stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    // Nuevo método
+    public List<TestDTO> getTestsByPacienteIdAndEspecialistaCedula(Long pacienteId, String cedula) {
+        return testRepositorio.findByPacienteIdAndEspecialistaCedulaAndActivo(pacienteId, cedula, 1).stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
@@ -196,6 +203,7 @@ public class TestService {
                 institucionEducativa.setNombreInstitucion(testDTO.getPaciente().getInstitucionEducativa().getNombreInstitucion());
                 institucionEducativa.setDireccion(testDTO.getPaciente().getInstitucionEducativa().getDireccion());
                 institucionEducativa.setTipoInstitucion(testDTO.getPaciente().getInstitucionEducativa().getTipoInstitucion());
+                institucionEducativa.setInstitucionEstado(testDTO.getPaciente().getInstitucionEducativa().getInstitucionEstado());
                 paciente.setInstitucionEducativa(institucionEducativa);
             }
 
