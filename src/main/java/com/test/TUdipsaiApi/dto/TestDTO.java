@@ -14,7 +14,7 @@ public class TestDTO {
     private EspecialistasDTO especialista;
     private String nombreArchivo;
     private Date fecha;
-    private Integer activo; // Cambiado a Integer
+    private Integer activo;
     private Long documentoId;
     private byte[] contenido;
 }

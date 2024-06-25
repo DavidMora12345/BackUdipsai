@@ -8,7 +8,6 @@ import java.util.Date;
 @Getter
 @Setter
 public class PacienteDTO {
-
     private Integer id;
     private Date fechaApertura;
     private Integer pacienteEstado;
@@ -21,9 +20,11 @@ public class PacienteDTO {
     private byte[] imagen;
     private String telefono;
     private String celular;
-    private InstitucionEducativaDTO institucionEducativa;
+    private Integer institucionEducativa;  // Cambiado a Integer
+    private Integer tipoInstitucion;       // Cambiado a Integer
+    private Integer jornada;               // Cambiado a Integer
+    private Integer direccionInstitucion;  // Cambiado a Integer
     private String proyecto;
-    private JornadaDTO jornada;
     private String anioEducacion;
     private String paralelo;
     private String perteneceInclusion;

@@ -10,5 +10,5 @@ import java.util.List;
 public interface TestRepositorio extends JpaRepository<Test, Long> {
     List<Test> findByActivo(Integer activo);
     List<Test> findByPacienteIdAndActivo(Long pacienteId, Integer activo);
-    List<Test> findByPacienteIdAndEspecialistaCedulaAndActivo(Long pacienteId, String cedula, Integer activo); // Nuevo método
+    List<Test> findByPacienteIdAndEspecialistaCedulaAndActivo(Long pacienteId, String cedula, Integer activo);
 }

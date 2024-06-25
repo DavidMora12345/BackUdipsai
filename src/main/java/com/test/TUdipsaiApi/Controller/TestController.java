@@ -52,7 +52,6 @@ public class TestController {
         return testService.getTestsByPacienteId(pacienteId);
     }
 
-    // Nuevo endpoint
     @GetMapping("/paciente/{pacienteId}/especialista/{cedula}")
     public List<TestDTO> getTestsByPacienteIdAndEspecialistaCedula(@PathVariable Long pacienteId, @PathVariable String cedula) {
         return testService.getTestsByPacienteIdAndEspecialistaCedula(pacienteId, cedula);

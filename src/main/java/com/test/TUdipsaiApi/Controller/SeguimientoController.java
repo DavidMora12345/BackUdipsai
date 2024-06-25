@@ -1,6 +1,5 @@
 package com.test.TUdipsaiApi.Controller;
 
-import com.test.TUdipsaiApi.Model.Especialidad;
 import com.test.TUdipsaiApi.Model.Especialistas;
 import com.test.TUdipsaiApi.Model.Paciente;
 import com.test.TUdipsaiApi.Model.Seguimiento;
@@ -29,11 +28,7 @@ public class SeguimientoController {
     @GetMapping("/{id}")
     public ResponseEntity<SeguimientoDTO> getSeguimientoById(@PathVariable int id) {
         Optional<SeguimientoDTO> seguimiento = seguimientoService.getSeguimientoById(id);
-        if (seguimiento.isPresent()) {
-            return ResponseEntity.ok(seguimiento.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return seguimiento.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @GetMapping("/paciente/{pacienteId}")
@@ -42,20 +37,20 @@ public class SeguimientoController {
     }
 
     @PostMapping
-    public Seguimiento createSeguimiento(@RequestBody Seguimiento seguimiento) {
-        return seguimientoService.saveSeguimiento(seguimiento);
+    public ResponseEntity<Seguimiento> createSeguimiento(@RequestBody SeguimientoDTO seguimientoDTO) {
+        Seguimiento savedSeguimiento = seguimientoService.saveSeguimiento(seguimientoDTO);
+        return ResponseEntity.ok(savedSeguimiento);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<SeguimientoDTO> updateSeguimiento(@PathVariable int id, @RequestBody Seguimiento seguimientoDetails) {
+    public ResponseEntity<SeguimientoDTO> updateSeguimiento(@PathVariable int id, @RequestBody SeguimientoDTO seguimientoDetails) {
         Optional<Seguimiento> optionalSeguimiento = seguimientoService.getSeguimientoById(id).map(this::convertToEntity);
         if (optionalSeguimiento.isPresent()) {
             Seguimiento seguimiento = optionalSeguimiento.get();
-            seguimiento.setEspecialista(seguimientoDetails.getEspecialista());
-            seguimiento.setPaciente(seguimientoDetails.getPaciente());
             seguimiento.setFecha(seguimientoDetails.getFecha());
             seguimiento.setObservacion(seguimientoDetails.getObservacion());
-            final Seguimiento updatedSeguimiento = seguimientoService.saveSeguimiento(seguimiento);
+            seguimiento.setEstado(seguimientoDetails.getEstado());
+            final Seguimiento updatedSeguimiento = seguimientoService.saveSeguimiento(seguimientoService.convertToDTO(seguimiento));
             return ResponseEntity.ok(seguimientoService.convertToDTO(updatedSeguimiento));
         } else {
             return ResponseEntity.notFound().build();
@@ -77,32 +72,10 @@ public class SeguimientoController {
 
         Especialistas especialista = new Especialistas();
         especialista.setCedula(dto.getEspecialista().getCedula());
-        especialista.setEspecialistaEstado(dto.getEspecialista().getEspecialistaEstado());
-        especialista.setPrimerNombre(dto.getEspecialista().getPrimerNombre());
-        especialista.setSegundoNombre(dto.getEspecialista().getSegundoNombre());
-        especialista.setPrimerApellido(dto.getEspecialista().getPrimerApellido());
-        especialista.setSegundoApellido(dto.getEspecialista().getSegundoApellido());
-        especialista.setEspecialistaAsignado(dto.getEspecialista().getEspecialistaAsignado());
-        especialista.setInicioPasantia(dto.getEspecialista().getInicioPasantia());
-        especialista.setFinPasantia(dto.getEspecialista().getFinPasantia());
-        especialista.setImagen(dto.getEspecialista().getImagen());
-
-        if (dto.getEspecialista().getEspecialidad() != null) {
-            Especialidad especialidad = new Especialidad();
-            especialidad.setId(dto.getEspecialista().getEspecialidad().getId());
-            especialidad.setArea(dto.getEspecialista().getEspecialidad().getArea());
-            especialista.setEspecialidad(especialidad);
-        }
+        entity.setEspecialista(especialista);
 
         Paciente paciente = new Paciente();
         paciente.setId(dto.getPaciente().getId());
-        paciente.setNombresApellidos(dto.getPaciente().getNombresApellidos());
-        paciente.setCedula(dto.getPaciente().getCedula());
-        paciente.setTelefono(dto.getPaciente().getTelefono());
-        paciente.setCelular(dto.getPaciente().getCelular());
-        paciente.setCiudad(dto.getPaciente().getCiudad());
-
-        entity.setEspecialista(especialista);
         entity.setPaciente(paciente);
 
         return entity;

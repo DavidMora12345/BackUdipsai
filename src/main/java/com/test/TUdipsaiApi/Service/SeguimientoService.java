@@ -1,6 +1,8 @@
 package com.test.TUdipsaiApi.Service;
 
-import com.test.TUdipsaiApi.Model.*;
+import com.test.TUdipsaiApi.Model.Seguimiento;
+import com.test.TUdipsaiApi.Model.Especialistas;
+import com.test.TUdipsaiApi.Model.Paciente;
 import com.test.TUdipsaiApi.Repository.SeguimientoRepositorio;
 import com.test.TUdipsaiApi.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +28,8 @@ public class SeguimientoService {
         return seguimientoRepository.findById(id).map(this::convertToDTO);
     }
 
-    public Seguimiento saveSeguimiento(Seguimiento seguimiento) {
+    public Seguimiento saveSeguimiento(SeguimientoDTO seguimientoDTO) {
+        Seguimiento seguimiento = convertToEntity(seguimientoDTO);
         return seguimientoRepository.save(seguimiento);
     }
 
@@ -88,23 +91,7 @@ public class SeguimientoService {
             pacienteDTO.setImagen(seguimiento.getPaciente().getImagen());
             pacienteDTO.setTelefono(seguimiento.getPaciente().getTelefono());
             pacienteDTO.setCelular(seguimiento.getPaciente().getCelular());
-            if (seguimiento.getPaciente().getInstitucionEducativa() != null) {
-                InstitucionEducativaDTO institucionEducativaDTO = new InstitucionEducativaDTO();
-                institucionEducativaDTO.setId(seguimiento.getPaciente().getInstitucionEducativa().getId());
-                institucionEducativaDTO.setNombreInstitucion(seguimiento.getPaciente().getInstitucionEducativa().getNombreInstitucion());
-                institucionEducativaDTO.setDireccion(seguimiento.getPaciente().getInstitucionEducativa().getDireccion());
-                institucionEducativaDTO.setTipoInstitucion(seguimiento.getPaciente().getInstitucionEducativa().getTipoInstitucion());
-                institucionEducativaDTO.setInstitucionEstado(seguimiento.getPaciente().getInstitucionEducativa().getInstitucionEstado());
-                pacienteDTO.setInstitucionEducativa(institucionEducativaDTO);
-            }
             pacienteDTO.setProyecto(seguimiento.getPaciente().getProyecto());
-            if (seguimiento.getPaciente().getJornada() != null) {
-                JornadaDTO jornadaDTO = new JornadaDTO();
-                jornadaDTO.setId(seguimiento.getPaciente().getJornada().getId());
-                jornadaDTO.setNombreJornada(seguimiento.getPaciente().getJornada().getNombreJornada());
-                jornadaDTO.setEstadoJornada(seguimiento.getPaciente().getJornada().getEstadoJornada());
-                pacienteDTO.setJornada(jornadaDTO);
-            }
             pacienteDTO.setAnioEducacion(seguimiento.getPaciente().getAnioEducacion());
             pacienteDTO.setParalelo(seguimiento.getPaciente().getParalelo());
             pacienteDTO.setPerteneceInclusion(seguimiento.getPaciente().getPerteneceInclusion());
@@ -117,13 +104,14 @@ public class SeguimientoService {
             pacienteDTO.setDetalleDiscapacidad(seguimiento.getPaciente().getDetalleDiscapacidad());
             pacienteDTO.setPorcentajeDiscapacidad(seguimiento.getPaciente().getPorcentajeDiscapacidad());
             pacienteDTO.setPerteneceAProyecto(seguimiento.getPaciente().getPerteneceAProyecto());
+
             seguimientoDTO.setPaciente(pacienteDTO);
         }
 
         return seguimientoDTO;
     }
 
-    public Seguimiento convertToEntity(SeguimientoDTO seguimientoDTO) {
+    private Seguimiento convertToEntity(SeguimientoDTO seguimientoDTO) {
         Seguimiento seguimiento = new Seguimiento();
         seguimiento.setId(seguimientoDTO.getId());
         seguimiento.setFecha(seguimientoDTO.getFecha());
@@ -133,68 +121,12 @@ public class SeguimientoService {
         if (seguimientoDTO.getEspecialista() != null) {
             Especialistas especialista = new Especialistas();
             especialista.setCedula(seguimientoDTO.getEspecialista().getCedula());
-            especialista.setEspecialistaEstado(seguimientoDTO.getEspecialista().getEspecialistaEstado());
-            especialista.setPrimerNombre(seguimientoDTO.getEspecialista().getPrimerNombre());
-            especialista.setSegundoNombre(seguimientoDTO.getEspecialista().getSegundoNombre());
-            especialista.setPrimerApellido(seguimientoDTO.getEspecialista().getPrimerApellido());
-            especialista.setSegundoApellido(seguimientoDTO.getEspecialista().getSegundoApellido());
-            if (seguimientoDTO.getEspecialista().getEspecialidad() != null) {
-                Especialidad especialidad = new Especialidad();
-                especialidad.setId(seguimientoDTO.getEspecialista().getEspecialidad().getId());
-                especialidad.setArea(seguimientoDTO.getEspecialista().getEspecialidad().getArea());
-                especialista.setEspecialidad(especialidad);
-            }
-            especialista.setEsPasante(seguimientoDTO.getEspecialista().getEsPasante());
-            especialista.setEspecialistaAsignado(seguimientoDTO.getEspecialista().getEspecialistaAsignado());
-            especialista.setInicioPasantia(seguimientoDTO.getEspecialista().getInicioPasantia());
-            especialista.setFinPasantia(seguimientoDTO.getEspecialista().getFinPasantia());
-            especialista.setImagen(seguimientoDTO.getEspecialista().getImagen());
             seguimiento.setEspecialista(especialista);
         }
 
         if (seguimientoDTO.getPaciente() != null) {
             Paciente paciente = new Paciente();
             paciente.setId(seguimientoDTO.getPaciente().getId());
-            paciente.setFechaApertura(seguimientoDTO.getPaciente().getFechaApertura());
-            paciente.setPacienteEstado(seguimientoDTO.getPaciente().getPacienteEstado());
-            paciente.setNombresApellidos(seguimientoDTO.getPaciente().getNombresApellidos());
-            paciente.setCiudad(seguimientoDTO.getPaciente().getCiudad());
-            paciente.setFechaNacimiento(seguimientoDTO.getPaciente().getFechaNacimiento());
-            paciente.setEdad(seguimientoDTO.getPaciente().getEdad());
-            paciente.setCedula(seguimientoDTO.getPaciente().getCedula());
-            paciente.setDomicilio(seguimientoDTO.getPaciente().getDomicilio());
-            paciente.setImagen(seguimientoDTO.getPaciente().getImagen());
-            paciente.setTelefono(seguimientoDTO.getPaciente().getTelefono());
-            paciente.setCelular(seguimientoDTO.getPaciente().getCelular());
-            if (seguimientoDTO.getPaciente().getInstitucionEducativa() != null) {
-                InstitucionEducativa institucionEducativa = new InstitucionEducativa();
-                institucionEducativa.setId(seguimientoDTO.getPaciente().getInstitucionEducativa().getId());
-                institucionEducativa.setNombreInstitucion(seguimientoDTO.getPaciente().getInstitucionEducativa().getNombreInstitucion());
-                institucionEducativa.setDireccion(seguimientoDTO.getPaciente().getInstitucionEducativa().getDireccion());
-                institucionEducativa.setTipoInstitucion(seguimientoDTO.getPaciente().getInstitucionEducativa().getTipoInstitucion());
-                institucionEducativa.setInstitucionEstado(seguimientoDTO.getPaciente().getInstitucionEducativa().getInstitucionEstado());
-                paciente.setInstitucionEducativa(institucionEducativa);
-            }
-            paciente.setProyecto(seguimientoDTO.getPaciente().getProyecto());
-            if (seguimientoDTO.getPaciente().getJornada() != null) {
-                Jornada jornada = new Jornada();
-                jornada.setId(seguimientoDTO.getPaciente().getJornada().getId());
-                jornada.setNombreJornada(seguimientoDTO.getPaciente().getJornada().getNombreJornada());
-                jornada.setEstadoJornada(seguimientoDTO.getPaciente().getJornada().getEstadoJornada());
-                paciente.setJornada(jornada);
-            }
-            paciente.setAnioEducacion(seguimientoDTO.getPaciente().getAnioEducacion());
-            paciente.setParalelo(seguimientoDTO.getPaciente().getParalelo());
-            paciente.setPerteneceInclusion(seguimientoDTO.getPaciente().getPerteneceInclusion());
-            paciente.setTieneDiscapacidad(seguimientoDTO.getPaciente().getTieneDiscapacidad());
-            paciente.setPortadorCarnet(seguimientoDTO.getPaciente().isPortadorCarnet());
-            paciente.setDiagnostico(seguimientoDTO.getPaciente().getDiagnostico());
-            paciente.setMotivoConsulta(seguimientoDTO.getPaciente().getMotivoConsulta());
-            paciente.setObservaciones(seguimientoDTO.getPaciente().getObservaciones());
-            paciente.setTipoDiscapacidad(seguimientoDTO.getPaciente().getTipoDiscapacidad());
-            paciente.setDetalleDiscapacidad(seguimientoDTO.getPaciente().getDetalleDiscapacidad());
-            paciente.setPorcentajeDiscapacidad(seguimientoDTO.getPaciente().getPorcentajeDiscapacidad());
-            paciente.setPerteneceAProyecto(seguimientoDTO.getPaciente().getPerteneceAProyecto());
             seguimiento.setPaciente(paciente);
         }
 

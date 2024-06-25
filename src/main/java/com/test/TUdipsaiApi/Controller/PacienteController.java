@@ -30,9 +30,10 @@ public class PacienteController {
     }
 
     @GetMapping("/listar/{id}")
-    public ResponseEntity<Paciente> getPacienteById(@PathVariable Integer id) {
+    public ResponseEntity<PacienteDTO> getPacienteById(@PathVariable Integer id) {
         Optional<Paciente> detalleEntidad = pacienteService.getPacienteById(id);
-        return detalleEntidad.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        return detalleEntidad.map(paciente -> ResponseEntity.ok(pacienteService.convertToDTO(paciente)))
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping("/insertar")
