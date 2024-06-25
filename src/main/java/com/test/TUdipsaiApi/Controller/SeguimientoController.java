@@ -15,6 +15,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/seguimientos")
+@CrossOrigin(origins = "*")
 public class SeguimientoController {
 
     @Autowired

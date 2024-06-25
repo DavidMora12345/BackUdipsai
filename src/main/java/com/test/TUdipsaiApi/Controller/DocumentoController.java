@@ -10,6 +10,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/documentos")
+@CrossOrigin(origins = "*")
 public class DocumentoController {
 
     @Autowired
