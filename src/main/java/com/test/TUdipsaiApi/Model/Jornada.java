@@ -5,21 +5,19 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "Jornada")
+@Table(name="Jornada")
 @Setter
 @Getter
 public class Jornada {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name= "id")
     private Integer id;
 
-    @Column(name = "nombre_jornada")
+    @Column(name= "nombre_jornada")
     private String nombreJornada;
 
-    @Column(name = "estado_jornada")
+    @Column(name= "estado_jornada")
     private Integer estadoJornada;
-
-    public Jornada() {
-    }
 }

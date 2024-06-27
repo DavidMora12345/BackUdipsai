@@ -15,6 +15,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ExcelService {
@@ -39,7 +40,7 @@ public class ExcelService {
 
             Paciente paciente = new Paciente();
 
-            paciente.setId((int)row.getCell(0).getNumericCellValue());
+            paciente.setId((int) row.getCell(0).getNumericCellValue());
             paciente.setCedula(getCellValueAsString(row.getCell(1)));
             paciente.setNombresApellidos(getCellValueAsString(row.getCell(2)));
             paciente.setEdad(getCellValueAsString(row.getCell(3)));
@@ -48,28 +49,20 @@ public class ExcelService {
             paciente.setTelefono(getCellValueAsString(row.getCell(6)));
             paciente.setCelular(getCellValueAsString(row.getCell(7)));
 
-            // Obtener y asignar InstitucionEducativa
+            // Asignar InstitucionEducativa por nombre
             String institucionNombre = getCellValueAsString(row.getCell(8));
-            InstitucionEducativa institucion = institucionEducativaRepositorio.findByNombreInstitucion(institucionNombre);
-            if (institucion != null) {
-                paciente.setInstitucionEducativaId(institucion.getId());
-            }
+            Optional<InstitucionEducativa> institucion = institucionEducativaRepositorio.findByNombreInstitucion(institucionNombre);
+            institucion.ifPresent(paciente::setInstitucionEducativa);
 
+            // Asignar TipoInstitucion por nombre
             String institucionTipo = getCellValueAsString(row.getCell(9));
-            InstitucionEducativa institucionT = institucionEducativaRepositorio.findByTipoInstitucion(institucionTipo);
-            if (institucionT != null) {
-                paciente.setInstitucionEducativaId(institucionT.getId());
-            }
+            paciente.setTipoInstitucion(institucionTipo);
 
             paciente.setProyecto(getCellValueAsString(row.getCell(10)));
 
-
-
+            // Asignar DireccionInstitucion por nombre
             String institucionDireccion = getCellValueAsString(row.getCell(12));
-            InstitucionEducativa institucionD = institucionEducativaRepositorio.findByDireccion(institucionDireccion);
-            if (institucionD != null) {
-                paciente.setInstitucionEducativaId(institucionD.getId());
-            }
+            paciente.setDireccionInstitucion(institucionDireccion);
 
             paciente.setAnioEducacion(getCellValueAsString(row.getCell(13)));
             paciente.setParalelo(getCellValueAsString(row.getCell(14)));
@@ -81,7 +74,7 @@ public class ExcelService {
             paciente.setObservaciones(getCellValueAsString(row.getCell(20)));
             paciente.setTipoDiscapacidad(getCellValueAsString(row.getCell(21)));
             paciente.setDetalleDiscapacidad(getCellValueAsString(row.getCell(22)));
-            paciente.setPorcentajeDiscapacidad((int)row.getCell(23).getNumericCellValue());
+            paciente.setPorcentajeDiscapacidad((int) row.getCell(23).getNumericCellValue());
 
             try {
                 paciente.setFechaApertura(dateFormat.parse(getCellValueAsString(row.getCell(24))));

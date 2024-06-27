@@ -2,6 +2,7 @@ package com.test.TUdipsaiApi.Controller;
 
 import com.test.TUdipsaiApi.Model.Especialistas;
 import com.test.TUdipsaiApi.Service.EspecialistasService;
+import com.test.TUdipsaiApi.dto.EspecialistasSinImagenDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +22,9 @@ public class EspecialistaController {
     private EspecialistasService especialistasService;
 
     @GetMapping("/activos")
-    public List<Especialistas> listarEspecialistasActivos() {
-        return especialistasService.findAllActive();
+    public ResponseEntity<List<EspecialistasSinImagenDTO>> listarEspecialistasActivos() {
+        List<EspecialistasSinImagenDTO> especialistas = especialistasService.findAllActiveSinImagen();
+        return ResponseEntity.ok(especialistas);
     }
 
     @GetMapping("/activos/nopasantes")

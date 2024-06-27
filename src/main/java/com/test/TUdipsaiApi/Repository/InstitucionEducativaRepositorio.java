@@ -5,11 +5,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface InstitucionEducativaRepositorio extends JpaRepository<InstitucionEducativa, Integer> {
-    List<InstitucionEducativa> findByInstitucionEstado(Integer estado);
-    InstitucionEducativa findByNombreInstitucion(String nombreInstitucion);
-    InstitucionEducativa findByTipoInstitucion(String tipoInstitucion);
-    InstitucionEducativa findByDireccion(String direccion);
+    List<InstitucionEducativa> findByInstitucionEstado(int estado);
+    Optional<InstitucionEducativa> findByNombreInstitucion(String nombreInstitucion);
+    Optional<InstitucionEducativa> findByTipoInstitucion(String tipoInstitucion);
+    Optional<InstitucionEducativa> findByDireccion(String direccion);
 }

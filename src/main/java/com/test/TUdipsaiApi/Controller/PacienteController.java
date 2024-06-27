@@ -4,6 +4,7 @@ import com.test.TUdipsaiApi.Model.Paciente;
 import com.test.TUdipsaiApi.Service.LogService;
 import com.test.TUdipsaiApi.Service.PacienteService;
 import com.test.TUdipsaiApi.dto.PacienteDTO;
+import com.test.TUdipsaiApi.dto.PacienteSinImagenDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,8 +25,8 @@ public class PacienteController {
     private LogService logService;
 
     @GetMapping("/listar")
-    public ResponseEntity<List<Paciente>> getAllPacientes() {
-        List<Paciente> pacientes = pacienteService.getAllPacientes();
+    public ResponseEntity<List<PacienteSinImagenDTO>> getAllPacientes() {
+        List<PacienteSinImagenDTO> pacientes = pacienteService.getAllPacientesSinImagen();
         return ResponseEntity.ok(pacientes);
     }
 

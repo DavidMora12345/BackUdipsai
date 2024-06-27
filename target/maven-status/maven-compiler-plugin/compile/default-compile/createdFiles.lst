@@ -14,10 +14,12 @@ com\test\TUdipsaiApi\Model\Paciente.class
 com\test\TUdipsaiApi\Repository\PacienteRepositorio.class
 com\test\TUdipsaiApi\Service\EspecialistasService.class
 com\test\TUdipsaiApi\Controller\SeguimientoController.class
+com\test\TUdipsaiApi\dto\EspecialistasSinImagenDTO.class
 com\test\TUdipsaiApi\Repository\SeguimientoRepositorio.class
 com\test\TUdipsaiApi\Controller\DocumentoController.class
 com\test\TUdipsaiApi\Controller\TestController.class
 com\test\TUdipsaiApi\Service\PacienteService.class
+com\test\TUdipsaiApi\dto\PacienteSinImagenDTO.class
 com\test\TUdipsaiApi\Model\Documento.class
 com\test\TUdipsaiApi\Model\Jornada.class
 com\test\TUdipsaiApi\dto\TestDTO.class

@@ -8,6 +8,7 @@ C:\Users\User\Documents\NetBeansProjects\TUdipsaiApi\src\main\java\com\test\TUdi
 C:\Users\User\Documents\NetBeansProjects\TUdipsaiApi\src\main\java\com\test\TUdipsaiApi\Service\InstitucionEducativaService.java
 C:\Users\User\Documents\NetBeansProjects\TUdipsaiApi\src\main\java\com\test\TUdipsaiApi\dto\JornadaDTO.java
 C:\Users\User\Documents\NetBeansProjects\TUdipsaiApi\src\main\java\com\test\TUdipsaiApi\Model\Documento.java
+C:\Users\User\Documents\NetBeansProjects\TUdipsaiApi\src\main\java\com\test\TUdipsaiApi\dto\EspecialistasSinImagenDTO.java
 C:\Users\User\Documents\NetBeansProjects\TUdipsaiApi\src\main\java\com\test\TUdipsaiApi\Service\DocumentoService.java
 C:\Users\User\Documents\NetBeansProjects\TUdipsaiApi\src\main\java\com\test\TUdipsaiApi\Controller\DocumentoController.java
 C:\Users\User\Documents\NetBeansProjects\TUdipsaiApi\src\main\java\com\test\TUdipsaiApi\Service\EspecialistasService.java
@@ -23,6 +24,7 @@ C:\Users\User\Documents\NetBeansProjects\TUdipsaiApi\src\main\java\com\test\TUdi
 C:\Users\User\Documents\NetBeansProjects\TUdipsaiApi\src\main\java\com\test\TUdipsaiApi\Repository\TestRepositorio.java
 C:\Users\User\Documents\NetBeansProjects\TUdipsaiApi\src\main\java\com\test\TUdipsaiApi\Repository\SeguimientoRepositorio.java
 C:\Users\User\Documents\NetBeansProjects\TUdipsaiApi\src\main\java\com\test\TUdipsaiApi\Repository\JornadaRepositorio.java
+C:\Users\User\Documents\NetBeansProjects\TUdipsaiApi\src\main\java\com\test\TUdipsaiApi\dto\PacienteSinImagenDTO.java
 C:\Users\User\Documents\NetBeansProjects\TUdipsaiApi\src\main\java\com\test\TUdipsaiApi\dto\EspecialistasDTO.java
 C:\Users\User\Documents\NetBeansProjects\TUdipsaiApi\src\main\java\com\test\TUdipsaiApi\Model\Seguimiento.java
 C:\Users\User\Documents\NetBeansProjects\TUdipsaiApi\src\main\java\com\test\TUdipsaiApi\Model\Especialidad.java

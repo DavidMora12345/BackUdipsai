@@ -1,5 +1,7 @@
 package com.test.TUdipsaiApi.dto;
 
+import com.test.TUdipsaiApi.Model.InstitucionEducativa;
+import com.test.TUdipsaiApi.Model.Jornada;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,11 +22,11 @@ public class PacienteDTO {
     private byte[] imagen;
     private String telefono;
     private String celular;
-    private Integer institucionEducativa;  // Cambiado a Integer
-    private Integer tipoInstitucion;       // Cambiado a Integer
-    private Integer jornada;               // Cambiado a Integer
-    private Integer direccionInstitucion;  // Cambiado a Integer
+    private InstitucionEducativa institucionEducativa;
+    private Integer tipoInstitucion;
+    private Integer direccionInstitucion;
     private String proyecto;
+    private Jornada jornada;
     private String anioEducacion;
     private String paralelo;
     private String perteneceInclusion;

@@ -2,11 +2,14 @@ package com.test.TUdipsaiApi.Service;
 
 import com.test.TUdipsaiApi.Model.Especialistas;
 import com.test.TUdipsaiApi.Repository.EspecialistasRepositorio;
+import com.test.TUdipsaiApi.dto.EspecialidadDTO;
+import com.test.TUdipsaiApi.dto.EspecialistasSinImagenDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class EspecialistasService {
@@ -69,5 +72,34 @@ public class EspecialistasService {
             return Optional.of(especialista);
         }
         return Optional.empty();
+    }
+
+    public List<EspecialistasSinImagenDTO> findAllActiveSinImagen() {
+        List<Especialistas> especialistas = findAllActive();
+        return especialistas.stream()
+                .map(this::convertToSinImagenDTO)
+                .collect(Collectors.toList());
+    }
+
+    public EspecialistasSinImagenDTO convertToSinImagenDTO(Especialistas especialista) {
+        EspecialistasSinImagenDTO dto = new EspecialistasSinImagenDTO();
+        dto.setCedula(especialista.getCedula());
+        dto.setEspecialistaEstado(especialista.getEspecialistaEstado());
+        dto.setPrimerNombre(especialista.getPrimerNombre());
+        dto.setSegundoNombre(especialista.getSegundoNombre());
+        dto.setPrimerApellido(especialista.getPrimerApellido());
+        dto.setSegundoApellido(especialista.getSegundoApellido());
+
+        EspecialidadDTO especialidadDTO = new EspecialidadDTO();
+        especialidadDTO.setId(especialista.getEspecialidad().getId());
+        especialidadDTO.setArea(especialista.getEspecialidad().getArea());
+        dto.setEspecialidad(especialidadDTO);
+
+        dto.setEsPasante(especialista.getEsPasante());
+        dto.setEspecialistaAsignado(especialista.getEspecialistaAsignado());
+        dto.setInicioPasantia(especialista.getInicioPasantia());
+        dto.setFinPasantia(especialista.getFinPasantia());
+
+        return dto;
     }
 }
