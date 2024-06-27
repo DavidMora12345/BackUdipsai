@@ -22,7 +22,7 @@ public class PacienteSinImagenDTO {
     private String telefono;
     private String celular;
     private InstitucionEducativa institucionEducativa;
-    private String tipoInstitucion;
+    private String tipoInstitucionId;
     private String direccionInstitucionId;
     private String proyecto;
     private Jornada jornada;
