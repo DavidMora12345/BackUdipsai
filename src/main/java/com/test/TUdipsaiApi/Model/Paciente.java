@@ -60,7 +60,7 @@ public class Paciente {
     @Column(name = "tipo_institucion")
     private String tipoInstitucion;
 
-    @Column(name = "direccion_institucion")
+    @Column(name = "direccion_institucion_id")
     private String direccionInstitucion;
 
     @Column(name = "proyecto")

@@ -24,7 +24,7 @@ public class PacienteDTO {
     private String celular;
     private InstitucionEducativa institucionEducativa;
     private Integer tipoInstitucion;
-    private Integer direccionInstitucion;
+    private Integer direccionInstitucionId;
     private String proyecto;
     private Jornada jornada;
     private String anioEducacion;
