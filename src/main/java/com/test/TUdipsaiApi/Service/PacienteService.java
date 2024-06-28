@@ -196,16 +196,16 @@ public class PacienteService {
             paciente.setPorcentajeDiscapacidad(pacienteUpdateDTO.getPorcentajeDiscapacidad());
             paciente.setPerteneceAProyecto(pacienteUpdateDTO.getPerteneceAProyecto());
 
-            if (pacienteUpdateDTO.getInstitucionEducativaId() != null) {
-                InstitucionEducativa institucion = institucionEducativaRepositorio.findById(pacienteUpdateDTO.getInstitucionEducativaId())
+            if (pacienteUpdateDTO.getInstitucionEducativa() != null) {
+                InstitucionEducativa institucion = institucionEducativaRepositorio.findById(pacienteUpdateDTO.getInstitucionEducativa())
                         .orElseThrow(() -> new RuntimeException("Institucion Educativa not found"));
                 paciente.setInstitucionEducativa(institucion);
             } else {
                 paciente.setInstitucionEducativa(null);
             }
 
-            if (pacienteUpdateDTO.getJornadaId() != null) {
-                Jornada jornada = jornadaRepositorio.findById(pacienteUpdateDTO.getJornadaId())
+            if (pacienteUpdateDTO.getJornada() != null) {
+                Jornada jornada = jornadaRepositorio.findById(pacienteUpdateDTO.getJornada())
                         .orElseThrow(() -> new RuntimeException("Jornada not found"));
                 paciente.setJornada(jornada);
             } else {
@@ -218,6 +218,52 @@ public class PacienteService {
         }
     }
 
+    public Paciente createPaciente(PacienteUpdateDTO pacienteUpdateDTO) {
+        Paciente paciente = new Paciente();
+
+        paciente.setFechaApertura(pacienteUpdateDTO.getFechaApertura());
+        paciente.setPacienteEstado(pacienteUpdateDTO.getPacienteEstado());
+        paciente.setNombresApellidos(pacienteUpdateDTO.getNombresApellidos());
+        paciente.setCiudad(pacienteUpdateDTO.getCiudad());
+        paciente.setFechaNacimiento(pacienteUpdateDTO.getFechaNacimiento());
+        paciente.setEdad(pacienteUpdateDTO.getEdad());
+        paciente.setCedula(pacienteUpdateDTO.getCedula());
+        paciente.setDomicilio(pacienteUpdateDTO.getDomicilio());
+        paciente.setImagen(pacienteUpdateDTO.getImagen());
+        paciente.setTelefono(pacienteUpdateDTO.getTelefono());
+        paciente.setCelular(pacienteUpdateDTO.getCelular());
+        paciente.setProyecto(pacienteUpdateDTO.getProyecto());
+        paciente.setAnioEducacion(pacienteUpdateDTO.getAnioEducacion());
+        paciente.setParalelo(pacienteUpdateDTO.getParalelo());
+        paciente.setPerteneceInclusion(pacienteUpdateDTO.getPerteneceInclusion());
+        paciente.setTieneDiscapacidad(pacienteUpdateDTO.getTieneDiscapacidad());
+        paciente.setPortadorCarnet(pacienteUpdateDTO.isPortadorCarnet());
+        paciente.setDiagnostico(pacienteUpdateDTO.getDiagnostico());
+        paciente.setMotivoConsulta(pacienteUpdateDTO.getMotivoConsulta());
+        paciente.setObservaciones(pacienteUpdateDTO.getObservaciones());
+        paciente.setTipoDiscapacidad(pacienteUpdateDTO.getTipoDiscapacidad());
+        paciente.setDetalleDiscapacidad(pacienteUpdateDTO.getDetalleDiscapacidad());
+        paciente.setPorcentajeDiscapacidad(pacienteUpdateDTO.getPorcentajeDiscapacidad());
+        paciente.setPerteneceAProyecto(pacienteUpdateDTO.getPerteneceAProyecto());
+
+        if (pacienteUpdateDTO.getInstitucionEducativa() != null) {
+            InstitucionEducativa institucion = institucionEducativaRepositorio.findById(pacienteUpdateDTO.getInstitucionEducativa())
+                    .orElseThrow(() -> new RuntimeException("Institucion Educativa not found"));
+            paciente.setInstitucionEducativa(institucion);
+        } else {
+            paciente.setInstitucionEducativa(null);
+        }
+
+        if (pacienteUpdateDTO.getJornada() != null) {
+            Jornada jornada = jornadaRepositorio.findById(pacienteUpdateDTO.getJornada())
+                    .orElseThrow(() -> new RuntimeException("Jornada not found"));
+            paciente.setJornada(jornada);
+        } else {
+            paciente.setJornada(null);
+        }
+
+        return pacienteRepositorio.save(paciente);
+    }
 
     public Optional<Paciente> deletePaciente(Integer id) {
         Optional<Paciente> optionalPaciente = pacienteRepositorio.findById(id);

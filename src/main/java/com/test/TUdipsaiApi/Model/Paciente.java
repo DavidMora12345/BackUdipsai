@@ -57,12 +57,6 @@ public class Paciente {
     @JoinColumn(name = "id_institucion_educativa")
     private InstitucionEducativa institucionEducativa;
 
-    @Column(name = "tipo_institucion_id")
-    private String tipoInstitucion;
-
-    @Column(name = "direccion_institucion_id")
-    private String direccionInstitucion;
-
     @Column(name = "proyecto")
     private String proyecto;
 

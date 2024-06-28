@@ -54,15 +54,11 @@ public class ExcelService {
             Optional<InstitucionEducativa> institucion = institucionEducativaRepositorio.findByNombreInstitucion(institucionNombre);
             institucion.ifPresent(paciente::setInstitucionEducativa);
 
-            // Asignar TipoInstitucion por nombre
-            String institucionTipo = getCellValueAsString(row.getCell(9));
-            paciente.setTipoInstitucion(institucionTipo);
+
 
             paciente.setProyecto(getCellValueAsString(row.getCell(10)));
 
-            // Asignar DireccionInstitucion por nombre
-            String institucionDireccion = getCellValueAsString(row.getCell(12));
-            paciente.setDireccionInstitucion(institucionDireccion);
+
 
             paciente.setAnioEducacion(getCellValueAsString(row.getCell(13)));
             paciente.setParalelo(getCellValueAsString(row.getCell(14)));

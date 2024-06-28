@@ -35,6 +35,7 @@ com\test\TUdipsaiApi\dto\PacienteDTO.class
 com\test\TUdipsaiApi\Service\InstitucionEducativaService.class
 com\test\TUdipsaiApi\Model\LogEntry.class
 com\test\TUdipsaiApi\Repository\InstitucionEducativaRepositorio.class
+com\test\TUdipsaiApi\dto\PacienteUpdateDTO.class
 com\test\TUdipsaiApi\Repository\DocumentoRepositorio.class
 com\test\TUdipsaiApi\Repository\EspecialistasRepositorio.class
 com\test\TUdipsaiApi\Service\SeguimientoService.class

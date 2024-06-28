@@ -39,12 +39,11 @@ public class PacienteController {
     }
 
     @PostMapping("/insertar")
-    public ResponseEntity<?> crearOActualizarPaciente(@RequestBody PacienteDTO pacienteDTO) {
+    public ResponseEntity<?> crearOActualizarPaciente(@RequestBody PacienteUpdateDTO pacienteUpdateDTO) {
         try {
-            Paciente paciente = pacienteService.convertToEntity(pacienteDTO);
-            Paciente savedPaciente = pacienteService.saveOrUpdate(paciente);
-            logService.logChange("Paciente", savedPaciente.getId().longValue(), "INSERT", null, savedPaciente.toString());
-            return ResponseEntity.ok(savedPaciente);
+            Paciente paciente = pacienteService.createPaciente(pacienteUpdateDTO);
+            logService.logChange("Paciente", paciente.getId().longValue(), "INSERT", null, paciente.toString());
+            return ResponseEntity.ok(paciente);
         } catch (Exception e) {
             logService.logError("Error al insertar paciente", e);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al insertar paciente: " + e.getMessage());
