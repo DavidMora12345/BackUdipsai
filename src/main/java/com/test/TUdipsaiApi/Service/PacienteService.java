@@ -8,6 +8,7 @@ import com.test.TUdipsaiApi.Repository.JornadaRepositorio;
 import com.test.TUdipsaiApi.Repository.PacienteRepositorio;
 import com.test.TUdipsaiApi.dto.PacienteDTO;
 import com.test.TUdipsaiApi.dto.PacienteSinImagenDTO;
+import com.test.TUdipsaiApi.dto.PacienteUpdateDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -165,46 +166,46 @@ public class PacienteService {
         return dto;
     }
 
-    public Paciente updatePaciente(Integer id, PacienteDTO pacienteDTO) {
+    public Paciente updatePaciente(Integer id, PacienteUpdateDTO pacienteUpdateDTO) {
         Optional<Paciente> pacienteOptional = pacienteRepositorio.findById(id);
         if (pacienteOptional.isPresent()) {
             Paciente paciente = pacienteOptional.get();
 
-            paciente.setFechaApertura(pacienteDTO.getFechaApertura());
-            paciente.setPacienteEstado(pacienteDTO.getPacienteEstado());
-            paciente.setNombresApellidos(pacienteDTO.getNombresApellidos());
-            paciente.setCiudad(pacienteDTO.getCiudad());
-            paciente.setFechaNacimiento(pacienteDTO.getFechaNacimiento());
-            paciente.setEdad(pacienteDTO.getEdad());
-            paciente.setCedula(pacienteDTO.getCedula());
-            paciente.setDomicilio(pacienteDTO.getDomicilio());
-            paciente.setImagen(pacienteDTO.getImagen());
-            paciente.setTelefono(pacienteDTO.getTelefono());
-            paciente.setCelular(pacienteDTO.getCelular());
-            paciente.setProyecto(pacienteDTO.getProyecto());
-            paciente.setAnioEducacion(pacienteDTO.getAnioEducacion());
-            paciente.setParalelo(pacienteDTO.getParalelo());
-            paciente.setPerteneceInclusion(pacienteDTO.getPerteneceInclusion());
-            paciente.setTieneDiscapacidad(pacienteDTO.getTieneDiscapacidad());
-            paciente.setPortadorCarnet(pacienteDTO.isPortadorCarnet());
-            paciente.setDiagnostico(pacienteDTO.getDiagnostico());
-            paciente.setMotivoConsulta(pacienteDTO.getMotivoConsulta());
-            paciente.setObservaciones(pacienteDTO.getObservaciones());
-            paciente.setTipoDiscapacidad(pacienteDTO.getTipoDiscapacidad());
-            paciente.setDetalleDiscapacidad(pacienteDTO.getDetalleDiscapacidad());
-            paciente.setPorcentajeDiscapacidad(pacienteDTO.getPorcentajeDiscapacidad());
-            paciente.setPerteneceAProyecto(pacienteDTO.getPerteneceAProyecto());
+            paciente.setFechaApertura(pacienteUpdateDTO.getFechaApertura());
+            paciente.setPacienteEstado(pacienteUpdateDTO.getPacienteEstado());
+            paciente.setNombresApellidos(pacienteUpdateDTO.getNombresApellidos());
+            paciente.setCiudad(pacienteUpdateDTO.getCiudad());
+            paciente.setFechaNacimiento(pacienteUpdateDTO.getFechaNacimiento());
+            paciente.setEdad(pacienteUpdateDTO.getEdad());
+            paciente.setCedula(pacienteUpdateDTO.getCedula());
+            paciente.setDomicilio(pacienteUpdateDTO.getDomicilio());
+            paciente.setImagen(pacienteUpdateDTO.getImagen());
+            paciente.setTelefono(pacienteUpdateDTO.getTelefono());
+            paciente.setCelular(pacienteUpdateDTO.getCelular());
+            paciente.setProyecto(pacienteUpdateDTO.getProyecto());
+            paciente.setAnioEducacion(pacienteUpdateDTO.getAnioEducacion());
+            paciente.setParalelo(pacienteUpdateDTO.getParalelo());
+            paciente.setPerteneceInclusion(pacienteUpdateDTO.getPerteneceInclusion());
+            paciente.setTieneDiscapacidad(pacienteUpdateDTO.getTieneDiscapacidad());
+            paciente.setPortadorCarnet(pacienteUpdateDTO.isPortadorCarnet());
+            paciente.setDiagnostico(pacienteUpdateDTO.getDiagnostico());
+            paciente.setMotivoConsulta(pacienteUpdateDTO.getMotivoConsulta());
+            paciente.setObservaciones(pacienteUpdateDTO.getObservaciones());
+            paciente.setTipoDiscapacidad(pacienteUpdateDTO.getTipoDiscapacidad());
+            paciente.setDetalleDiscapacidad(pacienteUpdateDTO.getDetalleDiscapacidad());
+            paciente.setPorcentajeDiscapacidad(pacienteUpdateDTO.getPorcentajeDiscapacidad());
+            paciente.setPerteneceAProyecto(pacienteUpdateDTO.getPerteneceAProyecto());
 
-            if (pacienteDTO.getInstitucionEducativa() != null && pacienteDTO.getInstitucionEducativa().getId() != null) {
-                InstitucionEducativa institucion = institucionEducativaRepositorio.findById(pacienteDTO.getInstitucionEducativa().getId())
+            if (pacienteUpdateDTO.getInstitucionEducativaId() != null) {
+                InstitucionEducativa institucion = institucionEducativaRepositorio.findById(pacienteUpdateDTO.getInstitucionEducativaId())
                         .orElseThrow(() -> new RuntimeException("Institucion Educativa not found"));
                 paciente.setInstitucionEducativa(institucion);
             } else {
                 paciente.setInstitucionEducativa(null);
             }
 
-            if (pacienteDTO.getJornada() != null && pacienteDTO.getJornada().getId() != null) {
-                Jornada jornada = jornadaRepositorio.findById(pacienteDTO.getJornada().getId())
+            if (pacienteUpdateDTO.getJornadaId() != null) {
+                Jornada jornada = jornadaRepositorio.findById(pacienteUpdateDTO.getJornadaId())
                         .orElseThrow(() -> new RuntimeException("Jornada not found"));
                 paciente.setJornada(jornada);
             } else {
@@ -216,6 +217,7 @@ public class PacienteService {
             return null;
         }
     }
+
 
     public Optional<Paciente> deletePaciente(Integer id) {
         Optional<Paciente> optionalPaciente = pacienteRepositorio.findById(id);

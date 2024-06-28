@@ -5,6 +5,7 @@ import com.test.TUdipsaiApi.Service.LogService;
 import com.test.TUdipsaiApi.Service.PacienteService;
 import com.test.TUdipsaiApi.dto.PacienteDTO;
 import com.test.TUdipsaiApi.dto.PacienteSinImagenDTO;
+import com.test.TUdipsaiApi.dto.PacienteUpdateDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -51,9 +52,9 @@ public class PacienteController {
     }
 
     @PutMapping("/actualizar/{id}")
-    public ResponseEntity<?> updatePaciente(@PathVariable Integer id, @RequestBody PacienteDTO pacienteDTO) {
+    public ResponseEntity<?> updatePaciente(@PathVariable Integer id, @RequestBody PacienteUpdateDTO pacienteUpdateDTO) {
         try {
-            Paciente updatedPaciente = pacienteService.updatePaciente(id, pacienteDTO);
+            Paciente updatedPaciente = pacienteService.updatePaciente(id, pacienteUpdateDTO);
             if (updatedPaciente != null) {
                 logService.logChange("Paciente", updatedPaciente.getId().longValue(), "UPDATE", null, updatedPaciente.toString());
                 return ResponseEntity.ok(updatedPaciente);

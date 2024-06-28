@@ -1,5 +1,7 @@
 package com.test.TUdipsaiApi.Model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,4 +31,6 @@ public class InstitucionEducativa {
 
     @Column(name = "Jornada")
     private String jornada;
+
+
 }
