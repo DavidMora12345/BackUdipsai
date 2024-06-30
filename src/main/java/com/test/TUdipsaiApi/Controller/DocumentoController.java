@@ -1,11 +1,13 @@
 package com.test.TUdipsaiApi.Controller;
 
+import com.test.TUdipsaiApi.Model.Documento;
 import com.test.TUdipsaiApi.Service.DocumentoService;
-import com.test.TUdipsaiApi.dto.DocumentoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Optional;
 
 @RestController
@@ -17,14 +19,18 @@ public class DocumentoController {
     private DocumentoService documentoService;
 
     @PostMapping
-    public ResponseEntity<DocumentoDTO> createDocumento(@RequestBody DocumentoDTO documentoDTO) {
-        DocumentoDTO savedDocumento = documentoService.saveDocumento(documentoDTO);
-        return ResponseEntity.ok(savedDocumento);
+    public ResponseEntity<Documento> createDocumento(@RequestParam("file") MultipartFile file) {
+        try {
+            Documento savedDocumento = documentoService.saveDocumento(file);
+            return ResponseEntity.ok(savedDocumento);
+        } catch (IOException e) {
+            return ResponseEntity.status(500).build();
+        }
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DocumentoDTO> getDocumentoById(@PathVariable Long id) {
-        Optional<DocumentoDTO> documento = documentoService.getDocumentoById(id);
+    public ResponseEntity<Documento> getDocumentoById(@PathVariable Long id) {
+        Optional<Documento> documento = documentoService.getDocumentoById(id);
         return documento.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 

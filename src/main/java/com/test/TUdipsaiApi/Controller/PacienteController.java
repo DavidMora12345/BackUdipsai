@@ -1,6 +1,8 @@
 package com.test.TUdipsaiApi.Controller;
 
+import com.test.TUdipsaiApi.Model.Documento;
 import com.test.TUdipsaiApi.Model.Paciente;
+import com.test.TUdipsaiApi.Service.DocumentoService;
 import com.test.TUdipsaiApi.Service.LogService;
 import com.test.TUdipsaiApi.Service.PacienteService;
 import com.test.TUdipsaiApi.dto.PacienteDTO;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,6 +27,9 @@ public class PacienteController {
 
     @Autowired
     private LogService logService;
+
+    @Autowired
+    private DocumentoService documentoService;
 
     @GetMapping("/listar")
     public ResponseEntity<List<PacienteSinImagenDTO>> getAllPacientes() {
@@ -87,6 +93,65 @@ public class PacienteController {
         } catch (Exception e) {
             logService.logError("Error al eliminar paciente", e);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al eliminar paciente: " + e.getMessage());
+        }
+    }
+
+    @PostMapping("/{id}/documento")
+    public ResponseEntity<?> subirDocumento(@PathVariable Integer id, @RequestParam("file") MultipartFile file) {
+        try {
+            Optional<Paciente> pacienteOpt = pacienteService.getPacienteById(id);
+            if (pacienteOpt.isPresent()) {
+                Paciente paciente = pacienteOpt.get();
+                Documento documento = documentoService.saveDocumento(file);
+                paciente.setFichaDiagnostica(documento);
+                pacienteService.saveOrUpdate(paciente);
+                return ResponseEntity.ok("Documento subido exitosamente con ID: " + documento.getId());
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Paciente no encontrado con ID: " + id);
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al subir documento: " + e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/{id}/documento")
+    public ResponseEntity<?> eliminarDocumento(@PathVariable Integer id) {
+        try {
+            Optional<Paciente> pacienteOpt = pacienteService.getPacienteById(id);
+            if (pacienteOpt.isPresent()) {
+                Paciente paciente = pacienteOpt.get();
+                Documento documento = paciente.getFichaDiagnostica();
+                if (documento != null) {
+                    documentoService.deleteDocumento(documento.getId());
+                    paciente.setFichaDiagnostica(null);
+                    pacienteService.saveOrUpdate(paciente);
+                }
+                return ResponseEntity.ok().build();
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Paciente no encontrado con ID: " + id);
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al eliminar documento: " + e.getMessage());
+        }
+    }
+
+    @GetMapping("/{id}/documento")
+    public ResponseEntity<?> listarDocumentos(@PathVariable Integer id) {
+        try {
+            Optional<Paciente> pacienteOpt = pacienteService.getPacienteById(id);
+            if (pacienteOpt.isPresent()) {
+                Paciente paciente = pacienteOpt.get();
+                Documento documento = paciente.getFichaDiagnostica();
+                if (documento != null) {
+                    return ResponseEntity.ok(documento);
+                } else {
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No hay documentos para el paciente con ID: " + id);
+                }
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Paciente no encontrado con ID: " + id);
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al listar documentos: " + e.getMessage());
         }
     }
 }

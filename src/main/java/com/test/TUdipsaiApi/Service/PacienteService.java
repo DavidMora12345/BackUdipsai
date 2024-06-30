@@ -3,9 +3,11 @@ package com.test.TUdipsaiApi.Service;
 import com.test.TUdipsaiApi.Model.InstitucionEducativa;
 import com.test.TUdipsaiApi.Model.Jornada;
 import com.test.TUdipsaiApi.Model.Paciente;
+import com.test.TUdipsaiApi.Model.Documento;
 import com.test.TUdipsaiApi.Repository.InstitucionEducativaRepositorio;
 import com.test.TUdipsaiApi.Repository.JornadaRepositorio;
 import com.test.TUdipsaiApi.Repository.PacienteRepositorio;
+import com.test.TUdipsaiApi.dto.DocumentoDTO;
 import com.test.TUdipsaiApi.dto.PacienteDTO;
 import com.test.TUdipsaiApi.dto.PacienteSinImagenDTO;
 import com.test.TUdipsaiApi.dto.PacienteUpdateDTO;
@@ -13,7 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -29,6 +33,9 @@ public class PacienteService {
 
     @Autowired
     private JornadaRepositorio jornadaRepositorio;
+
+    @Autowired
+    private DocumentoService documentoService;
 
     public Optional<Paciente> getPacienteById(Integer id) {
         return pacienteRepositorio.findById(id);
@@ -291,5 +298,36 @@ public class PacienteService {
         return pacientes.stream()
                 .map(this::convertToSinImagenDTO)
                 .collect(Collectors.toList());
+    }
+
+    public DocumentoDTO addDocumentoToPaciente(Integer pacienteId, MultipartFile file) throws IOException {
+        Optional<Paciente> optionalPaciente = pacienteRepositorio.findById(pacienteId);
+        if (optionalPaciente.isPresent()) {
+            Documento documento = documentoService.saveDocumento(file);
+            Paciente paciente = optionalPaciente.get();
+            paciente.setFichaDiagnostica(documento); // Asumiendo que tienes un setter para esto en la entidad Paciente
+            pacienteRepositorio.save(paciente);
+            DocumentoDTO documentoDTO = new DocumentoDTO();
+            documentoDTO.setId(documento.getId());
+            documentoDTO.setContenido(documento.getContenido());
+            return documentoDTO;
+        } else {
+            throw new RuntimeException("Paciente not found with ID: " + pacienteId);
+        }
+    }
+
+    public void deleteDocumentoFromPaciente(Integer pacienteId) {
+        Optional<Paciente> optionalPaciente = pacienteRepositorio.findById(pacienteId);
+        if (optionalPaciente.isPresent()) {
+            Paciente paciente = optionalPaciente.get();
+            Documento documento = paciente.getFichaDiagnostica();
+            if (documento != null) {
+                documentoService.deleteDocumento(documento.getId());
+                paciente.setFichaDiagnostica(null);
+                pacienteRepositorio.save(paciente);
+            }
+        } else {
+            throw new RuntimeException("Paciente not found with ID: " + pacienteId);
+        }
     }
 }

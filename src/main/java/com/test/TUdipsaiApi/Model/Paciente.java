@@ -99,4 +99,8 @@ public class Paciente {
 
     @Column(name = "pertenece_a_proyecto")
     private Boolean perteneceAProyecto;
+
+    @OneToOne
+    @JoinColumn(name = "ficha_diagnostica_id")
+    private Documento fichaDiagnostica;
 }
