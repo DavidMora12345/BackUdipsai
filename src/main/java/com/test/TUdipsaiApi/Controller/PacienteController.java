@@ -103,7 +103,7 @@ public class PacienteController {
             if (pacienteOpt.isPresent()) {
                 Paciente paciente = pacienteOpt.get();
                 Documento documento = documentoService.saveDocumento(file);
-                paciente.setFichaDiagnostica(documento);
+                paciente.setFichaDiagnosticaId(documento.getId());
                 pacienteService.saveOrUpdate(paciente);
                 return ResponseEntity.ok("Documento subido exitosamente con ID: " + documento.getId());
             } else {
@@ -114,21 +114,23 @@ public class PacienteController {
         }
     }
 
-    @DeleteMapping("/{id}/documento")
-    public ResponseEntity<?> eliminarDocumento(@PathVariable Integer id) {
+    @DeleteMapping("/documentos/{pacienteId}")
+    public ResponseEntity<?> eliminarDocumentoPorPacienteId(@PathVariable Integer pacienteId) {
         try {
-            Optional<Paciente> pacienteOpt = pacienteService.getPacienteById(id);
+            Optional<Paciente> pacienteOpt = pacienteService.getPacienteById(pacienteId);
             if (pacienteOpt.isPresent()) {
                 Paciente paciente = pacienteOpt.get();
-                Documento documento = paciente.getFichaDiagnostica();
-                if (documento != null) {
-                    documentoService.deleteDocumento(documento.getId());
-                    paciente.setFichaDiagnostica(null);
+                Long documentoId = paciente.getFichaDiagnosticaId();
+                if (documentoId != null) {
+                    paciente.setFichaDiagnosticaId(null);
                     pacienteService.saveOrUpdate(paciente);
+                    documentoService.deleteDocumento(documentoId);
+                    return ResponseEntity.ok("Documento eliminado exitosamente");
+                } else {
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El paciente con ID: " + pacienteId + " no tiene documento asociado");
                 }
-                return ResponseEntity.ok().build();
             } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Paciente no encontrado con ID: " + id);
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Paciente no encontrado con ID: " + pacienteId);
             }
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al eliminar documento: " + e.getMessage());
@@ -141,7 +143,7 @@ public class PacienteController {
             Optional<Paciente> pacienteOpt = pacienteService.getPacienteById(id);
             if (pacienteOpt.isPresent()) {
                 Paciente paciente = pacienteOpt.get();
-                Documento documento = paciente.getFichaDiagnostica();
+                Long documento = paciente.getFichaDiagnosticaId();
                 if (documento != null) {
                     return ResponseEntity.ok(documento);
                 } else {

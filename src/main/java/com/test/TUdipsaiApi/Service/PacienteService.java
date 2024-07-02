@@ -305,7 +305,7 @@ public class PacienteService {
         if (optionalPaciente.isPresent()) {
             Documento documento = documentoService.saveDocumento(file);
             Paciente paciente = optionalPaciente.get();
-            paciente.setFichaDiagnostica(documento); // Asumiendo que tienes un setter para esto en la entidad Paciente
+            paciente.setFichaDiagnosticaId(documento.getId());
             pacienteRepositorio.save(paciente);
             DocumentoDTO documentoDTO = new DocumentoDTO();
             documentoDTO.setId(documento.getId());
@@ -320,10 +320,10 @@ public class PacienteService {
         Optional<Paciente> optionalPaciente = pacienteRepositorio.findById(pacienteId);
         if (optionalPaciente.isPresent()) {
             Paciente paciente = optionalPaciente.get();
-            Documento documento = paciente.getFichaDiagnostica();
+            Long documento = paciente.getFichaDiagnosticaId();
             if (documento != null) {
-                documentoService.deleteDocumento(documento.getId());
-                paciente.setFichaDiagnostica(null);
+                documentoService.deleteDocumento(documento);
+                paciente.setFichaDiagnosticaId(null);
                 pacienteRepositorio.save(paciente);
             }
         } else {
