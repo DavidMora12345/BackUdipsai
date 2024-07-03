@@ -3,6 +3,7 @@ package com.test.TUdipsaiApi.Controller;
 import com.test.TUdipsaiApi.Model.Especialistas;
 import com.test.TUdipsaiApi.Service.EspecialistasService;
 import com.test.TUdipsaiApi.dto.EspecialistasSinImagenDTO;
+import com.test.TUdipsaiApi.dto.PermisosDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -62,11 +63,22 @@ public class EspecialistaController {
             especialidad.put("id", resultadoLogin.getEspecialidad().getId());
             especialidad.put("area", resultadoLogin.getEspecialidad().getArea());
             respuesta.put("especialidad", especialidad);
+
+            PermisosDTO permisosDTO = new PermisosDTO();
+            permisosDTO.setId(resultadoLogin.getPermisos().getId());
+            permisosDTO.setEspecialistas(resultadoLogin.getPermisos().getEspecialistas());
+            permisosDTO.setInstitucionesEducativas(resultadoLogin.getPermisos().getInstitucionesEducativas());
+            permisosDTO.setHistoriaClinica(resultadoLogin.getPermisos().getHistoriaClinica());
+            permisosDTO.setFonoAudiologia(resultadoLogin.getPermisos().getFonoAudiologia());
+            permisosDTO.setPsicologiaClinica(resultadoLogin.getPermisos().getPsicologiaClinica());
+            permisosDTO.setPsicologiaEducativa(resultadoLogin.getPermisos().getPsicologiaEducativa());
+            respuesta.put("permisos", permisosDTO);
             return ResponseEntity.ok(respuesta);
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
+
 
     @PutMapping("/actualizar/{cedula}")
     public ResponseEntity<Especialistas> actualizarEspecialista(@PathVariable String cedula, @RequestBody Especialistas updatedEspecialista) {

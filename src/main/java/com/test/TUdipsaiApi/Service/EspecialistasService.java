@@ -1,9 +1,11 @@
 package com.test.TUdipsaiApi.Service;
 
 import com.test.TUdipsaiApi.Model.Especialistas;
+import com.test.TUdipsaiApi.Model.Permisos;
 import com.test.TUdipsaiApi.Repository.EspecialistasRepositorio;
 import com.test.TUdipsaiApi.dto.EspecialidadDTO;
 import com.test.TUdipsaiApi.dto.EspecialistasSinImagenDTO;
+import com.test.TUdipsaiApi.dto.PermisosDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -61,6 +63,7 @@ public class EspecialistasService {
             especialista.setPrimerApellido(updatedEspecialista.getPrimerApellido());
             especialista.setSegundoApellido(updatedEspecialista.getSegundoApellido());
             especialista.setEspecialidad(updatedEspecialista.getEspecialidad());
+            especialista.setPermisos(updatedEspecialista.getPermisos());
             especialista.setEsPasante(updatedEspecialista.getEsPasante());
             especialista.setEspecialistaAsignado(updatedEspecialista.getEspecialistaAsignado());
             especialista.setEspecialistaEstado(updatedEspecialista.getEspecialistaEstado());
@@ -95,11 +98,22 @@ public class EspecialistasService {
         especialidadDTO.setArea(especialista.getEspecialidad().getArea());
         dto.setEspecialidad(especialidadDTO);
 
-        dto.setEsPasante(especialista.getEsPasante());
-        dto.setEspecialistaAsignado(especialista.getEspecialistaAsignado());
-        dto.setInicioPasantia(especialista.getInicioPasantia());
-        dto.setFinPasantia(especialista.getFinPasantia());
+        Permisos permisos = especialista.getPermisos();
+        if (permisos != null) {
+            PermisosDTO permisosDTO = new PermisosDTO();
+            permisosDTO.setId(permisos.getId());
+            permisosDTO.setEspecialistas(permisos.getEspecialistas());
+            permisosDTO.setInstitucionesEducativas(permisos.getInstitucionesEducativas());
+            permisosDTO.setHistoriaClinica(permisos.getHistoriaClinica());
+            permisosDTO.setFonoAudiologia(permisos.getFonoAudiologia());
+            permisosDTO.setPsicologiaClinica(permisos.getPsicologiaClinica());
+            permisosDTO.setPsicologiaEducativa(permisos.getPsicologiaEducativa());
+            dto.setPermisos(permisosDTO);
+        } else {
+            dto.setPermisos(null);
+        }
 
         return dto;
     }
+
 }

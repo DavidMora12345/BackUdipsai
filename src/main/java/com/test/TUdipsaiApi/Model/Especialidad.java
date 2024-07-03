@@ -16,6 +16,7 @@ public class Especialidad {
 
     private String area;
 
+
     public Especialidad(int id) {
         this.id = (long) id;
     }
