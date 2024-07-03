@@ -20,4 +20,6 @@ public class Permisos {
     private Boolean fonoAudiologia;
     private Boolean psicologiaClinica;
     private Boolean psicologiaEducativa;
+    private Boolean pacientes;
+
 }

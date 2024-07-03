@@ -8,6 +8,5 @@ import lombok.Setter;
 public class EspecialidadDTO {
     private Long id;
     private String area;
+    private PermisosDTO permisos;
 }
-
-

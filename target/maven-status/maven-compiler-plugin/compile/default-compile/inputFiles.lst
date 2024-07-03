@@ -2,6 +2,7 @@ C:\Users\User\Documents\NetBeansProjects\TUdipsaiApi\src\main\java\com\test\TUdi
 C:\Users\User\Documents\NetBeansProjects\TUdipsaiApi\src\main\java\com\test\TUdipsaiApi\Model\LogEntry.java
 C:\Users\User\Documents\NetBeansProjects\TUdipsaiApi\src\main\java\com\test\TUdipsaiApi\Service\LogService.java
 C:\Users\User\Documents\NetBeansProjects\TUdipsaiApi\src\main\java\com\test\TUdipsaiApi\dto\InstitucionEducativaDTO.java
+C:\Users\User\Documents\NetBeansProjects\TUdipsaiApi\src\main\java\com\test\TUdipsaiApi\dto\PermisosDTO.java
 C:\Users\User\Documents\NetBeansProjects\TUdipsaiApi\src\main\java\com\test\TUdipsaiApi\Service\ExcelService.java
 C:\Users\User\Documents\NetBeansProjects\TUdipsaiApi\src\main\java\com\test\TUdipsaiApi\Controller\EspecialistaController.java
 C:\Users\User\Documents\NetBeansProjects\TUdipsaiApi\src\main\java\com\test\TUdipsaiApi\Model\Test.java
@@ -18,6 +19,7 @@ C:\Users\User\Documents\NetBeansProjects\TUdipsaiApi\src\main\java\com\test\TUdi
 C:\Users\User\Documents\NetBeansProjects\TUdipsaiApi\src\main\java\com\test\TUdipsaiApi\Service\PacienteService.java
 C:\Users\User\Documents\NetBeansProjects\TUdipsaiApi\src\main\java\com\test\TUdipsaiApi\Model\Paciente.java
 C:\Users\User\Documents\NetBeansProjects\TUdipsaiApi\src\main\java\com\test\TUdipsaiApi\dto\EspecialidadDTO.java
+C:\Users\User\Documents\NetBeansProjects\TUdipsaiApi\src\main\java\com\test\TUdipsaiApi\Model\Permisos.java
 C:\Users\User\Documents\NetBeansProjects\TUdipsaiApi\src\main\java\com\test\TUdipsaiApi\Service\TestService.java
 C:\Users\User\Documents\NetBeansProjects\TUdipsaiApi\src\main\java\com\test\TUdipsaiApi\Model\Especialistas.java
 C:\Users\User\Documents\NetBeansProjects\TUdipsaiApi\src\main\java\com\test\TUdipsaiApi\Repository\EspecialistasRepositorio.java

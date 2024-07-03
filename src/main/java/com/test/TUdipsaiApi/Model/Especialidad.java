@@ -16,6 +16,9 @@ public class Especialidad {
 
     private String area;
 
+    @ManyToOne
+    @JoinColumn(name = "id_permiso")
+    private Permisos permisos;
 
     public Especialidad(int id) {
         this.id = (long) id;

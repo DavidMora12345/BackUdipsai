@@ -35,10 +35,6 @@ public class Especialistas {
     @JoinColumn(name = "id_especialidad")
     private Especialidad especialidad;
 
-    @ManyToOne
-    @JoinColumn(name = "id_permiso")
-    private Permisos permisos;
-
     @Column(name = "esPasante")
     private Boolean esPasante;
 

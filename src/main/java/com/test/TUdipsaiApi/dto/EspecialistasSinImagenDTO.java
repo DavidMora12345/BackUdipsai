@@ -15,7 +15,6 @@ public class EspecialistasSinImagenDTO {
     private String primerApellido;
     private String segundoApellido;
     private EspecialidadDTO especialidad;
-    private PermisosDTO permisos;
     private Boolean esPasante;
     private String especialistaAsignado;
     private LocalDate inicioPasantia;

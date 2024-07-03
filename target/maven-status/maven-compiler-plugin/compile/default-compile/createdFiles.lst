@@ -4,6 +4,7 @@ com\test\TUdipsaiApi\util\BCryptPasswordEncoderTest.class
 com\test\TUdipsaiApi\Controller\EspecialistaController.class
 com\test\TUdipsaiApi\Service\DocumentoService.class
 com\test\TUdipsaiApi\Controller\InstitucionEducativaController.class
+com\test\TUdipsaiApi\Model\Permisos.class
 com\test\TUdipsaiApi\dto\EspecialistasDTO.class
 com\test\TUdipsaiApi\dto\DocumentoDTO.class
 com\test\TUdipsaiApi\Service\ExcelService.class
@@ -39,6 +40,7 @@ com\test\TUdipsaiApi\dto\PacienteUpdateDTO.class
 com\test\TUdipsaiApi\Repository\DocumentoRepositorio.class
 com\test\TUdipsaiApi\Repository\EspecialistasRepositorio.class
 com\test\TUdipsaiApi\Service\SeguimientoService.class
+com\test\TUdipsaiApi\dto\PermisosDTO.class
 com\test\TUdipsaiApi\Repository\LogEntryRepository.class
 com\test\TUdipsaiApi\dto\SeguimientoDTO.class
 com\test\TUdipsaiApi\Service\TestService.class

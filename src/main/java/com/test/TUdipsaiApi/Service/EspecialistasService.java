@@ -63,7 +63,6 @@ public class EspecialistasService {
             especialista.setPrimerApellido(updatedEspecialista.getPrimerApellido());
             especialista.setSegundoApellido(updatedEspecialista.getSegundoApellido());
             especialista.setEspecialidad(updatedEspecialista.getEspecialidad());
-            especialista.setPermisos(updatedEspecialista.getPermisos());
             especialista.setEsPasante(updatedEspecialista.getEsPasante());
             especialista.setEspecialistaAsignado(updatedEspecialista.getEspecialistaAsignado());
             especialista.setEspecialistaEstado(updatedEspecialista.getEspecialistaEstado());
@@ -96,24 +95,34 @@ public class EspecialistasService {
         EspecialidadDTO especialidadDTO = new EspecialidadDTO();
         especialidadDTO.setId(especialista.getEspecialidad().getId());
         especialidadDTO.setArea(especialista.getEspecialidad().getArea());
-        dto.setEspecialidad(especialidadDTO);
 
-        Permisos permisos = especialista.getPermisos();
+        Permisos permisos = especialista.getEspecialidad().getPermisos();
         if (permisos != null) {
-            PermisosDTO permisosDTO = new PermisosDTO();
-            permisosDTO.setId(permisos.getId());
-            permisosDTO.setEspecialistas(permisos.getEspecialistas());
-            permisosDTO.setInstitucionesEducativas(permisos.getInstitucionesEducativas());
-            permisosDTO.setHistoriaClinica(permisos.getHistoriaClinica());
-            permisosDTO.setFonoAudiologia(permisos.getFonoAudiologia());
-            permisosDTO.setPsicologiaClinica(permisos.getPsicologiaClinica());
-            permisosDTO.setPsicologiaEducativa(permisos.getPsicologiaEducativa());
-            dto.setPermisos(permisosDTO);
+            PermisosDTO permisosDTO = convertToPermisosDTO(permisos);
+            especialidadDTO.setPermisos(permisosDTO);
         } else {
-            dto.setPermisos(null);
+            especialidadDTO.setPermisos(null);
         }
+
+        dto.setEspecialidad(especialidadDTO);
+        dto.setEsPasante(especialista.getEsPasante());
+        dto.setEspecialistaAsignado(especialista.getEspecialistaAsignado());
+        dto.setInicioPasantia(especialista.getInicioPasantia());
+        dto.setFinPasantia(especialista.getFinPasantia());
 
         return dto;
     }
 
+    public PermisosDTO convertToPermisosDTO(Permisos permisos) {
+        PermisosDTO dto = new PermisosDTO();
+        dto.setId(permisos.getId());
+        dto.setEspecialistas(permisos.getEspecialistas());
+        dto.setInstitucionesEducativas(permisos.getInstitucionesEducativas());
+        dto.setHistoriaClinica(permisos.getHistoriaClinica());
+        dto.setFonoAudiologia(permisos.getFonoAudiologia());
+        dto.setPsicologiaClinica(permisos.getPsicologiaClinica());
+        dto.setPsicologiaEducativa(permisos.getPsicologiaEducativa());
+        dto.setPacientes(permisos.getPacientes());
+        return dto;
+    }
 }

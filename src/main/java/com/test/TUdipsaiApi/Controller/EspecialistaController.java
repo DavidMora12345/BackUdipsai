@@ -64,15 +64,9 @@ public class EspecialistaController {
             especialidad.put("area", resultadoLogin.getEspecialidad().getArea());
             respuesta.put("especialidad", especialidad);
 
-            PermisosDTO permisosDTO = new PermisosDTO();
-            permisosDTO.setId(resultadoLogin.getPermisos().getId());
-            permisosDTO.setEspecialistas(resultadoLogin.getPermisos().getEspecialistas());
-            permisosDTO.setInstitucionesEducativas(resultadoLogin.getPermisos().getInstitucionesEducativas());
-            permisosDTO.setHistoriaClinica(resultadoLogin.getPermisos().getHistoriaClinica());
-            permisosDTO.setFonoAudiologia(resultadoLogin.getPermisos().getFonoAudiologia());
-            permisosDTO.setPsicologiaClinica(resultadoLogin.getPermisos().getPsicologiaClinica());
-            permisosDTO.setPsicologiaEducativa(resultadoLogin.getPermisos().getPsicologiaEducativa());
+            PermisosDTO permisosDTO = especialistasService.convertToPermisosDTO(resultadoLogin.getEspecialidad().getPermisos());
             respuesta.put("permisos", permisosDTO);
+
             return ResponseEntity.ok(respuesta);
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
