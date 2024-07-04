@@ -1,9 +1,9 @@
 package com.test.TUdipsaiApi.Service;
 
+import com.test.TUdipsaiApi.Model.Documento;
 import com.test.TUdipsaiApi.Model.InstitucionEducativa;
 import com.test.TUdipsaiApi.Model.Jornada;
 import com.test.TUdipsaiApi.Model.Paciente;
-import com.test.TUdipsaiApi.Model.Documento;
 import com.test.TUdipsaiApi.Repository.InstitucionEducativaRepositorio;
 import com.test.TUdipsaiApi.Repository.JornadaRepositorio;
 import com.test.TUdipsaiApi.Repository.PacienteRepositorio;
@@ -89,6 +89,14 @@ public class PacienteService {
             paciente.setJornada(null);
         }
 
+        if (pacienteDTO.getFichaDiagnostica() != null && pacienteDTO.getFichaDiagnostica().getId() != null) {
+            Documento documento = documentoService.findById(pacienteDTO.getFichaDiagnostica().getId())
+                    .orElseThrow(() -> new RuntimeException("Documento not found"));
+            paciente.setFichaDiagnostica(documento);
+        } else {
+            paciente.setFichaDiagnostica(null);
+        }
+
         return paciente;
     }
 
@@ -115,6 +123,11 @@ public class PacienteService {
         if (paciente.getJornada() != null) {
             Jornada jornada = paciente.getJornada();
             pacienteDTO.setJornada(jornada);
+        }
+
+        if (paciente.getFichaDiagnostica() != null) {
+            Documento documento = paciente.getFichaDiagnostica();
+            pacienteDTO.setFichaDiagnostica(new DocumentoDTO(documento.getId(), documento.getContenido()));
         }
 
         pacienteDTO.setProyecto(paciente.getProyecto());
@@ -269,6 +282,7 @@ public class PacienteService {
             paciente.setJornada(null);
         }
 
+
         return pacienteRepositorio.save(paciente);
     }
 
@@ -305,7 +319,7 @@ public class PacienteService {
         if (optionalPaciente.isPresent()) {
             Documento documento = documentoService.saveDocumento(file);
             Paciente paciente = optionalPaciente.get();
-            paciente.setFichaDiagnosticaId(documento.getId());
+            paciente.setFichaDiagnostica(documento);
             pacienteRepositorio.save(paciente);
             DocumentoDTO documentoDTO = new DocumentoDTO();
             documentoDTO.setId(documento.getId());
@@ -320,10 +334,10 @@ public class PacienteService {
         Optional<Paciente> optionalPaciente = pacienteRepositorio.findById(pacienteId);
         if (optionalPaciente.isPresent()) {
             Paciente paciente = optionalPaciente.get();
-            Long documento = paciente.getFichaDiagnosticaId();
+            Documento documento = paciente.getFichaDiagnostica();
             if (documento != null) {
-                documentoService.deleteDocumento(documento);
-                paciente.setFichaDiagnosticaId(null);
+                documentoService.deleteDocumento(documento.getId());
+                paciente.setFichaDiagnostica(null);
                 pacienteRepositorio.save(paciente);
             }
         } else {

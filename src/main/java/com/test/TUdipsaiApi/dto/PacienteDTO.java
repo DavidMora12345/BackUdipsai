@@ -44,5 +44,6 @@ public class PacienteDTO {
     private String detalleDiscapacidad;
     private Integer porcentajeDiscapacidad;
     private Boolean perteneceAProyecto;
-    private Long fichaDiagnosticaId;
+    private DocumentoDTO fichaDiagnostica;
+
 }

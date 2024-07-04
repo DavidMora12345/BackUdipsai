@@ -21,11 +21,26 @@ public class DocumentoService {
         return documentoRepositorio.save(documento);
     }
 
-    public Optional<Documento> getDocumentoById(Long id) {
+    public Optional<Documento> findById(Long id) {
         return documentoRepositorio.findById(id);
     }
 
     public void deleteDocumento(Long id) {
         documentoRepositorio.deleteById(id);
+    }
+
+    public Documento updateDocumento(Long id, MultipartFile file) throws IOException {
+        Optional<Documento> optionalDocumento = documentoRepositorio.findById(id);
+        if (optionalDocumento.isPresent()) {
+            Documento documento = optionalDocumento.get();
+            documento.setContenido(file.getBytes());
+            return documentoRepositorio.save(documento);
+        } else {
+            throw new RuntimeException("Documento not found with ID: " + id);
+        }
+    }
+
+    public Optional<Documento> getDocumentoById(Long id) {
+        return documentoRepositorio.findById(id);
     }
 }

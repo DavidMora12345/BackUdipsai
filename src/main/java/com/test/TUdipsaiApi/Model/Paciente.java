@@ -100,6 +100,7 @@ public class Paciente {
     @Column(name = "pertenece_a_proyecto")
     private Boolean perteneceAProyecto;
 
-    @Column(name = "ficha_diagnostica_id")
-    private Long fichaDiagnosticaId;
+    @ManyToOne
+    @JoinColumn(name = "ficha_diagnostica_id", referencedColumnName = "id")
+    private Documento fichaDiagnostica;
 }
