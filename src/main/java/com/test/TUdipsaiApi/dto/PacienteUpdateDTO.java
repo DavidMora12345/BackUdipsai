@@ -41,4 +41,6 @@ public class PacienteUpdateDTO {
     private String detalleDiscapacidad;
     private Integer porcentajeDiscapacidad;
     private Boolean perteneceAProyecto;
+    private String sede;
+
 }

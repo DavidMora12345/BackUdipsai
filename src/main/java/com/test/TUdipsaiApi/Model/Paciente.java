@@ -103,4 +103,7 @@ public class Paciente {
     @ManyToOne
     @JoinColumn(name = "ficha_diagnostica_id", referencedColumnName = "id")
     private Documento fichaDiagnostica;
+
+    @Column(name = "sede")
+    private String sede;
 }

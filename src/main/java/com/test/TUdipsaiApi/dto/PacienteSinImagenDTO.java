@@ -43,4 +43,6 @@ public class PacienteSinImagenDTO {
     private String detalleDiscapacidad;
     private Integer porcentajeDiscapacidad;
     private Boolean perteneceAProyecto;
+    private String sede;
+
 }

@@ -72,6 +72,7 @@ public class PacienteService {
         paciente.setDetalleDiscapacidad(pacienteDTO.getDetalleDiscapacidad());
         paciente.setPorcentajeDiscapacidad(pacienteDTO.getPorcentajeDiscapacidad());
         paciente.setPerteneceAProyecto(pacienteDTO.getPerteneceAProyecto());
+        paciente.setSede(pacienteDTO.getSede());
 
         if (pacienteDTO.getInstitucionEducativa() != null && pacienteDTO.getInstitucionEducativa().getId() != null) {
             InstitucionEducativa institucion = institucionEducativaRepositorio.findById(pacienteDTO.getInstitucionEducativa().getId())
@@ -143,6 +144,7 @@ public class PacienteService {
         pacienteDTO.setDetalleDiscapacidad(paciente.getDetalleDiscapacidad());
         pacienteDTO.setPorcentajeDiscapacidad(paciente.getPorcentajeDiscapacidad());
         pacienteDTO.setPerteneceAProyecto(paciente.getPerteneceAProyecto());
+        pacienteDTO.setSede(paciente.getSede());
 
         return pacienteDTO;
     }
@@ -182,6 +184,7 @@ public class PacienteService {
         dto.setDetalleDiscapacidad(paciente.getDetalleDiscapacidad());
         dto.setPorcentajeDiscapacidad(paciente.getPorcentajeDiscapacidad());
         dto.setPerteneceAProyecto(paciente.getPerteneceAProyecto());
+        dto.setSede(paciente.getSede());
 
         return dto;
     }
@@ -215,6 +218,7 @@ public class PacienteService {
             paciente.setDetalleDiscapacidad(pacienteUpdateDTO.getDetalleDiscapacidad());
             paciente.setPorcentajeDiscapacidad(pacienteUpdateDTO.getPorcentajeDiscapacidad());
             paciente.setPerteneceAProyecto(pacienteUpdateDTO.getPerteneceAProyecto());
+            paciente.setSede(pacienteUpdateDTO.getSede());
 
             if (pacienteUpdateDTO.getInstitucionEducativa() != null) {
                 InstitucionEducativa institucion = institucionEducativaRepositorio.findById(pacienteUpdateDTO.getInstitucionEducativa())
@@ -265,6 +269,8 @@ public class PacienteService {
         paciente.setDetalleDiscapacidad(pacienteUpdateDTO.getDetalleDiscapacidad());
         paciente.setPorcentajeDiscapacidad(pacienteUpdateDTO.getPorcentajeDiscapacidad());
         paciente.setPerteneceAProyecto(pacienteUpdateDTO.getPerteneceAProyecto());
+        paciente.setSede(pacienteUpdateDTO.getSede());
+
 
         if (pacienteUpdateDTO.getInstitucionEducativa() != null) {
             InstitucionEducativa institucion = institucionEducativaRepositorio.findById(pacienteUpdateDTO.getInstitucionEducativa())
