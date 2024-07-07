@@ -145,7 +145,7 @@ public class PacienteController {
                 Paciente paciente = pacienteOpt.get();
                 Documento documento = paciente.getFichaDiagnostica();
                 if (documento != null) {
-                    return ResponseEntity.ok(documento);
+                    return ResponseEntity.ok(documento.getId());
                 } else {
                     return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No hay documentos para el paciente con ID: " + id);
                 }
