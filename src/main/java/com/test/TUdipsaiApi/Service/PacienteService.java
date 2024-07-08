@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -301,9 +302,20 @@ public class PacienteService {
         }
     }
 
-    public List<PacienteSinImagenDTO> searchPacientes(String busqueda) {
-        Pageable pageable = PageRequest.of(0, 100);
-        List<Paciente> pacientes = pacienteRepositorio.searchPacientes(busqueda, pageable);
+    public List<PacienteSinImagenDTO> searchPacientes(String search, String sede) {
+        List<Paciente> pacientes;
+
+        if ((search == null || search.isEmpty()) && (sede == null || sede.isEmpty())) {
+            pacientes = new ArrayList<>(); // O puedes devolver todos los pacientes si prefieres
+        } else if (sede == null || sede.isEmpty()) {
+            pacientes = pacienteRepositorio.findBySearchCriteria(search);
+        } else if (search == null || search.isEmpty()) {
+            pacientes = pacienteRepositorio.findBySede(sede.toLowerCase());
+        } else {
+            pacientes = pacienteRepositorio.findBySearchCriteriaAndSede(search, sede.toLowerCase());
+        }
+
+        // Convierte las entidades a DTO
         return pacientes.stream()
                 .map(this::convertToSinImagenDTO)
                 .collect(Collectors.toList());

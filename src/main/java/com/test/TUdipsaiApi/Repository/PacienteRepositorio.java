@@ -27,4 +27,14 @@ public interface PacienteRepositorio extends JpaRepository<Paciente, Integer> {
             "p.pacienteEstado = 1 " +
             "ORDER BY p.fechaApertura DESC")
     List<Paciente> searchPacientes(@Param("busqueda") String busqueda, Pageable pageable);
+
+
+    @Query("SELECT p FROM Paciente p WHERE LOWER(p.sede) = LOWER(:sede)")
+    List<Paciente> findBySede(@Param("sede") String sede);
+
+    @Query("SELECT p FROM Paciente p WHERE LOWER(p.nombresApellidos) LIKE LOWER(CONCAT('%', :search, '%')) OR LOWER(p.cedula) LIKE LOWER(CONCAT('%', :search, '%'))")
+    List<Paciente> findBySearchCriteria(@Param("search") String search);
+
+    @Query("SELECT p FROM Paciente p WHERE (LOWER(p.nombresApellidos) LIKE LOWER(CONCAT('%', :search, '%')) OR LOWER(p.cedula) LIKE LOWER(CONCAT('%', :search, '%'))) AND LOWER(p.sede) = LOWER(:sede)")
+    List<Paciente> findBySearchCriteriaAndSede(@Param("search") String search, @Param("sede") String sede);
 }
