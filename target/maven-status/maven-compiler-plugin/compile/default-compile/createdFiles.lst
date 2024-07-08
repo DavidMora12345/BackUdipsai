@@ -9,6 +9,7 @@ com\test\TUdipsaiApi\dto\EspecialistasDTO.class
 com\test\TUdipsaiApi\dto\DocumentoDTO.class
 com\test\TUdipsaiApi\Service\ExcelService.class
 com\test\TUdipsaiApi\Model\InstitucionEducativa.class
+com\test\TUdipsaiApi\dto\DocumentoIdDTO.class
 com\test\TUdipsaiApi\dto\JornadaDTO.class
 com\test\TUdipsaiApi\Model\Especialidad.class
 com\test\TUdipsaiApi\Model\Paciente.class
