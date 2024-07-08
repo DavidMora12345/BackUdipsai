@@ -7,10 +7,7 @@ import com.test.TUdipsaiApi.Model.Paciente;
 import com.test.TUdipsaiApi.Repository.InstitucionEducativaRepositorio;
 import com.test.TUdipsaiApi.Repository.JornadaRepositorio;
 import com.test.TUdipsaiApi.Repository.PacienteRepositorio;
-import com.test.TUdipsaiApi.dto.DocumentoDTO;
-import com.test.TUdipsaiApi.dto.PacienteDTO;
-import com.test.TUdipsaiApi.dto.PacienteSinImagenDTO;
-import com.test.TUdipsaiApi.dto.PacienteUpdateDTO;
+import com.test.TUdipsaiApi.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -128,7 +125,7 @@ public class PacienteService {
 
         if (paciente.getFichaDiagnostica() != null) {
             Documento documento = paciente.getFichaDiagnostica();
-            pacienteDTO.setFichaDiagnostica(new DocumentoDTO(documento.getId(), documento.getContenido()));
+            pacienteDTO.setFichaDiagnosticaId(documento.getId());
         }
 
         pacienteDTO.setProyecto(paciente.getProyecto());
@@ -304,9 +301,12 @@ public class PacienteService {
         }
     }
 
-    public List<Paciente> searchPacientes(String busqueda) {
+    public List<PacienteSinImagenDTO> searchPacientes(String busqueda) {
         Pageable pageable = PageRequest.of(0, 100);
-        return pacienteRepositorio.searchPacientes(busqueda, pageable);
+        List<Paciente> pacientes = pacienteRepositorio.searchPacientes(busqueda, pageable);
+        return pacientes.stream()
+                .map(this::convertToSinImagenDTO)
+                .collect(Collectors.toList());
     }
 
     public List<Paciente> getAllPacientes() {

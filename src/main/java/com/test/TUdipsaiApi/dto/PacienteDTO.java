@@ -44,7 +44,11 @@ public class PacienteDTO {
     private String detalleDiscapacidad;
     private Integer porcentajeDiscapacidad;
     private Boolean perteneceAProyecto;
-    private DocumentoDTO fichaDiagnostica;
+    private DocumentoIdDTO fichaDiagnostica;
     private String sede;
+
+    public void setFichaDiagnosticaId(Long id) {
+        this.fichaDiagnostica = new DocumentoIdDTO(id);
+    }
 
 }
