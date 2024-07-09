@@ -305,15 +305,8 @@ public class PacienteService {
     public List<PacienteSinImagenDTO> searchPacientes(String search, String sede) {
         List<Paciente> pacientes;
 
-        if ((search == null || search.isEmpty()) && (sede == null || sede.isEmpty())) {
-            pacientes = new ArrayList<>(); // O puedes devolver todos los pacientes si prefieres
-        } else if (sede == null || sede.isEmpty()) {
-            pacientes = pacienteRepositorio.findBySearchCriteria(search);
-        } else if (search == null || search.isEmpty()) {
-            pacientes = pacienteRepositorio.findBySede(sede.toLowerCase());
-        } else {
-            pacientes = pacienteRepositorio.findBySearchCriteriaAndSede(search, sede.toLowerCase());
-        }
+        pacientes =  pacienteRepositorio.searchPacientes(search,sede,PageRequest.of(0, 100));
+
 
         // Convierte las entidades a DTO
         return pacientes.stream()

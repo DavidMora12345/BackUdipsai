@@ -23,10 +23,12 @@ public interface PacienteRepositorio extends JpaRepository<Paciente, Integer> {
             "LOWER(p.domicilio) LIKE LOWER(CONCAT('%', :busqueda, '%')) OR " +
             "LOWER(p.proyecto) LIKE LOWER(CONCAT('%', :busqueda, '%')) OR " +
             "LOWER(p.cedula) LIKE LOWER(CONCAT('%', :busqueda, '%')) OR " +
+            "LOWER(p.sede) LIKE LOWER(CONCAT('%', :busqueda, '%')) OR " +
             "LOWER(p.ciudad) LIKE LOWER(CONCAT('%', :busqueda, '%'))) AND " +
+            "LOWER(p.sede) LIKE LOWER(CONCAT('%', :sede, '%')) AND "+
             "p.pacienteEstado = 1 " +
             "ORDER BY p.fechaApertura DESC")
-    List<Paciente> searchPacientes(@Param("busqueda") String busqueda, Pageable pageable);
+    List<Paciente> searchPacientes(@Param("busqueda") String busqueda,@Param("sede") String sede, Pageable pageable);
 
 
     @Query("SELECT p FROM Paciente p WHERE LOWER(p.sede) = LOWER(:sede)")

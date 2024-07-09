@@ -108,7 +108,7 @@ public class PacienteController {
             if (pacienteOpt.isPresent()) {
                 Paciente paciente = pacienteOpt.get();
                 Documento documento = documentoService.saveDocumento(file);
-                paciente.setFichaDiagnostica(documento);  // Aquí se establece la relación
+                paciente.setFichaDiagnostica(documento);
                 pacienteService.saveOrUpdate(paciente);
                 return ResponseEntity.ok("Documento subido exitosamente con ID: " + documento.getId());
             } else {
