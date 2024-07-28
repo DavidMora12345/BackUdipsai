@@ -23,20 +23,18 @@ public interface PacienteRepositorio extends JpaRepository<Paciente, Integer> {
             "LOWER(p.domicilio) LIKE LOWER(CONCAT('%', :busqueda, '%')) OR " +
             "LOWER(p.proyecto) LIKE LOWER(CONCAT('%', :busqueda, '%')) OR " +
             "LOWER(p.cedula) LIKE LOWER(CONCAT('%', :busqueda, '%')) OR " +
-            "LOWER(p.sede) LIKE LOWER(CONCAT('%', :busqueda, '%')) OR " +
             "LOWER(p.ciudad) LIKE LOWER(CONCAT('%', :busqueda, '%'))) AND " +
-            "LOWER(p.sede) LIKE LOWER(CONCAT('%', :sede, '%')) AND "+
+            "p.sede.id = :sedeId AND " +
             "p.pacienteEstado = 1 " +
             "ORDER BY p.fechaApertura DESC")
-    List<Paciente> searchPacientes(@Param("busqueda") String busqueda,@Param("sede") String sede, Pageable pageable);
+    List<Paciente> searchPacientes(@Param("busqueda") String busqueda, @Param("sedeId") Integer sedeId, Pageable pageable);
 
-
-    @Query("SELECT p FROM Paciente p WHERE LOWER(p.sede) = LOWER(:sede)")
-    List<Paciente> findBySede(@Param("sede") String sede);
+    @Query("SELECT p FROM Paciente p WHERE p.sede.id = :sedeId")
+    List<Paciente> findBySede(@Param("sedeId") Integer sedeId);
 
     @Query("SELECT p FROM Paciente p WHERE LOWER(p.nombresApellidos) LIKE LOWER(CONCAT('%', :search, '%')) OR LOWER(p.cedula) LIKE LOWER(CONCAT('%', :search, '%'))")
     List<Paciente> findBySearchCriteria(@Param("search") String search);
 
-    @Query("SELECT p FROM Paciente p WHERE (LOWER(p.nombresApellidos) LIKE LOWER(CONCAT('%', :search, '%')) OR LOWER(p.cedula) LIKE LOWER(CONCAT('%', :search, '%'))) AND LOWER(p.sede) = LOWER(:sede)")
-    List<Paciente> findBySearchCriteriaAndSede(@Param("search") String search, @Param("sede") String sede);
+    @Query("SELECT p FROM Paciente p WHERE (LOWER(p.nombresApellidos) LIKE LOWER(CONCAT('%', :search, '%')) OR LOWER(p.cedula) LIKE LOWER(CONCAT('%', :search, '%'))) AND p.sede.id = :sedeId")
+    List<Paciente> findBySearchCriteriaAndSede(@Param("search") String search, @Param("sedeId") Integer sedeId);
 }

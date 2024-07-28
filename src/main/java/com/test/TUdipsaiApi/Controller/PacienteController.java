@@ -71,17 +71,14 @@ public class PacienteController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al actualizar paciente: " + e.getMessage());
         }
     }
-
     @PostMapping("/buscar")
     public ResponseEntity<List<PacienteSinImagenDTO>> buscarPaciente(
             @RequestParam(value = "search", required = false) String search,
-            @RequestParam(value = "sede", required = false) String sede) {
+            @RequestParam(value = "sedeId", required = false) Integer sedeId) {
 
-        List<PacienteSinImagenDTO> pacientes = pacienteService.searchPacientes(search, sede);
+        List<PacienteSinImagenDTO> pacientes = pacienteService.searchPacientes(search, sedeId);
         return ResponseEntity.ok(pacientes);
     }
-
-
 
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<?> deletePaciente(@PathVariable Integer id) {

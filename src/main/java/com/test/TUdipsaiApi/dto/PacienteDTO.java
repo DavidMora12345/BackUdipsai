@@ -3,6 +3,7 @@ package com.test.TUdipsaiApi.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.test.TUdipsaiApi.Model.InstitucionEducativa;
 import com.test.TUdipsaiApi.Model.Jornada;
+import com.test.TUdipsaiApi.Model.Sede;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -45,7 +46,7 @@ public class PacienteDTO {
     private Integer porcentajeDiscapacidad;
     private Boolean perteneceAProyecto;
     private DocumentoIdDTO fichaDiagnostica;
-    private String sede;
+    private Sede sede;
 
     public void setFichaDiagnosticaId(Long id) {
         this.fichaDiagnostica = new DocumentoIdDTO(id);

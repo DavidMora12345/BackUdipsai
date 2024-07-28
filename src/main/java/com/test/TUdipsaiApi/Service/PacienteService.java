@@ -1,21 +1,14 @@
 package com.test.TUdipsaiApi.Service;
 
-import com.test.TUdipsaiApi.Model.Documento;
-import com.test.TUdipsaiApi.Model.InstitucionEducativa;
-import com.test.TUdipsaiApi.Model.Jornada;
-import com.test.TUdipsaiApi.Model.Paciente;
-import com.test.TUdipsaiApi.Repository.InstitucionEducativaRepositorio;
-import com.test.TUdipsaiApi.Repository.JornadaRepositorio;
-import com.test.TUdipsaiApi.Repository.PacienteRepositorio;
+import com.test.TUdipsaiApi.Model.*;
+import com.test.TUdipsaiApi.Repository.*;
 import com.test.TUdipsaiApi.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -31,6 +24,9 @@ public class PacienteService {
 
     @Autowired
     private JornadaRepositorio jornadaRepositorio;
+
+    @Autowired
+    private SedeRepositorio sedeRepositorio;
 
     @Autowired
     private DocumentoService documentoService;
@@ -70,7 +66,12 @@ public class PacienteService {
         paciente.setDetalleDiscapacidad(pacienteDTO.getDetalleDiscapacidad());
         paciente.setPorcentajeDiscapacidad(pacienteDTO.getPorcentajeDiscapacidad());
         paciente.setPerteneceAProyecto(pacienteDTO.getPerteneceAProyecto());
-        paciente.setSede(pacienteDTO.getSede());
+
+        if (pacienteDTO.getSede() != null) {
+            Sede sede = sedeRepositorio.findById(pacienteDTO.getSede().getId())
+                    .orElseThrow(() -> new RuntimeException("Sede not found"));
+            paciente.setSede(sede);
+        }
 
         if (pacienteDTO.getInstitucionEducativa() != null && pacienteDTO.getInstitucionEducativa().getId() != null) {
             InstitucionEducativa institucion = institucionEducativaRepositorio.findById(pacienteDTO.getInstitucionEducativa().getId())
@@ -129,6 +130,10 @@ public class PacienteService {
             pacienteDTO.setFichaDiagnosticaId(documento.getId());
         }
 
+        if (paciente.getSede() != null) {
+            pacienteDTO.setSede(paciente.getSede());
+        }
+
         pacienteDTO.setProyecto(paciente.getProyecto());
         pacienteDTO.setAnioEducacion(paciente.getAnioEducacion());
         pacienteDTO.setParalelo(paciente.getParalelo());
@@ -142,7 +147,6 @@ public class PacienteService {
         pacienteDTO.setDetalleDiscapacidad(paciente.getDetalleDiscapacidad());
         pacienteDTO.setPorcentajeDiscapacidad(paciente.getPorcentajeDiscapacidad());
         pacienteDTO.setPerteneceAProyecto(paciente.getPerteneceAProyecto());
-        pacienteDTO.setSede(paciente.getSede());
 
         return pacienteDTO;
     }
@@ -182,7 +186,9 @@ public class PacienteService {
         dto.setDetalleDiscapacidad(paciente.getDetalleDiscapacidad());
         dto.setPorcentajeDiscapacidad(paciente.getPorcentajeDiscapacidad());
         dto.setPerteneceAProyecto(paciente.getPerteneceAProyecto());
-        dto.setSede(paciente.getSede());
+        if (paciente.getSede() != null) {
+            dto.setSede(paciente.getSede());
+        }
 
         return dto;
     }
@@ -216,7 +222,12 @@ public class PacienteService {
             paciente.setDetalleDiscapacidad(pacienteUpdateDTO.getDetalleDiscapacidad());
             paciente.setPorcentajeDiscapacidad(pacienteUpdateDTO.getPorcentajeDiscapacidad());
             paciente.setPerteneceAProyecto(pacienteUpdateDTO.getPerteneceAProyecto());
-            paciente.setSede(pacienteUpdateDTO.getSede());
+
+            if (pacienteUpdateDTO.getSede() != null) {
+                Sede sede = sedeRepositorio.findById(pacienteUpdateDTO.getSede())
+                        .orElseThrow(() -> new RuntimeException("Sede not found"));
+                paciente.setSede(sede);
+            }
 
             if (pacienteUpdateDTO.getInstitucionEducativa() != null) {
                 InstitucionEducativa institucion = institucionEducativaRepositorio.findById(pacienteUpdateDTO.getInstitucionEducativa())
@@ -267,8 +278,12 @@ public class PacienteService {
         paciente.setDetalleDiscapacidad(pacienteUpdateDTO.getDetalleDiscapacidad());
         paciente.setPorcentajeDiscapacidad(pacienteUpdateDTO.getPorcentajeDiscapacidad());
         paciente.setPerteneceAProyecto(pacienteUpdateDTO.getPerteneceAProyecto());
-        paciente.setSede(pacienteUpdateDTO.getSede());
 
+        if (pacienteUpdateDTO.getSede() != null) {
+            Sede sede = sedeRepositorio.findById(pacienteUpdateDTO.getSede())
+                    .orElseThrow(() -> new RuntimeException("Sede not found"));
+            paciente.setSede(sede);
+        }
 
         if (pacienteUpdateDTO.getInstitucionEducativa() != null) {
             InstitucionEducativa institucion = institucionEducativaRepositorio.findById(pacienteUpdateDTO.getInstitucionEducativa())
@@ -286,7 +301,6 @@ public class PacienteService {
             paciente.setJornada(null);
         }
 
-
         return pacienteRepositorio.save(paciente);
     }
 
@@ -302,17 +316,15 @@ public class PacienteService {
         }
     }
 
-    public List<PacienteSinImagenDTO> searchPacientes(String search, String sede) {
+    public List<PacienteSinImagenDTO> searchPacientes(String search, Integer sedeId) {
         List<Paciente> pacientes;
+        pacientes = pacienteRepositorio.searchPacientes(search, sedeId, PageRequest.of(0, 100));
 
-        pacientes =  pacienteRepositorio.searchPacientes(search,sede,PageRequest.of(0, 100));
-
-
-        // Convierte las entidades a DTO
         return pacientes.stream()
                 .map(this::convertToSinImagenDTO)
                 .collect(Collectors.toList());
     }
+
 
     public List<Paciente> getAllPacientes() {
         return pacienteRepositorio.findByPacienteEstado(1);

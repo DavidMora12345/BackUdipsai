@@ -3,6 +3,7 @@ package com.test.TUdipsaiApi.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.test.TUdipsaiApi.Model.InstitucionEducativa;
 import com.test.TUdipsaiApi.Model.Jornada;
+import com.test.TUdipsaiApi.Model.Sede;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -43,6 +44,6 @@ public class PacienteSinImagenDTO {
     private String detalleDiscapacidad;
     private Integer porcentajeDiscapacidad;
     private Boolean perteneceAProyecto;
-    private String sede;
+    private Sede sede;
 
 }
