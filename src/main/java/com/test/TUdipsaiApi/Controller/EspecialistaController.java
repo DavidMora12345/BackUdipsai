@@ -74,6 +74,7 @@ public class EspecialistaController {
     }
 
 
+
     @PutMapping("/actualizar/{cedula}")
     public ResponseEntity<Especialistas> actualizarEspecialista(@PathVariable String cedula, @RequestBody Especialistas updatedEspecialista) {
         Optional<Especialistas> especialistaOptional = especialistasService.updateEspecialista(cedula, updatedEspecialista);

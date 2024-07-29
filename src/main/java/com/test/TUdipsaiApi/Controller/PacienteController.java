@@ -72,7 +72,7 @@ public class PacienteController {
         }
     }
     @PostMapping("/buscar")
-    public ResponseEntity<List<PacienteSinImagenDTO>> buscarPaciente(
+    public ResponseEntity<List<PacienteSinImagenDTO>> buscarPacientes(
             @RequestParam(value = "search", required = false) String search,
             @RequestParam(value = "sedeId", required = false) Integer sedeId) {
 

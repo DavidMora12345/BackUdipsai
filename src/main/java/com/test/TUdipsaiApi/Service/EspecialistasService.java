@@ -123,6 +123,7 @@ public class EspecialistasService {
         dto.setPsicologiaClinica(permisos.getPsicologiaClinica());
         dto.setPsicologiaEducativa(permisos.getPsicologiaEducativa());
         dto.setPacientes(permisos.getPacientes());
+        dto.setSede(permisos.getSede());
         return dto;
     }
 }

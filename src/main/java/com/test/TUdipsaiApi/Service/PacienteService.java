@@ -318,8 +318,11 @@ public class PacienteService {
 
     public List<PacienteSinImagenDTO> searchPacientes(String search, Integer sedeId) {
         List<Paciente> pacientes;
-        pacientes = pacienteRepositorio.searchPacientes(search, sedeId, PageRequest.of(0, 100));
-
+        if (sedeId == null) {
+            pacientes = pacienteRepositorio.findAll();
+        } else {
+            pacientes = pacienteRepositorio.searchPacientes(search, sedeId, PageRequest.of(0, 100));
+        }
         return pacientes.stream()
                 .map(this::convertToSinImagenDTO)
                 .collect(Collectors.toList());
