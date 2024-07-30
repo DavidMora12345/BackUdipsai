@@ -3,6 +3,7 @@ package com.test.TUdipsaiApi.Controller;
 import com.test.TUdipsaiApi.Model.Documento;
 import com.test.TUdipsaiApi.Model.Paciente;
 import com.test.TUdipsaiApi.Service.DocumentoService;
+import com.test.TUdipsaiApi.Service.ExcelService;
 import com.test.TUdipsaiApi.Service.LogService;
 import com.test.TUdipsaiApi.Service.PacienteService;
 import com.test.TUdipsaiApi.dto.PacienteDTO;
@@ -30,6 +31,10 @@ public class PacienteController {
 
     @Autowired
     private DocumentoService documentoService;
+
+    @Autowired
+    private ExcelService excelService;
+
 
     @GetMapping("/listar")
     public ResponseEntity<List<PacienteSinImagenDTO>> getAllPacientes() {
@@ -158,4 +163,17 @@ public class PacienteController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al listar documentos: " + e.getMessage());
         }
     }
+
+    @PostMapping("/upload")
+    public ResponseEntity<?> subirPacientesExcel(@RequestParam("file") MultipartFile file) {
+        try {
+            excelService.savePatientsFromExcel(file);
+            return ResponseEntity.ok("Pacientes subidos exitosamente");
+        } catch (Exception e) {
+            logService.logError("Error al subir pacientes desde Excel", e);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al subir pacientes desde Excel: " + e.getMessage());
+        }
+    }
+
+
 }

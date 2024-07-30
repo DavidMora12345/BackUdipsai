@@ -319,7 +319,7 @@ public class PacienteService {
     public List<PacienteSinImagenDTO> searchPacientes(String search, Integer sedeId) {
         List<Paciente> pacientes;
         if (sedeId == null) {
-            pacientes = pacienteRepositorio.findAll();
+            pacientes = pacienteRepositorio.searchPacientes(search, null, PageRequest.of(0, 100));
         } else {
             pacientes = pacienteRepositorio.searchPacientes(search, sedeId, PageRequest.of(0, 100));
         }
