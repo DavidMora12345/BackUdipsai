@@ -29,8 +29,6 @@ public class InstitucionEducativa {
     @Column(name = "InstitucionEstado")
     private Integer institucionEstado;
 
-    @Column(name = "Jornada")
-    private String jornada;
 
 
 }

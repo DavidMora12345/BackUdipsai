@@ -48,8 +48,7 @@ public class ExcelService {
             } else {
                 int id = (int) getCellValueAsNumeric(idCell);
                 if (pacienteRepository.findById(id).isPresent()) {
-                    System.out.println("ID duplicado encontrado: " + id);
-                    paciente.setId(null); // ID se asignará automáticamente
+                    paciente.setId(null); // Ignorar ID repetido y dejar que la base de datos asigne uno nuevo
                 } else {
                     paciente.setId(id);
                 }
@@ -64,7 +63,7 @@ public class ExcelService {
             paciente.setEdad(getCellValueAsString(row.getCell(7)));
             paciente.setFechaApertura(getCellValueAsDate(row.getCell(8), dateFormat));
             paciente.setFechaNacimiento(getCellValueAsDate(row.getCell(9), dateFormat));
-            paciente.setImagen(null); // Suponiendo que no se sube imagen por Excel
+            paciente.setImagen(null); // Asume que la imagen no se carga desde Excel
             paciente.setMotivoConsulta(getCellValueAsString(row.getCell(11)));
             paciente.setNombresApellidos(getCellValueAsString(row.getCell(12)));
             paciente.setObservaciones(getCellValueAsString(row.getCell(13)));
@@ -76,44 +75,34 @@ public class ExcelService {
             paciente.setTelefono(getCellValueAsString(row.getCell(19)));
             paciente.setTieneDiscapacidad(getCellValueAsString(row.getCell(20)));
 
-            // Asignar InstitucionEducativa por id
-            Cell institucionCell = row.getCell(21);
-            if (institucionCell != null && institucionCell.getCellType() != CellType.BLANK) {
-                int institucionId = (int) getCellValueAsNumeric(institucionCell);
-                Optional<InstitucionEducativa> institucion = institucionEducativaRepositorio.findById(institucionId);
-                institucion.ifPresent(paciente::setInstitucionEducativa);
-            }
+            // Asignar o crear InstitucionEducativa por nombre
+            String institucionNombre = getCellValueAsString(row.getCell(21));
+            InstitucionEducativa institucion = getOrCreateInstitucionEducativa(institucionNombre);
+            paciente.setInstitucionEducativa(institucion);
 
-            // Asignar Jornada por id
-            Cell jornadaCell = row.getCell(22);
-            if (jornadaCell != null && jornadaCell.getCellType() != CellType.BLANK) {
-                int jornadaId = (int) getCellValueAsNumeric(jornadaCell);
-                Optional<Jornada> jornada = jornadaRepositorio.findById(jornadaId);
-                jornada.ifPresent(paciente::setJornada);
-            }
+            // Asignar o crear Jornada por nombre
+            String jornadaNombre = getCellValueAsString(row.getCell(22));
+            Jornada jornada = getOrCreateJornada(jornadaNombre);
+            paciente.setJornada(jornada);
 
             paciente.setDetalleDiscapacidad(getCellValueAsString(row.getCell(23)));
             paciente.setPorcentajeDiscapacidad((int) getCellValueAsNumeric(row.getCell(24)));
             paciente.setTipoDiscapacidad(getCellValueAsString(row.getCell(25)));
             paciente.setPerteneceAProyecto(getCellValueAsBoolean(row.getCell(26)));
 
-            // Asignar Sede por id
-            Cell sedeCell = row.getCell(30);
-            if (sedeCell != null && sedeCell.getCellType() != CellType.BLANK) {
-                int sedeId = (int) getCellValueAsNumeric(sedeCell);
-                Optional<Sede> sede = sedeRepositorio.findById(sedeId);
-                sede.ifPresent(paciente::setSede);
+            // Asignar o crear Sede por nombre (convertir a mayúsculas)
+            String sedeNombre = getCellValueAsString(row.getCell(30));
+            if (sedeNombre != null) {
+                sedeNombre = sedeNombre.toUpperCase();
             }
-
-            System.out.println("Paciente a insertar: " + paciente);
+            Sede sede = getOrCreateSede(sedeNombre);
+            paciente.setSede(sede);
 
             pacientes.add(paciente);
         }
 
         workbook.close();
         pacienteRepository.saveAll(pacientes);
-
-        System.out.println("Pacientes guardados: " + pacientes.size());
     }
 
     private String getCellValueAsString(Cell cell) {
@@ -180,6 +169,48 @@ public class ExcelService {
             }
         } else {
             return null;
+        }
+    }
+
+    private InstitucionEducativa getOrCreateInstitucionEducativa(String nombre) {
+        if (nombre == null || nombre.isEmpty()) {
+            return null;
+        }
+        Optional<InstitucionEducativa> optional = institucionEducativaRepositorio.findByNombreInstitucion(nombre);
+        if (optional.isPresent()) {
+            return optional.get();
+        } else {
+            InstitucionEducativa nuevaInstitucion = new InstitucionEducativa();
+            nuevaInstitucion.setNombreInstitucion(nombre);
+            return institucionEducativaRepositorio.save(nuevaInstitucion);
+        }
+    }
+
+    private Jornada getOrCreateJornada(String nombre) {
+        if (nombre == null || nombre.isEmpty()) {
+            return null;
+        }
+        Optional<Jornada> optional = jornadaRepositorio.findByNombreJornada(nombre);
+        if (optional.isPresent()) {
+            return optional.get();
+        } else {
+            Jornada nuevaJornada = new Jornada();
+            nuevaJornada.setNombreJornada(nombre);
+            return jornadaRepositorio.save(nuevaJornada);
+        }
+    }
+
+    private Sede getOrCreateSede(String nombre) {
+        if (nombre == null || nombre.isEmpty()) {
+            return null;
+        }
+        Optional<Sede> optional = sedeRepositorio.findByNombre(nombre);
+        if (optional.isPresent()) {
+            return optional.get();
+        } else {
+            Sede nuevaSede = new Sede();
+            nuevaSede.setNombre(nombre);
+            return sedeRepositorio.save(nuevaSede);
         }
     }
 }
