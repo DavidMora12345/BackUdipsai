@@ -2,6 +2,8 @@ package com.test.TUdipsaiApi.Controller;
 
 import com.test.TUdipsaiApi.Model.Especialistas;
 import com.test.TUdipsaiApi.Service.EspecialistasService;
+import com.test.TUdipsaiApi.dto.EspecialistasDTO;
+import com.test.TUdipsaiApi.dto.EspecialistasIdDTO;
 import com.test.TUdipsaiApi.dto.EspecialistasSinImagenDTO;
 import com.test.TUdipsaiApi.dto.PermisosDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,9 +42,15 @@ public class EspecialistaController {
     }
 
     @PostMapping("/insertar")
-    public Especialistas crearOActualizarEspecialista(@RequestBody Especialistas especialista) {
-        return especialistasService.saveOrUpdate(especialista);
+    public ResponseEntity<Especialistas> crearOActualizarEspecialista(@RequestBody EspecialistasIdDTO especialistaDTO) {
+        try {
+            Especialistas savedEspecialista = especialistasService.saveOrUpdate(especialistaDTO);
+            return ResponseEntity.ok(savedEspecialista);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
     }
+
 
     @DeleteMapping("/{cedula}")
     public boolean eliminarEspecialista(@PathVariable String cedula) {
@@ -67,21 +75,24 @@ public class EspecialistaController {
             PermisosDTO permisosDTO = especialistasService.convertToPermisosDTO(resultadoLogin.getEspecialidad().getPermisos());
             respuesta.put("permisos", permisosDTO);
 
+            if (resultadoLogin.getSede() != null) {
+                respuesta.put("sede", resultadoLogin.getSede());
+            }
+
             return ResponseEntity.ok(respuesta);
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
 
-
-
     @PutMapping("/actualizar/{cedula}")
-    public ResponseEntity<Especialistas> actualizarEspecialista(@PathVariable String cedula, @RequestBody Especialistas updatedEspecialista) {
-        Optional<Especialistas> especialistaOptional = especialistasService.updateEspecialista(cedula, updatedEspecialista);
-        if (especialistaOptional.isPresent()) {
-            return ResponseEntity.ok(especialistaOptional.get());
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    public ResponseEntity<Especialistas> actualizarEspecialista(@PathVariable String cedula, @RequestBody EspecialistasIdDTO especialistaDTO) {
+        try {
+            Optional<Especialistas> updatedEspecialista = especialistasService.updateEspecialista(cedula, especialistaDTO);
+            return updatedEspecialista.map(ResponseEntity::ok)
+                    .orElseGet(() -> ResponseEntity.notFound().build());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
     }
 }

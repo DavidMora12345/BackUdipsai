@@ -1,11 +1,13 @@
 package com.test.TUdipsaiApi.Service;
 
 import com.test.TUdipsaiApi.Model.Especialistas;
+import com.test.TUdipsaiApi.Model.Especialidad;
 import com.test.TUdipsaiApi.Model.Permisos;
+import com.test.TUdipsaiApi.Model.Sede;
+import com.test.TUdipsaiApi.Repository.EspecialidadRepositorio;
 import com.test.TUdipsaiApi.Repository.EspecialistasRepositorio;
-import com.test.TUdipsaiApi.dto.EspecialidadDTO;
-import com.test.TUdipsaiApi.dto.EspecialistasSinImagenDTO;
-import com.test.TUdipsaiApi.dto.PermisosDTO;
+import com.test.TUdipsaiApi.Repository.SedeRepositorio;
+import com.test.TUdipsaiApi.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,9 +21,45 @@ public class EspecialistasService {
     @Autowired
     private EspecialistasRepositorio especialistasRepositorio;
 
-    public Especialistas saveOrUpdate(Especialistas especialista) {
+    @Autowired
+    private SedeRepositorio sedeRepositorio;
+
+    @Autowired
+    private EspecialidadRepositorio especialidadRepositorio;
+
+    public Especialistas saveOrUpdate(EspecialistasIdDTO especialistaDTO) {
+        Especialistas especialista = new Especialistas();
+        especialista.setCedula(especialistaDTO.getCedula());
+        especialista.setEspecialistaEstado(especialistaDTO.getEspecialistaEstado());
+        especialista.setPrimerNombre(especialistaDTO.getPrimerNombre());
+        especialista.setSegundoNombre(especialistaDTO.getSegundoNombre());
+        especialista.setPrimerApellido(especialistaDTO.getPrimerApellido());
+        especialista.setSegundoApellido(especialistaDTO.getSegundoApellido());
+
+        if (especialistaDTO.getEspecialidadId() != null) {
+            Optional<Especialidad> especialidad = especialidadRepositorio.findById(especialistaDTO.getEspecialidadId());
+            if (especialidad.isPresent()) {
+                especialista.setEspecialidad(especialidad.get());
+            } else {
+                throw new RuntimeException("Especialidad no encontrada con ID: " + especialistaDTO.getEspecialidadId());
+            }
+        }
+
+        especialista.setEsPasante(especialistaDTO.getEsPasante());
+        especialista.setEspecialistaAsignado(especialistaDTO.getEspecialistaAsignado());
+        especialista.setContrasena(especialistaDTO.getContrasena());
+        especialista.setInicioPasantia(especialistaDTO.getInicioPasantia());
+        especialista.setFinPasantia(especialistaDTO.getFinPasantia());
+        especialista.setImagen(especialistaDTO.getImagen());
+
+        if (especialistaDTO.getSede() != null) {
+            Optional<Sede> sede = sedeRepositorio.findById(especialistaDTO.getSede());
+            sede.ifPresent(especialista::setSede);
+        }
+
         return especialistasRepositorio.save(especialista);
     }
+
 
     public List<Especialistas> findAll() {
         return especialistasRepositorio.findAll();
@@ -54,27 +92,42 @@ public class EspecialistasService {
         return especialistasRepositorio.findAllByEspecialistaEstadoTrueAndEsPasanteFalse();
     }
 
-    public Optional<Especialistas> updateEspecialista(String cedula, Especialistas updatedEspecialista) {
+    public Optional<Especialistas> updateEspecialista(String cedula, EspecialistasIdDTO updatedEspecialistaDTO) {
         Optional<Especialistas> existingEspecialista = especialistasRepositorio.findById(cedula);
         if (existingEspecialista.isPresent()) {
             Especialistas especialista = existingEspecialista.get();
-            especialista.setPrimerNombre(updatedEspecialista.getPrimerNombre());
-            especialista.setSegundoNombre(updatedEspecialista.getSegundoNombre());
-            especialista.setPrimerApellido(updatedEspecialista.getPrimerApellido());
-            especialista.setSegundoApellido(updatedEspecialista.getSegundoApellido());
-            especialista.setEspecialidad(updatedEspecialista.getEspecialidad());
-            especialista.setEsPasante(updatedEspecialista.getEsPasante());
-            especialista.setEspecialistaAsignado(updatedEspecialista.getEspecialistaAsignado());
-            especialista.setEspecialistaEstado(updatedEspecialista.getEspecialistaEstado());
-            especialista.setContrasena(updatedEspecialista.getContrasena());
-            especialista.setInicioPasantia(updatedEspecialista.getInicioPasantia());
-            especialista.setFinPasantia(updatedEspecialista.getFinPasantia());
-            especialista.setImagen(updatedEspecialista.getImagen());
+            especialista.setPrimerNombre(updatedEspecialistaDTO.getPrimerNombre());
+            especialista.setSegundoNombre(updatedEspecialistaDTO.getSegundoNombre());
+            especialista.setPrimerApellido(updatedEspecialistaDTO.getPrimerApellido());
+            especialista.setSegundoApellido(updatedEspecialistaDTO.getSegundoApellido());
+
+            if (updatedEspecialistaDTO.getEspecialidadId() != null) {
+                Optional<Especialidad> especialidad = especialidadRepositorio.findById(updatedEspecialistaDTO.getEspecialidadId());
+                especialidad.ifPresent(especialista::setEspecialidad);
+            }
+
+            especialista.setEsPasante(updatedEspecialistaDTO.getEsPasante());
+            especialista.setEspecialistaAsignado(updatedEspecialistaDTO.getEspecialistaAsignado());
+            especialista.setEspecialistaEstado(updatedEspecialistaDTO.getEspecialistaEstado());
+            especialista.setContrasena(updatedEspecialistaDTO.getContrasena());
+            especialista.setInicioPasantia(updatedEspecialistaDTO.getInicioPasantia());
+            especialista.setFinPasantia(updatedEspecialistaDTO.getFinPasantia());
+            especialista.setImagen(updatedEspecialistaDTO.getImagen());
+
+            if (updatedEspecialistaDTO.getSede() != null) {
+                Optional<Sede> sede = sedeRepositorio.findById(updatedEspecialistaDTO.getSede());
+                sede.ifPresent(especialista::setSede);
+            } else {
+                especialista.setSede(null);
+            }
+
             especialistasRepositorio.save(especialista);
             return Optional.of(especialista);
         }
         return Optional.empty();
     }
+
+
 
     public List<EspecialistasSinImagenDTO> findAllActiveSinImagen() {
         List<Especialistas> especialistas = findAllActive();
@@ -109,6 +162,10 @@ public class EspecialistasService {
         dto.setEspecialistaAsignado(especialista.getEspecialistaAsignado());
         dto.setInicioPasantia(especialista.getInicioPasantia());
         dto.setFinPasantia(especialista.getFinPasantia());
+
+        if (especialista.getSede() != null) {
+            dto.setSede(especialista.getSede().getId());
+        }
 
         return dto;
     }
