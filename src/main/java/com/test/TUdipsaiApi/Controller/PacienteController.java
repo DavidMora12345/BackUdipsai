@@ -168,8 +168,8 @@ public class PacienteController {
     @PostMapping("/upload")
     public ResponseEntity<?> subirPacientesExcel(@RequestParam("file") MultipartFile file) {
         try {
-            excelService.savePatientsFromExcel(file);
-            return ResponseEntity.ok("Pacientes subidos exitosamente");
+            List<String> messages = excelService.savePatientsFromExcel(file);
+            return ResponseEntity.ok(messages);
         } catch (Exception e) {
             logService.logError("Error al subir pacientes desde Excel", e);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al subir pacientes desde Excel: " + e.getMessage());

@@ -9,4 +9,6 @@ import java.util.Optional;
 @Repository
 public interface JornadaRepositorio extends JpaRepository<Jornada, Integer> {
     Optional<Jornada> findByNombreJornada(String nombreJornada);
+    Optional<Jornada> findByNombreJornadaIgnoreCase(String nombreJornada);
+
 }

@@ -28,8 +28,9 @@ public class ExcelService {
     @Autowired
     private SedeRepositorio sedeRepositorio;
 
-    public void savePatientsFromExcel(MultipartFile file) throws IOException {
+    public List<String> savePatientsFromExcel(MultipartFile file) throws IOException {
         List<Paciente> pacientes = new ArrayList<>();
+        List<String> messages = new ArrayList<>();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         Workbook workbook = new XSSFWorkbook(file.getInputStream());
@@ -48,7 +49,9 @@ public class ExcelService {
             } else {
                 int id = (int) getCellValueAsNumeric(idCell);
                 if (pacienteRepository.findById(id).isPresent()) {
-                    paciente.setId(null); // Ignorar ID repetido y dejar que la base de datos asigne uno nuevo
+                    Paciente nuevoPaciente = pacienteRepository.save(paciente); // Guardar paciente para obtener nuevo ID
+                    messages.add("ID del paciente repetido. ID repetido: " + id + ", se asignará un nuevo ID. ID nuevo: " + nuevoPaciente.getId());
+                    paciente.setId(nuevoPaciente.getId());
                 } else {
                     paciente.setId(id);
                 }
@@ -77,7 +80,9 @@ public class ExcelService {
 
             // Asignar o crear InstitucionEducativa por nombre
             String institucionNombre = getCellValueAsString(row.getCell(21));
-            InstitucionEducativa institucion = getOrCreateInstitucionEducativa(institucionNombre);
+            String direccionInstitucion = getCellValueAsString(row.getCell(27));
+            String tipoInstitucion = getCellValueAsString(row.getCell(28));
+            InstitucionEducativa institucion = getOrCreateInstitucionEducativa(institucionNombre, direccionInstitucion, tipoInstitucion);
             paciente.setInstitucionEducativa(institucion);
 
             // Asignar o crear Jornada por nombre
@@ -92,9 +97,6 @@ public class ExcelService {
 
             // Asignar o crear Sede por nombre (convertir a mayúsculas)
             String sedeNombre = getCellValueAsString(row.getCell(30));
-            if (sedeNombre != null) {
-                sedeNombre = sedeNombre.toUpperCase();
-            }
             Sede sede = getOrCreateSede(sedeNombre);
             paciente.setSede(sede);
 
@@ -103,6 +105,8 @@ public class ExcelService {
 
         workbook.close();
         pacienteRepository.saveAll(pacientes);
+
+        return messages;
     }
 
     private String getCellValueAsString(Cell cell) {
@@ -172,16 +176,19 @@ public class ExcelService {
         }
     }
 
-    private InstitucionEducativa getOrCreateInstitucionEducativa(String nombre) {
+    private InstitucionEducativa getOrCreateInstitucionEducativa(String nombre, String direccion, String tipoInstitucion) {
         if (nombre == null || nombre.isEmpty()) {
             return null;
         }
-        Optional<InstitucionEducativa> optional = institucionEducativaRepositorio.findByNombreInstitucion(nombre);
+        Optional<InstitucionEducativa> optional = institucionEducativaRepositorio.findByNombreInstitucionIgnoreCase(nombre);
         if (optional.isPresent()) {
             return optional.get();
         } else {
             InstitucionEducativa nuevaInstitucion = new InstitucionEducativa();
             nuevaInstitucion.setNombreInstitucion(nombre);
+            nuevaInstitucion.setDireccion(direccion);
+            nuevaInstitucion.setTipoInstitucion(tipoInstitucion);
+            nuevaInstitucion.setInstitucionEstado(1); // Estado por defecto a 1
             return institucionEducativaRepositorio.save(nuevaInstitucion);
         }
     }
@@ -190,12 +197,13 @@ public class ExcelService {
         if (nombre == null || nombre.isEmpty()) {
             return null;
         }
-        Optional<Jornada> optional = jornadaRepositorio.findByNombreJornada(nombre);
+        Optional<Jornada> optional = jornadaRepositorio.findByNombreJornadaIgnoreCase(nombre);
         if (optional.isPresent()) {
             return optional.get();
         } else {
             Jornada nuevaJornada = new Jornada();
             nuevaJornada.setNombreJornada(nombre);
+            nuevaJornada.setEstadoJornada(1); // Estado por defecto a 1
             return jornadaRepositorio.save(nuevaJornada);
         }
     }
@@ -204,7 +212,7 @@ public class ExcelService {
         if (nombre == null || nombre.isEmpty()) {
             return null;
         }
-        Optional<Sede> optional = sedeRepositorio.findByNombre(nombre);
+        Optional<Sede> optional = sedeRepositorio.findByNombreIgnoreCase(nombre);
         if (optional.isPresent()) {
             return optional.get();
         } else {

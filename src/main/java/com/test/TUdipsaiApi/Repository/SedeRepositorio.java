@@ -11,5 +11,7 @@ import java.util.Optional;
 public interface SedeRepositorio extends JpaRepository<Sede, Integer> {
     List<Sede> findByEstado(Integer estado);
     Optional<Sede> findByNombre(String nombre);
+    Optional<Sede> findByNombreIgnoreCase(String nombre);
+
 
 }
