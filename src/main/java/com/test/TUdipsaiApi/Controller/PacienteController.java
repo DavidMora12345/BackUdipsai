@@ -35,7 +35,6 @@ public class PacienteController {
     @Autowired
     private ExcelService excelService;
 
-
     @GetMapping("/listar")
     public ResponseEntity<List<PacienteSinImagenDTO>> getAllPacientes() {
         List<PacienteSinImagenDTO> pacientes = pacienteService.getAllPacientesSinImagen();
@@ -53,7 +52,7 @@ public class PacienteController {
     public ResponseEntity<?> crearOActualizarPaciente(@RequestBody PacienteUpdateDTO pacienteUpdateDTO) {
         try {
             Paciente paciente = pacienteService.createPaciente(pacienteUpdateDTO);
-            logService.logChange("Paciente", paciente.getId().longValue(), "INSERT", null, paciente.toString());
+            logService.logChange("Paciente", paciente.getId().longValue(), "INSERT", null, paciente);
             return ResponseEntity.ok(paciente);
         } catch (Exception e) {
             logService.logError("Error al insertar paciente", e);
@@ -64,9 +63,10 @@ public class PacienteController {
     @PutMapping("/actualizar/{id}")
     public ResponseEntity<?> updatePaciente(@PathVariable Integer id, @RequestBody PacienteUpdateDTO pacienteUpdateDTO) {
         try {
-            Paciente updatedPaciente = pacienteService.updatePaciente(id, pacienteUpdateDTO);
-            if (updatedPaciente != null) {
-                logService.logChange("Paciente", updatedPaciente.getId().longValue(), "UPDATE", null, updatedPaciente.toString());
+            Optional<Paciente> existingPaciente = pacienteService.getPacienteById(id);
+            if (existingPaciente.isPresent()) {
+                Paciente updatedPaciente = pacienteService.updatePaciente(id, pacienteUpdateDTO);
+                logService.logChange("Paciente", updatedPaciente.getId().longValue(), "UPDATE", existingPaciente.get(), updatedPaciente);
                 return ResponseEntity.ok(updatedPaciente);
             } else {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Paciente no encontrado con ID: " + id);
@@ -76,6 +76,7 @@ public class PacienteController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al actualizar paciente: " + e.getMessage());
         }
     }
+
     @PostMapping("/buscar")
     public ResponseEntity<List<PacienteSinImagenDTO>> buscarPacientes(
             @RequestParam(value = "search", required = false) String search,
@@ -92,7 +93,7 @@ public class PacienteController {
             if (pacienteOpt.isPresent()) {
                 Paciente paciente = pacienteOpt.get();
                 pacienteService.deletePaciente(id);
-                logService.logChange("Paciente", id.longValue(), "DELETE", paciente.toString(), null);
+                logService.logChange("Paciente", id.longValue(), "DELETE", paciente, null);
                 return ResponseEntity.ok(paciente);
             } else {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Paciente no encontrado con ID: " + id);
@@ -174,6 +175,4 @@ public class PacienteController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al subir pacientes desde Excel: " + e.getMessage());
         }
     }
-
-
 }

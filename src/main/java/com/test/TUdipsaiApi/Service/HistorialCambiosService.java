@@ -16,4 +16,8 @@ public class HistorialCambiosService {
     public List<HistorialCambios> findAll() {
         return historialCambiosRepositorio.findAll();
     }
+
+    public List<HistorialCambios> findByEntidadId(Long entidadId) {
+        return historialCambiosRepositorio.findByEntidadId(entidadId);
+    }
 }

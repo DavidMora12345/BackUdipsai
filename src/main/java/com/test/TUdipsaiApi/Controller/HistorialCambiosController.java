@@ -21,4 +21,10 @@ public class HistorialCambiosController {
         List<HistorialCambios> historialCambios = historialCambiosService.findAll();
         return ResponseEntity.ok(historialCambios);
     }
+
+    @GetMapping("/listar/{entidadId}")
+    public ResponseEntity<List<HistorialCambios>> listarHistorialCambiosPorEntidadId(@PathVariable Long entidadId) {
+        List<HistorialCambios> historialCambios = historialCambiosService.findByEntidadId(entidadId);
+        return ResponseEntity.ok(historialCambios);
+    }
 }
