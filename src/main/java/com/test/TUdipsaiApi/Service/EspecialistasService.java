@@ -183,4 +183,15 @@ public class EspecialistasService {
         dto.setSede(permisos.getSede());
         return dto;
     }
+
+    public List<Especialistas> findAllPasantes() {
+        return especialistasRepositorio.findAllPasantes();
+    }
+
+    public List<EspecialistasSinImagenDTO> findAllPasantesSinImagen() {
+        List<Especialistas> pasantes = findAllPasantes();
+        return pasantes.stream()
+                .map(this::convertToSinImagenDTO)
+                .collect(Collectors.toList());
+    }
 }

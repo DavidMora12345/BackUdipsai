@@ -1,5 +1,8 @@
 package com.test.TUdipsaiApi.Service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.test.TUdipsaiApi.Model.*;
 import com.test.TUdipsaiApi.Repository.*;
 import com.test.TUdipsaiApi.dto.*;
@@ -30,6 +33,16 @@ public class PacienteService {
 
     @Autowired
     private DocumentoService documentoService;
+
+    @Autowired
+    private HistorialCambiosService historialCambiosService;
+
+    private final ObjectMapper objectMapper;
+
+    public PacienteService() {
+        this.objectMapper = new ObjectMapper();
+        this.objectMapper.configure(SerializationFeature.INDENT_OUTPUT, true);
+    }
 
     public Optional<Paciente> getPacienteById(Integer id) {
         return pacienteRepositorio.findById(id);
@@ -197,7 +210,9 @@ public class PacienteService {
         Optional<Paciente> pacienteOptional = pacienteRepositorio.findById(id);
         if (pacienteOptional.isPresent()) {
             Paciente paciente = pacienteOptional.get();
+            Paciente valorAnterior = new Paciente(paciente);
 
+            // Actualizar los campos del paciente aquí...
             paciente.setFechaApertura(pacienteUpdateDTO.getFechaApertura());
             paciente.setPacienteEstado(pacienteUpdateDTO.getPacienteEstado());
             paciente.setNombresApellidos(pacienteUpdateDTO.getNombresApellidos());
@@ -245,11 +260,19 @@ public class PacienteService {
                 paciente.setJornada(null);
             }
 
-            return pacienteRepositorio.save(paciente);
+            Paciente valorNuevo = new Paciente(paciente);
+
+            pacienteRepositorio.save(paciente);
+
+            historialCambiosService.registrarCambio("Paciente", id.longValue(), "UPDATE", valorAnterior, valorNuevo);
+
+            return paciente;
         } else {
             return null;
         }
     }
+
+
 
     public Paciente createPaciente(PacienteUpdateDTO pacienteUpdateDTO) {
         Paciente paciente = new Paciente();

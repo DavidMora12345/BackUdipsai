@@ -95,4 +95,10 @@ public class EspecialistaController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
     }
+
+    @GetMapping("/pasantes")
+    public ResponseEntity<List<EspecialistasSinImagenDTO>> listarPasantes() {
+        List<EspecialistasSinImagenDTO> pasantes = especialistasService.findAllPasantesSinImagen();
+        return ResponseEntity.ok(pasantes);
+    }
 }

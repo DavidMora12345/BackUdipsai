@@ -22,22 +22,25 @@ public class LogService {
     private ObjectMapper objectMapper;
 
     public void logChange(String entidad, Long entidadId, String operacion, Object valorAnterior, Object valorNuevo) {
-        LogEntry logEntry = new LogEntry();
-        logEntry.setEntidad(entidad);
-        logEntry.setEntidadId(entidadId);
-        logEntry.setOperacion(operacion);
-        logEntry.setFechaCambio(LocalDateTime.now());
-
         try {
             String valorAnteriorStr = valorAnterior != null ? objectToJson(valorAnterior) : null;
             String valorNuevoStr = valorNuevo != null ? objectToJson(valorNuevo) : null;
-            logEntry.setValorAnterior(valorAnteriorStr);
-            logEntry.setValorNuevo(valorNuevoStr);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
 
-        logEntryRepository.save(logEntry);
+            // Comparamos los valores anteriores y nuevos para asegurarnos de que sean diferentes
+            if (valorAnteriorStr != null && valorNuevoStr != null && !valorAnteriorStr.equals(valorNuevoStr)) {
+                LogEntry logEntry = new LogEntry();
+                logEntry.setEntidad(entidad);
+                logEntry.setEntidadId(entidadId);
+                logEntry.setOperacion(operacion);
+                logEntry.setFechaCambio(LocalDateTime.now());
+                logEntry.setValorAnterior(valorAnteriorStr);
+                logEntry.setValorNuevo(valorNuevoStr);
+
+                logEntryRepository.save(logEntry);
+            }
+        } catch (JsonProcessingException e) {
+            logError("Error al procesar JSON", e);
+        }
     }
 
     private String objectToJson(Object obj) throws JsonProcessingException {
@@ -48,7 +51,7 @@ public class LogService {
             try {
                 fieldMap.put(field.getName(), field.get(obj));
             } catch (IllegalAccessException e) {
-                e.printStackTrace();
+                logError("Error al acceder al campo", e);
             }
         }
         return objectMapper.writeValueAsString(fieldMap);

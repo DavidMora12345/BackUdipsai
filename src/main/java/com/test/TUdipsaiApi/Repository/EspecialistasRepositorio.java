@@ -19,4 +19,7 @@ public interface EspecialistasRepositorio extends JpaRepository<Especialistas, S
 
     @Query("SELECT e FROM Especialistas e WHERE e.especialistaEstado = true AND e.esPasante = false")
     List<Especialistas> findAllByEspecialistaEstadoTrueAndEsPasanteFalse();
+
+    @Query("SELECT e FROM Especialistas e WHERE e.especialistaEstado = true AND e.esPasante = true")
+    List<Especialistas> findAllPasantes();
 }
