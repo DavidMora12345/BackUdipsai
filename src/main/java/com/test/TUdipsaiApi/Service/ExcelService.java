@@ -218,6 +218,7 @@ public class ExcelService {
         } else {
             Sede nuevaSede = new Sede();
             nuevaSede.setNombre(nombre);
+            nuevaSede.setEstado(1); // Estado por defecto a 1
             return sedeRepositorio.save(nuevaSede);
         }
     }
