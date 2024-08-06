@@ -110,6 +110,14 @@ public class PacienteService {
             paciente.setFichaDiagnostica(null);
         }
 
+        if (pacienteDTO.getFichaCompromiso() != null && pacienteDTO.getFichaCompromiso().getId() != null) {
+            Documento documento = documentoService.findById(pacienteDTO.getFichaCompromiso().getId())
+                    .orElseThrow(() -> new RuntimeException("Documento not found"));
+            paciente.setFichaCompromiso(documento);
+        } else {
+            paciente.setFichaCompromiso(null);
+        }
+
         return paciente;
     }
 
@@ -145,6 +153,11 @@ public class PacienteService {
 
         if (paciente.getSede() != null) {
             pacienteDTO.setSede(paciente.getSede());
+        }
+
+        if (paciente.getFichaCompromiso() != null) {
+            Documento documento = paciente.getFichaCompromiso();
+            pacienteDTO.setDocumentoId(documento.getId());
         }
 
         pacienteDTO.setProyecto(paciente.getProyecto());
@@ -212,7 +225,6 @@ public class PacienteService {
             Paciente paciente = pacienteOptional.get();
             Paciente valorAnterior = new Paciente(paciente);
 
-            // Actualizar los campos del paciente aquí...
             paciente.setFechaApertura(pacienteUpdateDTO.getFechaApertura());
             paciente.setPacienteEstado(pacienteUpdateDTO.getPacienteEstado());
             paciente.setNombresApellidos(pacienteUpdateDTO.getNombresApellidos());
@@ -260,6 +272,7 @@ public class PacienteService {
                 paciente.setJornada(null);
             }
 
+
             Paciente valorNuevo = new Paciente(paciente);
 
             pacienteRepositorio.save(paciente);
@@ -271,8 +284,6 @@ public class PacienteService {
             return null;
         }
     }
-
-
 
     public Paciente createPaciente(PacienteUpdateDTO pacienteUpdateDTO) {
         Paciente paciente = new Paciente();
@@ -324,6 +335,8 @@ public class PacienteService {
             paciente.setJornada(null);
         }
 
+
+
         return pacienteRepositorio.save(paciente);
     }
 
@@ -350,7 +363,6 @@ public class PacienteService {
                 .map(this::convertToSinImagenDTO)
                 .collect(Collectors.toList());
     }
-
 
     public List<Paciente> getAllPacientes() {
         return pacienteRepositorio.findByPacienteEstado(1);

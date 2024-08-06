@@ -47,9 +47,14 @@ public class PacienteDTO {
     private Boolean perteneceAProyecto;
     private DocumentoIdDTO fichaDiagnostica;
     private Sede sede;
+    private DocumentoIdDTO fichaCompromiso;
 
     public void setFichaDiagnosticaId(Long id) {
         this.fichaDiagnostica = new DocumentoIdDTO(id);
+    }
+
+    public void setDocumentoId(Long id) {
+        this.fichaCompromiso = new DocumentoIdDTO(id);
     }
 
 }

@@ -175,4 +175,65 @@ public class PacienteController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al subir pacientes desde Excel: " + e.getMessage());
         }
     }
+
+    @PostMapping("/{id}/fichaCompromiso")
+    public ResponseEntity<?> subirFichaCompromiso(@PathVariable Integer id, @RequestParam("file") MultipartFile file) {
+        try {
+            Optional<Paciente> pacienteOpt = pacienteService.getPacienteById(id);
+            if (pacienteOpt.isPresent()) {
+                Paciente paciente = pacienteOpt.get();
+                Documento documento = documentoService.saveDocumento(file);
+                paciente.setFichaCompromiso(documento);
+                pacienteService.saveOrUpdate(paciente);
+                return ResponseEntity.ok("Ficha compromiso subida exitosamente con ID: " + documento.getId());
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Paciente no encontrado con ID: " + id);
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al subir ficha compromiso: " + e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/fichaCompromiso/{pacienteId}")
+    public ResponseEntity<?> eliminarFichaCompromisoPorPacienteId(@PathVariable Integer pacienteId) {
+        try {
+            Optional<Paciente> pacienteOpt = pacienteService.getPacienteById(pacienteId);
+            if (pacienteOpt.isPresent()) {
+                Paciente paciente = pacienteOpt.get();
+                Documento documento = paciente.getFichaCompromiso();
+                if (documento != null) {
+                    paciente.setFichaCompromiso(null);
+                    pacienteService.saveOrUpdate(paciente);
+                    documentoService.deleteDocumento(documento.getId());
+                    return ResponseEntity.ok("Ficha compromiso eliminada exitosamente");
+                } else {
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El paciente con ID: " + pacienteId + " no tiene ficha compromiso asociada");
+                }
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Paciente no encontrado con ID: " + pacienteId);
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al eliminar ficha compromiso: " + e.getMessage());
+        }
+    }
+
+    @GetMapping("/{id}/fichaCompromiso")
+    public ResponseEntity<?> listarFichaCompromiso(@PathVariable Integer id) {
+        try {
+            Optional<Paciente> pacienteOpt = pacienteService.getPacienteById(id);
+            if (pacienteOpt.isPresent()) {
+                Paciente paciente = pacienteOpt.get();
+                Documento documento = paciente.getFichaCompromiso();
+                if (documento != null) {
+                    return ResponseEntity.ok(documento.getId());
+                } else {
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No hay ficha compromiso para el paciente con ID: " + id);
+                }
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Paciente no encontrado con ID: " + id);
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al listar ficha compromiso: " + e.getMessage());
+        }
+    }
 }

@@ -108,6 +108,10 @@ public class Paciente {
     @JoinColumn(name = "sede_id", referencedColumnName = "id")
     private Sede sede;
 
+    @ManyToOne
+    @JoinColumn(name = "ficha_compromiso", referencedColumnName = "id")
+    private Documento fichaCompromiso;
+
     public Paciente(Paciente otro) {
         this.id = otro.id;
         this.fechaApertura = otro.fechaApertura;
@@ -138,6 +142,7 @@ public class Paciente {
         this.perteneceAProyecto = otro.perteneceAProyecto;
         this.fichaDiagnostica = otro.fichaDiagnostica;
         this.sede = otro.sede;
+        this.fichaCompromiso = otro.fichaCompromiso;
     }
 
     public Paciente() {

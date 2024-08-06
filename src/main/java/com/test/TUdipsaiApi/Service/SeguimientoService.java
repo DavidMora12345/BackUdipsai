@@ -1,5 +1,6 @@
 package com.test.TUdipsaiApi.Service;
 
+import com.test.TUdipsaiApi.Model.Documento;
 import com.test.TUdipsaiApi.Model.Seguimiento;
 import com.test.TUdipsaiApi.Model.Especialistas;
 import com.test.TUdipsaiApi.Model.Paciente;
@@ -17,6 +18,9 @@ public class SeguimientoService {
 
     @Autowired
     private SeguimientoRepositorio seguimientoRepository;
+
+    @Autowired
+    private DocumentoService documentoService;
 
     public List<SeguimientoDTO> getAllSeguimientos() {
         return seguimientoRepository.findByEstado(1).stream()
@@ -108,6 +112,12 @@ public class SeguimientoService {
             seguimientoDTO.setPaciente(pacienteDTO);
         }
 
+        if (seguimiento.getDocumento() != null) {
+            DocumentoIdDTO documentoIdDTO = new DocumentoIdDTO();
+            documentoIdDTO.setId(seguimiento.getDocumento().getId());
+            seguimientoDTO.setDocumento(documentoIdDTO);
+        }
+
         return seguimientoDTO;
     }
 
@@ -128,6 +138,14 @@ public class SeguimientoService {
             Paciente paciente = new Paciente();
             paciente.setId(seguimientoDTO.getPaciente().getId());
             seguimiento.setPaciente(paciente);
+        }
+
+        if (seguimientoDTO.getDocumento() != null && seguimientoDTO.getDocumento().getId() != null) {
+            Documento documento = documentoService.findById(seguimientoDTO.getDocumento().getId())
+                    .orElseThrow(() -> new RuntimeException("Documento not found"));
+            seguimiento.setDocumento(documento);
+        } else {
+            seguimiento.setDocumento(null);
         }
 
         return seguimiento;
