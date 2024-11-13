@@ -1,5 +1,6 @@
 package com.test.TUdipsaiApi.dto;
 
+import com.test.TUdipsaiApi.Model.Sede;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,7 +18,9 @@ public class EspecialistasDTO {
     private EspecialidadDTO especialidad;
     private Boolean esPasante;
     private String especialistaAsignado;
+    private String contrasena;
     private LocalDate inicioPasantia;
     private LocalDate finPasantia;
-    private byte[] imagen;
+    private String imagen;
+    private Sede sede;
 }

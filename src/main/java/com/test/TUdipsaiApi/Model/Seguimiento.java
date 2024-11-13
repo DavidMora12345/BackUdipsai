@@ -33,4 +33,8 @@ public class Seguimiento {
 
     @Column(name = "estado")
     private Integer estado = 1;
+
+    @ManyToOne
+    @JoinColumn(name = "documento_id", referencedColumnName = "id")
+    private Documento documento;
 }

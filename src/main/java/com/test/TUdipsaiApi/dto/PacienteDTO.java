@@ -27,7 +27,10 @@ public class PacienteDTO {
     private String edad;
     private String cedula;
     private String domicilio;
-    private byte[] imagen;
+
+    // Cambiado de byte[] a String para manejar Base64
+    private String imagen;
+
     private String telefono;
     private String celular;
     private InstitucionEducativa institucionEducativa;
@@ -47,9 +50,13 @@ public class PacienteDTO {
     private Boolean perteneceAProyecto;
     private DocumentoIdDTO fichaDiagnostica;
     private Sede sede;
+    private DocumentoIdDTO fichaCompromiso;
 
     public void setFichaDiagnosticaId(Long id) {
         this.fichaDiagnostica = new DocumentoIdDTO(id);
     }
 
+    public void setFichaCompromisoId(Long id) {
+        this.fichaCompromiso = new DocumentoIdDTO(id);
+    }
 }

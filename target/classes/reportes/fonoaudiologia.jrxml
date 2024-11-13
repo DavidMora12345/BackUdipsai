@@ -1,0 +1,2874 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="psicologia_educativa" pageWidth="595" pageHeight="2550" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+
+    <!-- Estilos personalizados -->
+    <style name="Title" fontName="Arial" fontSize="20" isBold="true" pdfFontName="Helvetica-Bold"/>
+    <style name="SubTitle" fontName="Arial" fontSize="16" isBold="true" pdfFontName="Helvetica-Bold"/>
+    <style name="Text" fontName="Arial" fontSize="12" pdfFontName="Helvetica"/>
+    <style name="DetailText" fontName="Arial" fontSize="10" pdfFontName="Helvetica"/>
+
+    <!-- Definición de parámetros -->
+    <parameter name="backgroundImage" class="java.lang.String"/>
+    <parameter name="imagenPaciente" class="java.io.InputStream"/>
+
+    <!-- Definición de campos -->
+    <field name="id" class="java.lang.Integer"/>
+    <field name="paciente.fechaApertura" class="java.util.Date"/>
+    <field name="paciente.nombresApellidos" class="java.lang.String"/>
+    <field name="paciente.ciudad" class="java.lang.String"/>
+    <field name="paciente.fechaNacimiento" class="java.util.Date"/>
+    <field name="paciente.edad" class="java.lang.String"/>
+    <field name="paciente.cedula" class="java.lang.String"/>
+    <field name="paciente.domicilio" class="java.lang.String"/>
+    <field name="paciente.telefono" class="java.lang.String"/>
+    <field name="paciente.celular" class="java.lang.String"/>
+    <field name="paciente.institucionEducativa.nombreInstitucion" class="java.lang.String"/>
+    <field name="paciente.proyecto" class="java.lang.String"/>
+    <field name="paciente.jornada.nombreJornada" class="java.lang.String"/>
+    <field name="paciente.anioEducacion" class="java.lang.String"/>
+    <field name="paciente.paralelo" class="java.lang.String"/>
+    <field name="paciente.perteneceInclusion" class="java.lang.String"/>
+    <field name="paciente.tieneDiscapacidad" class="java.lang.String"/>
+    <field name="paciente.portadorCarnet" class="java.lang.Boolean"/>
+    <field name="paciente.diagnostico" class="java.lang.String"/>
+    <field name="paciente.motivoConsulta" class="java.lang.String"/>
+    <field name="paciente.observaciones" class="java.lang.String"/>
+    <field name="paciente.tipoDiscapacidad" class="java.lang.String"/>
+    <field name="paciente.detalleDiscapacidad" class="java.lang.String"/>
+    <field name="paciente.porcentajeDiscapacidad" class="java.lang.Integer"/>
+    <field name="paciente.perteneceAProyecto" class="java.lang.Boolean"/>
+    <field name="paciente.sede.nombre" class="java.lang.String"/>
+
+    <!-- Características del habla -->
+    <field name="dificultadPronunciarPalabras" class="java.lang.Boolean"/>
+    <field name="seTrabaCuandoHabla" class="java.lang.Boolean"/>
+    <field name="seEntiendeLoQueDice" class="java.lang.Boolean"/>
+    <field name="sabeComoLlamanObjetosEntorno" class="java.lang.Boolean"/>
+    <field name="comprendeLoQueSeLeDice" class="java.lang.Boolean"/>
+    <field name="reconoceFuenteSonora" class="java.lang.Boolean"/>
+    <field name="comunicacionPreferentementeForma" class="com.test.TUdipsaiApi.Model.Fonoaudiologia$ComunicacionPreferentementeForma"/>
+    <field name="seARealizadoExamenAudiologico" class="java.lang.Boolean"/>
+
+    <!-- Diagnóstico audiológico -->
+    <field name="perdidaAuditivaConductivaNeurosensorial" class="java.lang.Boolean"/>
+    <field name="hipoacusiaConductivaBilateral" class="java.lang.Boolean"/>
+    <field name="hipoacusiaConductivaUnilateral" class="java.lang.Boolean"/>
+    <field name="hipoacusiaNeurosensorialBilateral" class="java.lang.Boolean"/>
+    <field name="hipoacusiaNeurosensorialUnilateral" class="java.lang.Boolean"/>
+
+    <!-- Diagnóstico fonoaudiológico previo -->
+    <field name="trastornoEspecificoPronunciacion" class="java.lang.Boolean"/>
+    <field name="trastornoLenguajeExpresivo" class="java.lang.Boolean"/>
+    <field name="afasiaAdquiridaEpilepsia" class="java.lang.Boolean"/>
+    <field name="otrosTrastornosDesarrolloHabla" class="java.lang.Boolean"/>
+    <field name="trastornoDesarrolloHablaLenguaje" class="java.lang.Boolean"/>
+    <field name="trastornoRecepcionLenguaje" class="java.lang.Boolean"/>
+    <field name="alteracionesHabla" class="java.lang.Boolean"/>
+    <field name="disfasiaAfasia" class="java.lang.Boolean"/>
+    <field name="disartriaAnartria" class="java.lang.Boolean"/>
+    <field name="otrasAlteracionesHabla" class="java.lang.Boolean"/>
+    <field name="aTenidoPerdidaAudicionPasado" class="java.lang.Boolean"/>
+    <field name="infeccionesOidoFuertes" class="java.lang.Boolean"/>
+    <field name="cualInfeccionesOidoFuertes" class="java.lang.String"/>
+    <field name="edadInfeccionesOidoFuertes" class="java.lang.Integer"/>
+
+    <!-- Fonación -->
+    <field name="creeTonoVozEstudianteApropiado" class="java.lang.Boolean"/>
+    <field name="respiracionNormal" class="java.lang.Boolean"/>
+    <field name="situacionesAlteraTonoVoz" class="java.lang.String"/>
+    <field name="desdeCuandoAlteracionesVoz" class="java.lang.String"/>
+    <field name="tonoDeVoz" class="java.lang.String"/>
+    <field name="respiracion" class="java.lang.String"/>
+    <field name="ronca" class="java.lang.Boolean"/>
+    <field name="juegoVocal" class="java.lang.Boolean"/>
+    <field name="vocalizacion" class="java.lang.Boolean"/>
+    <field name="balbuceo" class="java.lang.Boolean"/>
+    <field name="silabeo" class="java.lang.Boolean"/>
+    <field name="primerasPalabras" class="java.lang.Boolean"/>
+    <field name="oracionesDosPalabras" class="java.lang.Boolean"/>
+    <field name="oracionesTresPalabras" class="java.lang.Boolean"/>
+    <field name="formacionLinguisticaCompleta" class="java.lang.Boolean"/>
+    <field name="numeroTotalPalabras" class="java.lang.Integer"/>
+
+    <!-- Historia clínica Audición -->
+    <field name="perdidaAuditiva" class="java.lang.Boolean"/>
+    <field name="unilateral" class="java.lang.Boolean"/>
+    <field name="oidoDerecho" class="java.lang.Boolean"/>
+    <field name="oidoIzquierdo" class="java.lang.Boolean"/>
+    <field name="bilateral" class="java.lang.Boolean"/>
+    <field name="gradoPerdida" class="com.test.TUdipsaiApi.Model.Fonoaudiologia$GradoPerdida"/>
+    <field name="permanecia" class="com.test.TUdipsaiApi.Model.Fonoaudiologia$Permanecia"/>
+    <field name="otitis" class="java.lang.Boolean"/>
+    <field name="tipoOtitis" class="com.test.TUdipsaiApi.Model.Fonoaudiologia$TipoOtitis"/>
+    <field name="duracionOtitisInicio" class="java.util.Date"/>
+    <field name="duracionOtitisFin" class="java.util.Date"/>
+    <field name="antecedentesFamiliares" class="java.lang.Boolean"/>
+    <field name="exposisionRuidos" class="java.lang.Boolean"/>
+    <field name="duracionExposisionRuidosInicio" class="java.util.Date"/>
+    <field name="duracionExposisionRuidosFin" class="java.util.Date"/>
+    <field name="ototoxicos" class="java.lang.Boolean"/>
+    <field name="infecciones" class="java.lang.Boolean"/>
+    <field name="usoAudifonos" class="java.lang.Boolean"/>
+    <field name="inicioUsoAudifonos" class="java.util.Date"/>
+    <field name="finUsoAudifonos" class="java.util.Date"/>
+    <field name="implanteCoclear" class="java.lang.Boolean"/>
+    <field name="tratamientoFonoaudiologicoPrevio" class="java.lang.Boolean"/>
+    <field name="otalgia" class="java.lang.Boolean"/>
+    <field name="otalgiaUnilateral" class="java.lang.Boolean"/>
+    <field name="otalgiaOidoDerecho" class="java.lang.Boolean"/>
+    <field name="otalgiaOidoIzquierdo" class="java.lang.Boolean"/>
+    <field name="otalgiaBilateral" class="java.lang.Boolean"/>
+    <field name="permanenciaOtalgiaContinua" class="java.lang.Boolean"/>
+    <field name="permanenciaOtalgiaIntermitente" class="java.lang.Boolean"/>
+    <field name="gradoPermanenciaOtalgia" class="com.test.TUdipsaiApi.Model.Fonoaudiologia$GradoPermanenciaOtalgia"/>
+    <field name="asociadaOtalgiaInfeccionRespiratoriaAlta" class="java.lang.Boolean"/>
+    <field name="infeccionRespiratoriaPunzante" class="java.lang.Boolean"/>
+    <field name="infeccionRespiratoriaPulsatil" class="java.lang.Boolean"/>
+    <field name="infeccionRespiratoriaProgresivo" class="java.lang.Boolean"/>
+    <field name="infeccionRespiratoriaOpresivo" class="java.lang.Boolean"/>
+    <field name="pruriginoso" class="java.lang.Boolean"/>
+    <field name="aumentaMasticar" class="java.lang.Boolean"/>
+    <field name="disminuyeConCalorLocal" class="java.lang.Boolean"/>
+    <field name="aumentaConCalorLocal" class="java.lang.Boolean"/>
+    <field name="otorrea" class="java.lang.Boolean"/>
+    <field name="otorreaUnilateral" class="java.lang.Boolean"/>
+    <field name="otorreaOidoDerecho" class="java.lang.Boolean"/>
+    <field name="otorreaOidoIzquierdo" class="java.lang.Boolean"/>
+    <field name="otorreaBilateral" class="java.lang.Boolean"/>
+    <field name="permanenciaOtorreaContinua" class="java.lang.Boolean"/>
+    <field name="permanenciaOtorreaIntermitente" class="java.lang.Boolean"/>
+    <field name="gradoPermanenciaOtorrea" class="com.test.TUdipsaiApi.Model.Fonoaudiologia$GradoPermanenciaOtorrea"/>
+    <field name="aspectoClaroOtorrea" class="java.lang.Boolean"/>
+    <field name="aspectoSerosoOtorrea" class="java.lang.Boolean"/>
+    <field name="aspectoMucosoOtorrea" class="java.lang.Boolean"/>
+    <field name="aspectoMucopurulentoOtorrea" class="java.lang.Boolean"/>
+    <field name="aspectoPurulentoOtorrea" class="java.lang.Boolean"/>
+    <field name="aspectoSanguinolentoOtorrea" class="java.lang.Boolean"/>
+    <field name="asosiadaOtorreaInfeccionRespiratoriaAlta" class="java.lang.Boolean"/>
+    <field name="asosiadaotorreaInfeccionAgudaOido" class="java.lang.Boolean"/>
+
+    <!-- Antecedentes auditivos -->
+    <field name="presentoOtalgia" class="java.lang.Boolean"/>
+    <field name="presentoOtalgiaBilateral" class="java.lang.Boolean"/>
+    <field name="presentoOtalgiaOidoDerecho" class="java.lang.Boolean"/>
+    <field name="presentoOtalgiaOidoIzquierdo" class="java.lang.Boolean"/>
+    <field name="presentoSensacionOidoTapado" class="java.lang.Boolean"/>
+    <field name="presentoSensacionOidoTapadoBilateral" class="java.lang.Boolean"/>
+    <field name="presentoSensacionOidoTapadoOidoDerecho" class="java.lang.Boolean"/>
+    <field name="presentoSensacionOidoTapadoOidoIzquierdo" class="java.lang.Boolean"/>
+    <field name="presentoAutofonia" class="java.lang.Boolean"/>
+    <field name="presentoAutofoniaBilateral" class="java.lang.Boolean"/>
+    <field name="presentoAutofoniaOidoDerecho" class="java.lang.Boolean"/>
+    <field name="presentoAutofoniaOidoIzquierdo" class="java.lang.Boolean"/>
+    <field name="presentoOtorrea" class="java.lang.Boolean"/>
+    <field name="presentoOtorreaBilateral" class="java.lang.Boolean"/>
+    <field name="presentoOtorreaOidoDerecho" class="java.lang.Boolean"/>
+    <field name="presentoOtorreaOidoIzquierdo" class="java.lang.Boolean"/>
+    <field name="aumentaVolumenTV" class="java.lang.Boolean"/>
+    <field name="sensacionPercibirTinnitus" class="java.lang.Boolean"/>
+    <field name="expuestoRuidosFuertes" class="java.lang.Boolean"/>
+    <field name="dificultadOidVozBaja" class="java.lang.Boolean"/>
+    <field name="hablaMasFuerteOMasDespacio" class="java.lang.Boolean"/>
+    <field name="utilizaAyudaAuditiva" class="java.lang.Boolean"/>
+    <field name="especficarAyudaAuditiva" class="java.lang.String"/>
+    <field name="percibeSonidoIgualAmbosOidos" class="java.lang.Boolean"/>
+    <field name="conQueOidoEscuchaMejor" class="com.test.TUdipsaiApi.Model.Fonoaudiologia$ConQueOidoEscuchaMejor"/>
+    <field name="haceCuantoTiempoPresentaSintomasAuditivos" class="com.test.TUdipsaiApi.Model.Fonoaudiologia$HaceCuantoTiempoPresentaSintomasAuditivos"/>
+
+    <!-- Antecedentes vestibulares -->
+    <field name="faltaEquilibrioCaminar" class="java.lang.Boolean"/>
+    <field name="mareos" class="java.lang.Boolean"/>
+    <field name="cuandoMareos" class="com.test.TUdipsaiApi.Model.Fonoaudiologia$CuandoMareos"/>
+    <field name="vertigo" class="java.lang.Boolean"/>
+
+    <!-- Descripción de otoscopia oído derecho -->
+    <field name="palpacionPabellonOidoDerecho" class="com.test.TUdipsaiApi.Model.Fonoaudiologia$PalpacionOido"/>
+    <field name="palpacionMastoidesOidoDerecho" class="com.test.TUdipsaiApi.Model.Fonoaudiologia$PalpacionOido"/>
+    <field name="caeOidoDerecho" class="com.test.TUdipsaiApi.Model.Fonoaudiologia$CAEOido"/>
+    <field name="obstruccionOidoDerecho" class="com.test.TUdipsaiApi.Model.Fonoaudiologia$ObstruccionOido"/>
+    <field name="aparienciaMenbranaTimpanicaOidoDerecho" class="com.test.TUdipsaiApi.Model.Fonoaudiologia$AparienciaMenbranaTimpanica"/>
+    <field name="perforacionOidoDerecho" class="java.lang.Boolean"/>
+    <field name="burbujaOidoDerecho" class="java.lang.Boolean"/>
+    <field name="coloracionOidoDerecho" class="com.test.TUdipsaiApi.Model.Fonoaudiologia$ColoracionOido"/>
+
+    <!-- Descripción de otoscopia oído izquierdo -->
+    <field name="palpacionPabellonOidoIzquierdo" class="com.test.TUdipsaiApi.Model.Fonoaudiologia$PalpacionOido"/>
+    <field name="palpacionMastoidesOidoIzquierdo" class="com.test.TUdipsaiApi.Model.Fonoaudiologia$PalpacionOido"/>
+    <field name="caeOidoIzquierdo" class="com.test.TUdipsaiApi.Model.Fonoaudiologia$CAEOido"/>
+    <field name="obstruccionOidoIzquierdo" class="com.test.TUdipsaiApi.Model.Fonoaudiologia$ObstruccionOido"/>
+    <field name="aparienciaMenbranaTimpanicaOidoIzquierdo" class="com.test.TUdipsaiApi.Model.Fonoaudiologia$AparienciaMenbranaTimpanica"/>
+    <field name="perforacionOidoIzquierdo" class="java.lang.Boolean"/>
+    <field name="burbujaOidoIzquierdo" class="java.lang.Boolean"/>
+    <field name="coloracionOidoIzquierdo" class="com.test.TUdipsaiApi.Model.Fonoaudiologia$ColoracionOido"/>
+
+
+
+
+    <pageHeader>
+        <band height="60" splitType="Stretch">
+            <!-- Contenedor general para las tres columnas -->
+            <rectangle>
+                <reportElement x="0" y="0" width="555" height="60" forecolor="#000000"/> <!-- Borde negro general -->
+            </rectangle>
+
+            <!-- Primera columna (Logo y nombre de la universidad) -->
+            <frame>
+                <reportElement x="0" y="0" width="198" height="60" forecolor="#000000"/> <!-- Añadir borde con color negro -->
+                <image>
+                    <reportElement x="10" y="10" width="50" height="50"/>
+                    <imageExpression><![CDATA[new java.net.URL($P{backgroundImage})]]></imageExpression>
+                </image>
+                <staticText>
+                    <reportElement x="70" y="10" width="120" height="50"/>
+                    <textElement markup="html" verticalAlignment="Middle"> <!-- Indicar que se puede usar HTML -->
+                        <font size="10" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[Universidad<br/>Católica<br/>de Cuenca]]></text> <!-- Agregar saltos de línea con <br/> -->
+                </staticText>
+            </frame>
+
+            <!-- Línea negra entre la primera y segunda columna -->
+            <line>
+                <reportElement x="198" y="0" width="1" height="60" forecolor="#000000"/> <!-- Línea negra vertical -->
+            </line>
+
+            <!-- Segunda columna (Título del reporte) -->
+            <frame>
+                <reportElement x="198" y="0" width="198" height="60" forecolor="#000000"/> <!-- Añadir borde con color negro -->
+                <staticText>
+                    <reportElement x="0" y="10" width="198" height="40"/>
+                    <textElement textAlignment="Center" verticalAlignment="Middle">
+                        <font size="14" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[HISTORIA CLÍNICA UNIFICADA]]></text>
+                </staticText>
+            </frame>
+
+            <!-- Línea negra entre la segunda y tercera columna -->
+            <line>
+                <reportElement x="396" y="0" width="1" height="60" forecolor="#000000"/> <!-- Línea negra vertical -->
+            </line>
+
+            <!-- Tercera columna (Código, versión, fecha y número de página) -->
+            <frame>
+                <reportElement x="396" y="0" width="198" height="60" forecolor="#000000"/> <!-- Mantener el marco en su lugar -->
+
+                <!-- CÓDIGO -->
+                <staticText>
+                    <reportElement x="5" y="5" width="193" height="12"/> <!-- Ajustar ancho y posición -->
+                    <textElement textAlignment="Left"> <!-- Alinear el texto a la izquierda -->
+                        <font size="8" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[CÓDIGO: F – VS – 66]]></text>
+                </staticText>
+
+                <!-- VERSIÓN -->
+                <staticText>
+                    <reportElement x="5" y="18" width="193" height="12"/> <!-- Ajustar ancho y posición -->
+                    <textElement textAlignment="Left"> <!-- Alinear el texto a la izquierda -->
+                        <font size="8" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[VERSIÓN: 01]]></text>
+                </staticText>
+
+                <!-- FECHA DINÁMICA -->
+                <textField>
+                    <reportElement x="5" y="31" width="193" height="12"/> <!-- Ajustar ancho y posición -->
+                    <textElement textAlignment="Left"> <!-- Alinear el texto a la izquierda -->
+                        <font size="8" isBold="true"/>
+                    </textElement>
+                    <!-- Usar SimpleDateFormat para generar la fecha actual -->
+                    <textFieldExpression><![CDATA[new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date())]]></textFieldExpression>
+                </textField>
+
+                <!-- PÁGINA -->
+                <textField>
+                    <reportElement x="5" y="44" width="193" height="12"/> <!-- Ajustar ancho y posición -->
+                    <textElement textAlignment="Left"> <!-- Alinear el texto a la izquierda -->
+                        <font size="8" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA["Página " + $V{PAGE_NUMBER}]]></textFieldExpression>
+                </textField>
+            </frame>
+        </band>
+    </pageHeader>
+
+    <!-- Banda de detalles -->
+    <detail>
+
+        <!-- Nueva banda con diseño ajustado e imagen del paciente -->
+        <band height="570">
+            <!-- Contenedor General -->
+            <rectangle>
+                <reportElement x="0" y="0" width="555" height="500" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+            </rectangle>
+
+            <!-- Sección A. DATOS PERSONALES -->
+            <staticText>
+                <reportElement x="10" y="5" width="535" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[A. DATOS PERSONALES]]></text>
+            </staticText>
+
+            <!-- Fecha de Apertura -->
+            <rectangle>
+                <reportElement x="10" y="25" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="27" width="120" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Fecha de Apertura:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="140" y="27" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.fechaApertura}]]></textFieldExpression>
+            </textField>
+
+            <!-- Imagen del Paciente -->
+            <rectangle>
+                <reportElement x="380" y="25" width="150" height="160" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="380" y="10" width="150" height="15"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[Imagen del Paciente:]]></text>
+            </staticText>
+            <image scaleImage="FillFrame" onErrorType="Blank">
+                <reportElement x="380" y="30" width="150" height="150"/>
+                <imageExpression class="java.io.InputStream">
+                    <![CDATA[$P{imagenPaciente} != null ? $P{imagenPaciente} : new java.net.URL("https://thumbs.dreamstime.com/b/icono-de-usuario-personas-vectoriales-vector-perfil-ilustraci%C3%B3n-persona-comercial-s%C3%ADmbolo-grupo-usuarios-masculino-195160429.jpg").openStream()]]>
+                </imageExpression>
+            </image>
+
+            <!-- Nombres y Apellidos -->
+            <rectangle>
+                <reportElement x="10" y="50" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="52" width="120" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Nombres y Apellidos:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="140" y="52" width="220" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.nombresApellidos}]]></textFieldExpression>
+            </textField>
+
+            <!-- Ciudad -->
+            <rectangle>
+                <reportElement x="10" y="70" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="72" width="120" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Ciudad:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="140" y="72" width="220" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.ciudad}]]></textFieldExpression>
+            </textField>
+
+            <!-- Fecha de Nacimiento -->
+            <rectangle>
+                <reportElement x="10" y="90" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="92" width="120" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Fecha de Nacimiento:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="140" y="92" width="220" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.fechaNacimiento}]]></textFieldExpression>
+            </textField>
+
+            <!-- Edad -->
+            <rectangle>
+                <reportElement x="10" y="110" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="112" width="120" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Edad:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="140" y="112" width="50" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.edad}]]></textFieldExpression>
+            </textField>
+
+            <!-- Cédula -->
+            <rectangle>
+                <reportElement x="10" y="130" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="132" width="120" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Cédula:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="140" y="132" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.cedula}]]></textFieldExpression>
+            </textField>
+
+            <!-- Domicilio -->
+            <rectangle>
+                <reportElement x="10" y="150" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="152" width="120" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Domicilio:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="140" y="152" width="220" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.domicilio}]]></textFieldExpression>
+            </textField>
+
+            <!-- Teléfono -->
+            <rectangle>
+                <reportElement x="10" y="170" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="172" width="120" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Teléfono:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="140" y="172" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.telefono}]]></textFieldExpression>
+            </textField>
+
+            <!-- Celular -->
+            <rectangle>
+                <reportElement x="10" y="190" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="192" width="120" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Celular:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="140" y="192" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.celular}]]></textFieldExpression>
+            </textField>
+
+            <!-- Proyecto -->
+            <rectangle>
+                <reportElement x="10" y="210" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="212" width="120" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Proyecto:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="140" y="212" width="220" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.proyecto}]]></textFieldExpression>
+            </textField>
+
+            <!-- Año de Educación -->
+            <rectangle>
+                <reportElement x="10" y="230" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="232" width="120" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Año de Educación:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="140" y="232" width="220" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.anioEducacion}]]></textFieldExpression>
+            </textField>
+
+            <!-- Paralelo -->
+            <rectangle>
+                <reportElement x="10" y="250" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="252" width="120" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Paralelo:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="140" y="252" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.paralelo}]]></textFieldExpression>
+            </textField>
+
+            <!-- Pertenece a Inclusión -->
+            <rectangle>
+                <reportElement x="10" y="270" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="272" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Pertenece a Inclusión:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="160" y="272" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.perteneceInclusion}]]></textFieldExpression>
+            </textField>
+
+            <!-- Tiene Discapacidad -->
+            <rectangle>
+                <reportElement x="10" y="290" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="292" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Tiene Discapacidad:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="160" y="292" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.tieneDiscapacidad}]]></textFieldExpression>
+            </textField>
+
+            <!-- Portador de Carnet -->
+            <rectangle>
+                <reportElement x="10" y="310" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="312" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Portador de Carnet:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="160" y="312" width="50" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.portadorCarnet} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Diagnóstico -->
+            <rectangle>
+                <reportElement x="380" y="310" width="200" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="385" y="312" width="100" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Diagnóstico:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="480" y="312" width="80" height="15"/> <!-- Ancho ajustado -->
+                <textFieldExpression><![CDATA[$F{paciente.diagnostico}]]></textFieldExpression>
+            </textField>
+
+            <!-- Observaciones -->
+            <rectangle>
+                <reportElement x="10" y="330" width="540" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="332" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Observaciones:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="160" y="332" width="385" height="15"/> <!-- Ancho ajustado -->
+                <textFieldExpression><![CDATA[$F{paciente.observaciones}]]></textFieldExpression>
+            </textField>
+
+            <!-- Tipo de Discapacidad -->
+            <rectangle>
+                <reportElement x="10" y="350" width="540" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="352" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Tipo de Discapacidad:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="160" y="352" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.tipoDiscapacidad}]]></textFieldExpression>
+            </textField>
+
+            <!-- Detalle de Discapacidad -->
+            <rectangle>
+                <reportElement x="10" y="370" width="540" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="372" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Detalle de Discapacidad:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="160" y="372" width="385" height="15"/> <!-- Ancho ajustado -->
+                <textFieldExpression><![CDATA[$F{paciente.detalleDiscapacidad}]]></textFieldExpression>
+            </textField>
+
+            <!-- Porcentaje de Discapacidad -->
+            <rectangle>
+                <reportElement x="10" y="390" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="392" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Porcentaje de Discapacidad:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="160" y="392" width="50" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.porcentajeDiscapacidad}]]></textFieldExpression>
+            </textField>
+
+            <!-- Institución Educativa -->
+            <rectangle>
+                <reportElement x="10" y="410" width="540" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="412" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Institución Educativa:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="160" y="412" width="385" height="15"/> <!-- Ancho ajustado -->
+                <textFieldExpression><![CDATA[$F{paciente.institucionEducativa.nombreInstitucion}]]></textFieldExpression>
+            </textField>
+
+            <!-- Jornada -->
+            <rectangle>
+                <reportElement x="10" y="430" width="540" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="432" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Jornada:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="160" y="432" width="385" height="15"/> <!-- Ancho ajustado -->
+                <textFieldExpression><![CDATA[$F{paciente.jornada.nombreJornada}]]></textFieldExpression>
+            </textField>
+
+            <!-- Sede -->
+            <rectangle>
+                <reportElement x="10" y="450" width="540" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="452" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Sede:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="160" y="452" width="385" height="15"/> <!-- Ancho ajustado -->
+                <textFieldExpression><![CDATA[$F{paciente.sede.nombre}]]></textFieldExpression>
+            </textField>
+        </band>
+
+        <!-- Banda para la Sección Características del habla -->
+        <band height="240">
+            <!-- Contenedor General -->
+            <rectangle>
+                <reportElement x="0" y="0" width="555" height="230" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+            </rectangle>
+
+            <!-- Sección Características del habla -->
+            <staticText>
+                <reportElement x="10" y="5" width="535" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Características del habla]]></text>
+            </staticText>
+
+            <!-- Dificultad para pronunciar palabras -->
+            <rectangle>
+                <reportElement x="10" y="25" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="27" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Dificultad para pronunciar palabras:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="27" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{dificultadPronunciarPalabras} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Se traba cuando habla -->
+            <rectangle>
+                <reportElement x="10" y="50" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="52" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Se traba cuando habla:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="52" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{seTrabaCuandoHabla} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Se entiende lo que dice -->
+            <rectangle>
+                <reportElement x="10" y="75" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="77" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Se entiende lo que dice:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="77" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{seEntiendeLoQueDice} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Sabe cómo llaman a los objetos de su entorno -->
+            <rectangle>
+                <reportElement x="10" y="100" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="102" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Sabe cómo llaman a los objetos de su entorno:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="102" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{sabeComoLlamanObjetosEntorno} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Comprende lo que se le dice -->
+            <rectangle>
+                <reportElement x="10" y="125" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="127" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Comprende lo que se le dice:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="127" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{comprendeLoQueSeLeDice} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Reconoce la fuente sonora -->
+            <rectangle>
+                <reportElement x="10" y="150" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="152" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Reconoce la fuente sonora:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="152" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{reconoceFuenteSonora} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Comunicación preferentemente en forma -->
+            <rectangle>
+                <reportElement x="10" y="175" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="177" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Comunicación preferentemente en forma:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="177" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{comunicacionPreferentementeForma}]]></textFieldExpression>
+            </textField>
+
+            <!-- Se ha realizado examen audiológico -->
+            <rectangle>
+                <reportElement x="10" y="200" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="202" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Se ha realizado examen audiológico:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="202" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{seARealizadoExamenAudiologico} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+        </band>
+
+        <!-- Banda para la Sección Diagnóstico audiológico -->
+        <band height="180">
+            <!-- Contenedor General -->
+            <rectangle>
+                <reportElement x="0" y="0" width="555" height="170" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+            </rectangle>
+
+            <!-- Sección Diagnóstico audiológico -->
+            <staticText>
+                <reportElement x="10" y="5" width="535" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Diagnóstico audiológico]]></text>
+            </staticText>
+
+            <!-- Pérdida Auditiva Conductiva Neurosensorial -->
+            <rectangle>
+                <reportElement x="10" y="25" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="27" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Pérdida Auditiva Conductiva Neurosensorial:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="27" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{perdidaAuditivaConductivaNeurosensorial} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Hipoacusia Conductiva Bilateral -->
+            <rectangle>
+                <reportElement x="10" y="50" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="52" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Hipoacusia Conductiva Bilateral:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="52" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{hipoacusiaConductivaBilateral} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Hipoacusia Conductiva Unilateral -->
+            <rectangle>
+                <reportElement x="10" y="75" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="77" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Hipoacusia Conductiva Unilateral:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="77" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{hipoacusiaConductivaUnilateral} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Hipoacusia Neurosensorial Bilateral -->
+            <rectangle>
+                <reportElement x="10" y="100" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="102" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Hipoacusia Neurosensorial Bilateral:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="102" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{hipoacusiaNeurosensorialBilateral} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Hipoacusia Neurosensorial Unilateral -->
+            <rectangle>
+                <reportElement x="10" y="125" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="127" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Hipoacusia Neurosensorial Unilateral:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="127" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{hipoacusiaNeurosensorialUnilateral} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+        </band>
+
+        <!-- Banda para la Sección Diagnóstico fonoaudiológico previo -->
+        <band height="420">
+            <!-- Contenedor General -->
+            <rectangle>
+                <reportElement x="0" y="0" width="555" height="410" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+            </rectangle>
+
+            <!-- Sección Diagnóstico fonoaudiológico previo -->
+            <staticText>
+                <reportElement x="10" y="5" width="535" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Diagnóstico fonoaudiológico previo]]></text>
+            </staticText>
+
+            <!-- Trastorno Específico de Pronunciación -->
+            <rectangle>
+                <reportElement x="10" y="25" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="27" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Trastorno Específico de Pronunciación:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="27" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{trastornoEspecificoPronunciacion} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Trastorno del Lenguaje Expresivo -->
+            <rectangle>
+                <reportElement x="10" y="50" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="52" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Trastorno del Lenguaje Expresivo:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="52" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{trastornoLenguajeExpresivo} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Afasia Adquirida con Epilepsia -->
+            <rectangle>
+                <reportElement x="10" y="75" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="77" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Afasia Adquirida con Epilepsia:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="77" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{afasiaAdquiridaEpilepsia} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Otros Trastornos del Desarrollo del Habla -->
+            <rectangle>
+                <reportElement x="10" y="100" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="102" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Otros Trastornos del Desarrollo del Habla:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="102" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{otrosTrastornosDesarrolloHabla} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Trastorno del Desarrollo del Habla y Lenguaje -->
+            <rectangle>
+                <reportElement x="10" y="125" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="127" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Trastorno del Desarrollo del Habla y Lenguaje:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="127" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{trastornoDesarrolloHablaLenguaje} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Trastorno de Recepción del Lenguaje -->
+            <rectangle>
+                <reportElement x="10" y="150" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="152" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Trastorno de Recepción del Lenguaje:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="152" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{trastornoRecepcionLenguaje} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Alteraciones en el Habla -->
+            <rectangle>
+                <reportElement x="10" y="175" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="177" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Alteraciones en el Habla:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="177" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{alteracionesHabla} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Disfasia/Afasia -->
+            <rectangle>
+                <reportElement x="10" y="200" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="202" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Disfasia/Afasia:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="202" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{disfasiaAfasia} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Disartria/Anartria -->
+            <rectangle>
+                <reportElement x="10" y="225" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="227" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Disartria/Anartria:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="227" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{disartriaAnartria} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Otras Alteraciones del Habla -->
+            <rectangle>
+                <reportElement x="10" y="250" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="252" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Otras Alteraciones del Habla:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="252" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{otrasAlteracionesHabla} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Ha Tenido Pérdida de Audición en el Pasado -->
+            <rectangle>
+                <reportElement x="10" y="275" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="277" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Ha Tenido Pérdida de Audición en el Pasado:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="277" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{aTenidoPerdidaAudicionPasado} != null && $F{aTenidoPerdidaAudicionPasado} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Infecciones de Oído Fuertes -->
+            <rectangle>
+                <reportElement x="10" y="300" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="302" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Infecciones de Oído Fuertes:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="302" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{infeccionesOidoFuertes} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Cuáles Infecciones de Oído Fuertes -->
+            <rectangle>
+                <reportElement x="10" y="325" width="360" height="40" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="327" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Cuáles Infecciones de Oído Fuertes:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="327" width="320" height="35"/> <!-- Ajuste para mayor espacio de texto -->
+                <textFieldExpression><![CDATA[$F{cualInfeccionesOidoFuertes}]]></textFieldExpression>
+            </textField>
+
+            <!-- Edad en que Ocurrieron las Infecciones de Oído Fuertes -->
+            <rectangle>
+                <reportElement x="10" y="375" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="377" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Edad en que Ocurrieron las Infecciones de Oído Fuertes:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="377" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{edadInfeccionesOidoFuertes}]]></textFieldExpression>
+            </textField>
+
+        </band>
+
+        <!-- Banda para la Sección Fonación -->
+        <band height="620">
+            <!-- Contenedor General -->
+            <rectangle>
+                <reportElement x="0" y="0" width="555" height="610" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+            </rectangle>
+
+            <!-- Sección Fonación -->
+            <staticText>
+                <reportElement x="10" y="5" width="535" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Fonación]]></text>
+            </staticText>
+
+            <!-- Cree que el Tono de Voz del Estudiante es Apropiado -->
+            <rectangle>
+                <reportElement x="10" y="25" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="27" width="250" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Cree que el Tono de Voz del Estudiante es Apropiado:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="265" y="27" width="100" height="15"/>
+                <textFieldExpression><![CDATA[$F{creeTonoVozEstudianteApropiado} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Respiración Normal -->
+            <rectangle>
+                <reportElement x="10" y="50" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="52" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Respiración Normal:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="52" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{respiracionNormal} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Situaciones que Alteran el Tono de Voz -->
+            <rectangle>
+                <reportElement x="10" y="75" width="535" height="60" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="77" width="250" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Situaciones que Alteran el Tono de Voz:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="15" y="92" width="515" height="40"/>
+                <textFieldExpression><![CDATA[$F{situacionesAlteraTonoVoz}]]></textFieldExpression>
+            </textField>
+
+            <!-- Desde Cuándo Presenta Alteraciones en la Voz -->
+            <rectangle>
+                <reportElement x="10" y="140" width="535" height="60" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="142" width="250" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Desde Cuándo Presenta Alteraciones en la Voz:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="15" y="157" width="515" height="40"/>
+                <textFieldExpression><![CDATA[$F{desdeCuandoAlteracionesVoz}]]></textFieldExpression>
+            </textField>
+
+            <!-- Tono de Voz -->
+            <rectangle>
+                <reportElement x="10" y="210" width="535" height="60" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="212" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Tono de Voz:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="15" y="227" width="515" height="40"/>
+                <textFieldExpression><![CDATA[$F{tonoDeVoz}]]></textFieldExpression>
+            </textField>
+
+            <!-- Respiración -->
+            <rectangle>
+                <reportElement x="10" y="280" width="535" height="60" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="282" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Respiración:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="15" y="297" width="515" height="40"/>
+                <textFieldExpression><![CDATA[$F{respiracion}]]></textFieldExpression>
+            </textField>
+
+            <!-- Ronca -->
+            <rectangle>
+                <reportElement x="10" y="350" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="352" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Ronca:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="352" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{ronca} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Juego Vocal -->
+            <rectangle>
+                <reportElement x="10" y="375" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="377" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Juego Vocal:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="377" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{juegoVocal} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Vocalización -->
+            <rectangle>
+                <reportElement x="10" y="400" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="402" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Vocalización:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="402" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{vocalizacion} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Balbuceo -->
+            <rectangle>
+                <reportElement x="10" y="425" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="427" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Balbuceo:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="427" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{balbuceo} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Silabeo -->
+            <rectangle>
+                <reportElement x="10" y="450" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="452" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Silabeo:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="452" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{silabeo} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Primeras Palabras -->
+            <rectangle>
+                <reportElement x="10" y="475" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="477" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Primeras Palabras:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="477" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{primerasPalabras} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Oraciones de Dos Palabras -->
+            <rectangle>
+                <reportElement x="10" y="500" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="502" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Oraciones de Dos Palabras:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="502" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{oracionesDosPalabras} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Oraciones de Tres Palabras -->
+            <rectangle>
+                <reportElement x="10" y="525" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="527" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Oraciones de Tres Palabras:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="527" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{oracionesTresPalabras} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Formación Lingüística Completa -->
+            <rectangle>
+                <reportElement x="10" y="550" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="552" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Formación Lingüística Completa:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="552" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{formacionLinguisticaCompleta} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Número Total de Palabras -->
+            <rectangle>
+                <reportElement x="10" y="575" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="577" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Número Total de Palabras:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="577" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{numeroTotalPalabras}]]></textFieldExpression>
+            </textField>
+        </band>
+
+        <!-- Banda para la Sección Historia clínica Audición -->
+        <band height="1600">
+            <!-- Contenedor General -->
+            <rectangle>
+                <reportElement x="0" y="0" width="555" height="1490" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+            </rectangle>
+
+            <!-- Sección Historia clínica Audición -->
+            <staticText>
+                <reportElement x="10" y="5" width="535" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Historia clínica Audición]]></text>
+            </staticText>
+
+            <!-- Pérdida Auditiva -->
+            <rectangle>
+                <reportElement x="10" y="25" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="27" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Pérdida Auditiva:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="27" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{perdidaAuditiva} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Unilateral -->
+            <rectangle>
+                <reportElement x="10" y="50" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="52" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Unilateral:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="52" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{unilateral} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Oído Derecho -->
+            <rectangle>
+                <reportElement x="10" y="75" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="77" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Oído Derecho:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="77" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{oidoDerecho} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Oído Izquierdo -->
+            <rectangle>
+                <reportElement x="10" y="100" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="102" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Oído Izquierdo:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="102" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{oidoIzquierdo} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Bilateral -->
+            <rectangle>
+                <reportElement x="10" y="125" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="127" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Bilateral:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="127" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{bilateral} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Grado de Pérdida -->
+            <rectangle>
+                <reportElement x="10" y="150" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="152" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Grado de Pérdida:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="152" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{gradoPerdida}]]></textFieldExpression>
+            </textField>
+
+            <!-- Permanencia -->
+            <rectangle>
+                <reportElement x="10" y="175" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="177" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Permanencia:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="177" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{permanecia}]]></textFieldExpression>
+            </textField>
+
+            <!-- Otitis -->
+            <rectangle>
+                <reportElement x="10" y="200" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="202" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Otitis:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="202" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{otitis} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Tipo de Otitis -->
+            <rectangle>
+                <reportElement x="10" y="225" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="227" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Tipo de Otitis:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="227" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{tipoOtitis}]]></textFieldExpression>
+            </textField>
+
+            <!-- Duración de Otitis (Inicio) -->
+            <rectangle>
+                <reportElement x="10" y="250" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="252" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Duración de Otitis (Inicio):]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="252" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{duracionOtitisInicio}]]></textFieldExpression>
+            </textField>
+
+            <!-- Duración de Otitis (Fin) -->
+            <rectangle>
+                <reportElement x="10" y="275" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="277" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Duración de Otitis (Fin):]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="277" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{duracionOtitisFin}]]></textFieldExpression>
+            </textField>
+
+            <!-- Antecedentes Familiares -->
+            <rectangle>
+                <reportElement x="10" y="300" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="302" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Antecedentes Familiares:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="302" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{antecedentesFamiliares} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Exposición a Ruidos -->
+            <rectangle>
+                <reportElement x="10" y="325" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="327" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Exposición a Ruidos:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="327" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{exposisionRuidos} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Duración Exposición a Ruidos (Inicio) -->
+            <rectangle>
+                <reportElement x="10" y="350" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="352" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Duración Exposición a Ruidos (Inicio):]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="352" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{duracionExposisionRuidosInicio}]]></textFieldExpression>
+            </textField>
+
+            <!-- Duración Exposición a Ruidos (Fin) -->
+            <rectangle>
+                <reportElement x="10" y="375" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="377" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Duración Exposición a Ruidos (Fin):]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="377" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{duracionExposisionRuidosFin}]]></textFieldExpression>
+            </textField>
+
+            <!-- Ototóxicos -->
+            <rectangle>
+                <reportElement x="10" y="400" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="402" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Ototóxicos:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="402" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{ototoxicos} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Infecciones -->
+            <rectangle>
+                <reportElement x="10" y="425" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="427" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Infecciones:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="427" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{infecciones} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Uso de Audífonos -->
+            <rectangle>
+                <reportElement x="10" y="450" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="452" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Uso de Audífonos:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="452" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{usoAudifonos} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Inicio Uso de Audífonos -->
+            <rectangle>
+                <reportElement x="10" y="475" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="477" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Inicio Uso de Audífonos:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="477" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{inicioUsoAudifonos}]]></textFieldExpression>
+            </textField>
+
+            <!-- Fin Uso de Audífonos -->
+            <rectangle>
+                <reportElement x="10" y="500" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="502" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Fin Uso de Audífonos:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="502" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{finUsoAudifonos}]]></textFieldExpression>
+            </textField>
+
+            <!-- Implante Coclear -->
+            <rectangle>
+                <reportElement x="10" y="525" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="527" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Implante Coclear:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="527" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{implanteCoclear} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Tratamiento Fonoaudiológico Previo -->
+            <rectangle>
+                <reportElement x="10" y="550" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="552" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Tratamiento Fonoaudiológico Previo:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="552" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{tratamientoFonoaudiologicoPrevio} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Otalgia -->
+            <rectangle>
+                <reportElement x="10" y="575" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="577" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Otalgia:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="577" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{otalgia} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Otalgia Unilateral -->
+            <rectangle>
+                <reportElement x="10" y="600" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="602" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Otalgia Unilateral:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="602" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{otalgiaUnilateral} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Otalgia Oído Derecho -->
+            <rectangle>
+                <reportElement x="10" y="625" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="627" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Otalgia Oído Derecho:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="627" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{otalgiaOidoDerecho} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Otalgia Oído Izquierdo -->
+            <rectangle>
+                <reportElement x="10" y="650" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="652" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Otalgia Oído Izquierdo:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="652" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{otalgiaOidoIzquierdo} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Otalgia Bilateral -->
+            <rectangle>
+                <reportElement x="10" y="675" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="677" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Otalgia Bilateral:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="677" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{otalgiaBilateral} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Permanencia Otalgia Continua -->
+            <rectangle>
+                <reportElement x="10" y="700" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="702" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Permanencia Otalgia Continua:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="702" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{permanenciaOtalgiaContinua} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Permanencia Otalgia Intermitente -->
+            <rectangle>
+                <reportElement x="10" y="725" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="727" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Permanencia Otalgia Intermitente:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="727" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{permanenciaOtalgiaIntermitente} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Grado Permanencia Otalgia -->
+            <rectangle>
+                <reportElement x="10" y="750" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="752" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Grado Permanencia Otalgia:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="752" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{gradoPermanenciaOtalgia}]]></textFieldExpression>
+            </textField>
+
+            <!-- Asociada a Infección Respiratoria Alta -->
+            <rectangle>
+                <reportElement x="10" y="775" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="777" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Asociada a Infección Respiratoria Alta:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="777" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{asociadaOtalgiaInfeccionRespiratoriaAlta} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Infección Respiratoria Punzante -->
+            <rectangle>
+                <reportElement x="10" y="800" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="802" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Infección Respiratoria Punzante:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="802" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{infeccionRespiratoriaPunzante} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Infección Respiratoria Pulsátil -->
+            <rectangle>
+                <reportElement x="10" y="825" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="827" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Infección Respiratoria Pulsátil:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="827" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{infeccionRespiratoriaPulsatil} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Infección Respiratoria Progresivo -->
+            <rectangle>
+                <reportElement x="10" y="850" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="852" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Infección Respiratoria Progresivo:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="852" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{infeccionRespiratoriaProgresivo} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Infección Respiratoria Opresivo -->
+            <rectangle>
+                <reportElement x="10" y="875" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="877" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Infección Respiratoria Opresivo:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="877" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{infeccionRespiratoriaOpresivo} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Pruriginoso -->
+            <rectangle>
+                <reportElement x="10" y="900" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="902" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Pruriginoso:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="902" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{pruriginoso} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Aumenta al Masticar -->
+            <rectangle>
+                <reportElement x="10" y="925" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="927" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Aumenta al Masticar:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="927" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{aumentaMasticar} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Disminuye con Calor Local -->
+            <rectangle>
+                <reportElement x="10" y="950" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="952" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Disminuye con Calor Local:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="952" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{disminuyeConCalorLocal} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Aumenta con Calor Local -->
+            <rectangle>
+                <reportElement x="10" y="975" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="977" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Aumenta con Calor Local:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="977" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{aumentaConCalorLocal} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Otorrea -->
+            <rectangle>
+                <reportElement x="10" y="1000" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="1002" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Otorrea:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="1002" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{otorrea} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Otorrea Unilateral -->
+            <rectangle>
+                <reportElement x="10" y="1025" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="1027" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Otorrea Unilateral:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="1027" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{otorreaUnilateral} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Otorrea Oído Derecho -->
+            <rectangle>
+                <reportElement x="10" y="1050" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="1052" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Otorrea Oído Derecho:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="1052" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{otorreaOidoDerecho} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Otorrea Oído Izquierdo -->
+            <rectangle>
+                <reportElement x="10" y="1075" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="1077" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Otorrea Oído Izquierdo:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="1077" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{otorreaOidoIzquierdo} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Otorrea Bilateral -->
+            <rectangle>
+                <reportElement x="10" y="1100" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="1102" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Otorrea Bilateral:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="1102" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{otorreaBilateral} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Permanencia Otorrea Continua -->
+            <rectangle>
+                <reportElement x="10" y="1125" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="1127" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Permanencia Otorrea Continua:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="1127" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{permanenciaOtorreaContinua} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Permanencia Otorrea Intermitente -->
+            <rectangle>
+                <reportElement x="10" y="1150" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="1152" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Permanencia Otorrea Intermitente:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="1152" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{permanenciaOtorreaIntermitente} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Grado Permanencia Otorrea -->
+            <rectangle>
+                <reportElement x="10" y="1175" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="1177" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Grado Permanencia Otorrea:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="1177" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{gradoPermanenciaOtorrea}]]></textFieldExpression>
+            </textField>
+
+            <!-- Aspecto Claro Otorrea -->
+            <rectangle>
+                <reportElement x="10" y="1200" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="1202" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Aspecto Claro Otorrea:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="1202" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{aspectoClaroOtorrea} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Aspecto Seroso Otorrea -->
+            <rectangle>
+                <reportElement x="10" y="1225" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="1227" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Aspecto Seroso Otorrea:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="1227" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{aspectoSerosoOtorrea} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Aspecto Mucoso Otorrea -->
+            <rectangle>
+                <reportElement x="10" y="1250" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="1252" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Aspecto Mucoso Otorrea:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="1252" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{aspectoMucosoOtorrea} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Aspecto Mucopurulento Otorrea -->
+            <rectangle>
+                <reportElement x="10" y="1275" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="1277" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Aspecto Mucopurulento Otorrea:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="1277" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{aspectoMucopurulentoOtorrea} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Aspecto Purulento Otorrea -->
+            <rectangle>
+                <reportElement x="10" y="1300" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="1302" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Aspecto Purulento Otorrea:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="1302" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{aspectoPurulentoOtorrea} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Aspecto Sanguinolento Otorrea -->
+            <rectangle>
+                <reportElement x="10" y="1325" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="1327" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Aspecto Sanguinolento Otorrea:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="1327" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{aspectoSanguinolentoOtorrea} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Asociada Otorrea Infección Respiratoria Alta -->
+            <rectangle>
+                <reportElement x="10" y="1350" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="1352" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Asociada Otorrea Infección Respiratoria Alta:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="1352" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{asosiadaOtorreaInfeccionRespiratoriaAlta} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Asociada Otorrea Infección Aguda Oído -->
+            <rectangle>
+                <reportElement x="10" y="1375" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="1377" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Asociada Otorrea Infección Aguda Oído:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="1377" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{asosiadaotorreaInfeccionAgudaOido} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+        </band>
+
+        <!-- Banda para la Sección Antecedentes Auditivos -->
+        <band height="1400">
+            <!-- Contenedor General -->
+            <rectangle>
+                <reportElement x="0" y="0" width="555" height="1370" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+            </rectangle>
+
+            <!-- Título de la Sección -->
+            <staticText>
+                <reportElement x="10" y="5" width="535" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Antecedentes Auditivos]]></text>
+            </staticText>
+
+            <!-- Presentó Otalgia -->
+            <rectangle>
+                <reportElement x="10" y="25" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="27" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Presentó Otalgia:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="27" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{presentoOtalgia} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Presentó Otalgia Bilateral -->
+            <rectangle>
+                <reportElement x="10" y="50" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="52" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Presentó Otalgia Bilateral:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="52" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{presentoOtalgiaBilateral} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Presentó Otalgia Oído Derecho -->
+            <rectangle>
+                <reportElement x="10" y="75" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="77" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Presentó Otalgia Oído Derecho:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="77" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{presentoOtalgiaOidoDerecho} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Presentó Otalgia Oído Izquierdo -->
+            <rectangle>
+                <reportElement x="10" y="100" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="102" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Presentó Otalgia Oído Izquierdo:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="102" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{presentoOtalgiaOidoIzquierdo} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Presentó Sensación de Oído Tapado -->
+            <rectangle>
+                <reportElement x="10" y="125" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="127" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Presentó Sensación de Oído Tapado:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="127" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{presentoSensacionOidoTapado} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Presentó Sensación de Oído Tapado Bilateral -->
+            <rectangle>
+                <reportElement x="10" y="150" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="152" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Presentó Sensación de Oído Tapado Bilateral:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="152" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{presentoSensacionOidoTapadoBilateral} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Presentó Sensación de Oído Tapado Oído Derecho -->
+            <rectangle>
+                <reportElement x="10" y="175" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="177" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Presentó Sensación de Oído Tapado Oído Derecho:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="177" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{presentoSensacionOidoTapadoOidoDerecho} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Presentó Sensación de Oído Tapado Oído Izquierdo -->
+            <rectangle>
+                <reportElement x="10" y="200" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="202" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Presentó Sensación de Oído Tapado Oído Izquierdo:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="202" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{presentoSensacionOidoTapadoOidoIzquierdo} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Presentó Autofonía -->
+            <rectangle>
+                <reportElement x="10" y="225" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="227" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Presentó Autofonía:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="227" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{presentoAutofonia} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Presentó Autofonía Bilateral -->
+            <rectangle>
+                <reportElement x="10" y="250" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="252" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Presentó Autofonía Bilateral:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="252" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{presentoAutofoniaBilateral} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Presentó Autofonía Oído Derecho -->
+            <rectangle>
+                <reportElement x="10" y="275" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="277" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Presentó Autofonía Oído Derecho:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="277" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{presentoAutofoniaOidoDerecho} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Presentó Autofonía Oído Izquierdo -->
+            <rectangle>
+                <reportElement x="10" y="300" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="302" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Presentó Autofonía Oído Izquierdo:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="302" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{presentoAutofoniaOidoIzquierdo} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Presentó Otorrea -->
+            <rectangle>
+                <reportElement x="10" y="325" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="327" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Presentó Otorrea:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="327" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{presentoOtorrea} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Presentó Otorrea Bilateral -->
+            <rectangle>
+                <reportElement x="10" y="350" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="352" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Presentó Otorrea Bilateral:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="352" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{presentoOtorreaBilateral} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Presentó Otorrea Oído Derecho -->
+            <rectangle>
+                <reportElement x="10" y="375" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="377" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Presentó Otorrea Oído Derecho:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="377" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{presentoOtorreaOidoDerecho} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Presentó Otorrea Oído Izquierdo -->
+            <rectangle>
+                <reportElement x="10" y="400" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="402" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Presentó Otorrea Oído Izquierdo:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="402" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{presentoOtorreaOidoIzquierdo} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Aumenta Volumen de la TV -->
+            <rectangle>
+                <reportElement x="10" y="425" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="427" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Aumenta Volumen de la TV:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="427" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{aumentaVolumenTV} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Sensación de Percibir Tinnitus -->
+            <rectangle>
+                <reportElement x="10" y="450" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="452" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Sensación de Percibir Tinnitus:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="452" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{sensacionPercibirTinnitus} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Expuesto a Ruidos Fuertes -->
+            <rectangle>
+                <reportElement x="10" y="475" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="477" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Expuesto a Ruidos Fuertes:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="477" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{expuestoRuidosFuertes} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Dificultad para Oír Voz Baja -->
+            <rectangle>
+                <reportElement x="10" y="500" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="502" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Dificultad para Oír Voz Baja:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="502" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{dificultadOidVozBaja} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Habla Más Fuerte o Más Despacio -->
+            <rectangle>
+                <reportElement x="10" y="525" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="527" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Habla Más Fuerte o Más Despacio:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="527" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{hablaMasFuerteOMasDespacio} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Utiliza Ayuda Auditiva -->
+            <rectangle>
+                <reportElement x="10" y="550" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="552" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Utiliza Ayuda Auditiva:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="552" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{utilizaAyudaAuditiva} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Especificar Ayuda Auditiva -->
+            <rectangle>
+                <reportElement x="10" y="575" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="577" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Especificar Ayuda Auditiva:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="577" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{especficarAyudaAuditiva}]]></textFieldExpression>
+            </textField>
+
+            <!-- Percibe Sonido Igual en Ambos Oídos -->
+            <rectangle>
+                <reportElement x="10" y="600" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="602" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Percibe Sonido Igual en Ambos Oídos:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="602" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{percibeSonidoIgualAmbosOidos} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Con Qué Oído Escucha Mejor -->
+            <rectangle>
+                <reportElement x="10" y="625" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="627" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Con Qué Oído Escucha Mejor:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="627" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{conQueOidoEscuchaMejor}]]></textFieldExpression>
+            </textField>
+
+            <!-- Hace Cuánto Tiempo Presenta Síntomas Auditivos -->
+            <rectangle>
+                <reportElement x="10" y="650" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="652" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Hace Cuánto Tiempo Presenta Síntomas Auditivos:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="652" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{haceCuantoTiempoPresentaSintomasAuditivos}]]></textFieldExpression>
+            </textField>
+
+        </band>
+
+        <!-- Banda para la Sección de Antecedentes Vestibulares -->
+        <band height="150">
+            <!-- Contenedor General -->
+            <rectangle>
+                <reportElement x="0" y="0" width="555" height="130" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+            </rectangle>
+
+            <!-- Sección: Antecedentes Vestibulares -->
+            <staticText>
+                <reportElement x="10" y="5" width="535" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Antecedentes Vestibulares]]></text>
+            </staticText>
+
+            <!-- Falta de Equilibrio al Caminar -->
+            <rectangle>
+                <reportElement x="10" y="25" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="27" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Falta de Equilibrio al Caminar:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="27" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{faltaEquilibrioCaminar} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Mareos -->
+            <rectangle>
+                <reportElement x="10" y="50" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="52" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Mareos:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="52" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{mareos} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Cuándo Ocurren los Mareos -->
+            <rectangle>
+                <reportElement x="10" y="75" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="77" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Cuándo Ocurren los Mareos:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="77" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{cuandoMareos}]]></textFieldExpression>
+            </textField>
+
+            <!-- Vértigo -->
+            <rectangle>
+                <reportElement x="10" y="100" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="102" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Vértigo:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="215" y="102" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{vertigo} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+        </band>
+
+        <!-- Banda para la Sección de Descripción de Otoscopia Oído Derecho -->
+        <band height="260">
+            <!-- Contenedor General -->
+            <rectangle>
+                <reportElement x="0" y="0" width="555" height="240" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+            </rectangle>
+
+            <!-- Sección: Descripción de Otoscopia Oído Derecho -->
+            <staticText>
+                <reportElement x="10" y="5" width="535" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Descripción de Otoscopia Oído Derecho]]></text>
+            </staticText>
+
+            <!-- Palpación del Pabellón Oído Derecho -->
+            <rectangle>
+                <reportElement x="10" y="25" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="27" width="250" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Palpación del Pabellón Oído Derecho:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="265" y="27" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{palpacionPabellonOidoDerecho}]]></textFieldExpression>
+            </textField>
+
+            <!-- Palpación de la Mastoides Oído Derecho -->
+            <rectangle>
+                <reportElement x="10" y="50" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="52" width="250" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Palpación de la Mastoides Oído Derecho:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="265" y="52" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{palpacionMastoidesOidoDerecho}]]></textFieldExpression>
+            </textField>
+
+            <!-- Conducto Auditivo Externo (CAE) Oído Derecho -->
+            <rectangle>
+                <reportElement x="10" y="75" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="77" width="250" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Conducto Auditivo Externo (CAE) Oído Derecho:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="265" y="77" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{caeOidoDerecho}]]></textFieldExpression>
+            </textField>
+
+            <!-- Obstrucción del Oído Derecho -->
+            <rectangle>
+                <reportElement x="10" y="100" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="102" width="250" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Obstrucción del Oído Derecho:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="265" y="102" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{obstruccionOidoDerecho}]]></textFieldExpression>
+            </textField>
+
+            <!-- Apariencia de la Membrana Timpánica Oído Derecho -->
+            <rectangle>
+                <reportElement x="10" y="125" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="127" width="250" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Apariencia de la Membrana Timpánica Oído Derecho:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="265" y="127" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{aparienciaMenbranaTimpanicaOidoDerecho}]]></textFieldExpression>
+            </textField>
+
+            <!-- Perforación del Oído Derecho -->
+            <rectangle>
+                <reportElement x="10" y="150" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="152" width="250" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Perforación del Oído Derecho:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="265" y="152" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{perforacionOidoDerecho} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Presencia de Burbuja en el Oído Derecho -->
+            <rectangle>
+                <reportElement x="10" y="175" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="177" width="250" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Presencia de Burbuja en el Oído Derecho:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="265" y="177" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{burbujaOidoDerecho} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Coloración del Oído Derecho -->
+            <rectangle>
+                <reportElement x="10" y="200" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="202" width="250" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Coloración del Oído Derecho:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="265" y="202" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{coloracionOidoDerecho}]]></textFieldExpression>
+            </textField>
+
+        </band>
+
+        <!-- Banda para la Sección de Descripción de Otoscopia Oído Izquierdo -->
+        <band height="260">
+            <!-- Contenedor General -->
+            <rectangle>
+                <reportElement x="0" y="0" width="555" height="240" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+            </rectangle>
+
+            <!-- Sección: Descripción de Otoscopia Oído Izquierdo -->
+            <staticText>
+                <reportElement x="10" y="5" width="535" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Descripción de Otoscopia Oído Izquierdo]]></text>
+            </staticText>
+
+            <!-- Palpación del Pabellón Oído Izquierdo -->
+            <rectangle>
+                <reportElement x="10" y="25" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="27" width="250" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Palpación del Pabellón Oído Izquierdo:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="265" y="27" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{palpacionPabellonOidoIzquierdo}]]></textFieldExpression>
+            </textField>
+
+            <!-- Palpación de la Mastoides Oído Izquierdo -->
+            <rectangle>
+                <reportElement x="10" y="50" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="52" width="250" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Palpación de la Mastoides Oído Izquierdo:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="265" y="52" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{palpacionMastoidesOidoIzquierdo}]]></textFieldExpression>
+            </textField>
+
+            <!-- Conducto Auditivo Externo (CAE) Oído Izquierdo -->
+            <rectangle>
+                <reportElement x="10" y="75" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="77" width="250" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Conducto Auditivo Externo (CAE) Oído Izquierdo:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="265" y="77" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{caeOidoIzquierdo}]]></textFieldExpression>
+            </textField>
+
+            <!-- Obstrucción del Oído Izquierdo -->
+            <rectangle>
+                <reportElement x="10" y="100" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="102" width="250" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Obstrucción del Oído Izquierdo:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="265" y="102" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{obstruccionOidoIzquierdo}]]></textFieldExpression>
+            </textField>
+
+            <!-- Apariencia de la Membrana Timpánica Oído Izquierdo -->
+            <rectangle>
+                <reportElement x="10" y="125" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="127" width="250" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Apariencia de la Membrana Timpánica Oído Izquierdo:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="265" y="127" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{aparienciaMenbranaTimpanicaOidoIzquierdo}]]></textFieldExpression>
+            </textField>
+
+            <!-- Perforación del Oído Izquierdo -->
+            <rectangle>
+                <reportElement x="10" y="150" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="152" width="250" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Perforación del Oído Izquierdo:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="265" y="152" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{perforacionOidoIzquierdo} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Presencia de Burbuja en el Oído Izquierdo -->
+            <rectangle>
+                <reportElement x="10" y="175" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="177" width="250" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Presencia de Burbuja en el Oído Izquierdo:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="265" y="177" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{burbujaOidoIzquierdo} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Coloración del Oído Izquierdo -->
+            <rectangle>
+                <reportElement x="10" y="200" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="202" width="250" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Coloración del Oído Izquierdo:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="265" y="202" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{coloracionOidoIzquierdo}]]></textFieldExpression>
+            </textField>
+
+        </band>
+
+
+        <band height="100"> <!-- Altura de la banda ajustada -->
+            <!-- Título: Profesional Responsable -->
+            <staticText>
+                <reportElement x="200" y="10" width="200" height="20"/> <!-- Ajusta la posición y tamaño -->
+                <textElement textAlignment="Center">
+                    <font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+                </textElement>
+                <text><![CDATA[PROFESIONAL RESPONSABLE]]></text>
+            </staticText>
+
+            <!-- Línea punteada para nombre -->
+            <staticText>
+                <reportElement x="30" y="50" width="200" height="15"/> <!-- Ajusta la posición y tamaño -->
+                <textElement textAlignment="Center">
+                    <font size="10"/>
+                </textElement>
+                <text><![CDATA[........................................]]></text>
+            </staticText>
+
+            <!-- Línea punteada para firma -->
+            <staticText>
+                <reportElement x="320" y="50" width="200" height="15"/> <!-- Ajusta la posición y tamaño -->
+                <textElement textAlignment="Center">
+                    <font size="10"/>
+                </textElement>
+                <text><![CDATA[........................................]]></text>
+            </staticText>
+
+            <!-- Etiqueta: NOMBRE -->
+            <staticText>
+                <reportElement x="100" y="70" width="100" height="15"/> <!-- Ajusta la posición y tamaño -->
+                <textElement textAlignment="Center">
+                    <font size="10" isBold="true"/>
+                </textElement>
+                <text><![CDATA[NOMBRE]]></text>
+            </staticText>
+
+            <!-- Etiqueta: FIRMA -->
+            <staticText>
+                <reportElement x="390" y="70" width="100" height="15"/> <!-- Ajusta la posición y tamaño -->
+                <textElement textAlignment="Center">
+                    <font size="10" isBold="true"/>
+                </textElement>
+                <text><![CDATA[FIRMA]]></text>
+            </staticText>
+        </band>
+
+    </detail>
+
+    <!-- Pie de página -->
+    <pageFooter>
+        <band height="40" splitType="Stretch">
+            <!-- Texto de UDIPSAI -->
+            <textField isStretchWithOverflow="true">
+                <reportElement x="0" y="0" width="555" height="20"/>
+                <textElement textAlignment="Center">
+                    <font size="10" isItalic="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Unidad de Diagnóstico, Investigación Psicopedagógica y Apoyo a la Inclusión (UDIPSAI)"]]></textFieldExpression>
+            </textField>
+
+        </band>
+    </pageFooter>
+</jasperReport>

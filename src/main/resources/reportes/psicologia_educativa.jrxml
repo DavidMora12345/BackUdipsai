@@ -1,0 +1,1087 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="psicologia_educativa" pageWidth="595" pageHeight="1550" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+
+    <!-- Estilos personalizados -->
+    <style name="Title" fontName="Arial" fontSize="20" isBold="true" pdfFontName="Helvetica-Bold"/>
+    <style name="SubTitle" fontName="Arial" fontSize="16" isBold="true" pdfFontName="Helvetica-Bold"/>
+    <style name="Text" fontName="Arial" fontSize="12" pdfFontName="Helvetica"/>
+    <style name="DetailText" fontName="Arial" fontSize="10" pdfFontName="Helvetica"/>
+
+    <!-- Definición de parámetros -->
+    <parameter name="backgroundImage" class="java.lang.String"/>
+    <parameter name="imagenPaciente" class="java.io.InputStream"/>
+
+    <!-- Definición de campos -->
+    <field name="id" class="java.lang.Integer"/>
+    <field name="paciente.fechaApertura" class="java.util.Date"/>
+    <field name="paciente.nombresApellidos" class="java.lang.String"/>
+    <field name="paciente.ciudad" class="java.lang.String"/>
+    <field name="paciente.fechaNacimiento" class="java.util.Date"/>
+    <field name="paciente.edad" class="java.lang.String"/>
+    <field name="paciente.cedula" class="java.lang.String"/>
+    <field name="paciente.domicilio" class="java.lang.String"/>
+    <field name="paciente.telefono" class="java.lang.String"/>
+    <field name="paciente.celular" class="java.lang.String"/>
+    <field name="paciente.institucionEducativa.nombreInstitucion" class="java.lang.String"/>
+    <field name="paciente.proyecto" class="java.lang.String"/>
+    <field name="paciente.jornada.nombreJornada" class="java.lang.String"/>
+    <field name="paciente.anioEducacion" class="java.lang.String"/>
+    <field name="paciente.paralelo" class="java.lang.String"/>
+    <field name="paciente.perteneceInclusion" class="java.lang.String"/>
+    <field name="paciente.tieneDiscapacidad" class="java.lang.String"/>
+    <field name="paciente.portadorCarnet" class="java.lang.Boolean"/>
+    <field name="paciente.diagnostico" class="java.lang.String"/>
+    <field name="paciente.motivoConsulta" class="java.lang.String"/>
+    <field name="paciente.observaciones" class="java.lang.String"/>
+    <field name="paciente.tipoDiscapacidad" class="java.lang.String"/>
+    <field name="paciente.detalleDiscapacidad" class="java.lang.String"/>
+    <field name="paciente.porcentajeDiscapacidad" class="java.lang.Integer"/>
+    <field name="paciente.perteneceAProyecto" class="java.lang.Boolean"/>
+    <field name="paciente.sede.nombre" class="java.lang.String"/>
+    <field name="estado" class="java.lang.Integer"/>
+    <field name="asignaturasGustan" class="java.lang.String"/>
+    <field name="asignaturasDisgustan" class="java.lang.String"/>
+    <field name="relacionDocentes" class="com.test.TUdipsaiApi.Model.PsicologiaEducativa$RelacionDocentes"/>
+    <field name="causaRelacionDocentes" class="java.lang.String"/>
+    <field name="gustaIrInstitucion" class="java.lang.Boolean"/>
+    <field name="causaGustaIrInstitucion" class="java.lang.String"/>
+    <field name="relacionConGrupo" class="com.test.TUdipsaiApi.Model.PsicologiaEducativa$RelacionConGrupo"/>
+    <field name="causaRelacionConGrupo" class="java.lang.String"/>
+    <field name="inclusionEducativa" class="java.lang.Boolean"/>
+    <field name="causaInclusionEducativa" class="java.lang.String"/>
+    <field name="adaptacionesCurriculares" class="java.lang.Boolean"/>
+    <field name="gradoAdaptacion" class="java.lang.String"/>
+    <field name="especifiqueAsignaturas" class="java.lang.String"/>
+    <field name="cdi" class="java.lang.Boolean"/>
+    <field name="cdiEdad" class="java.lang.Integer"/>
+    <field name="inicial1" class="java.lang.Boolean"/>
+    <field name="inicial1Edad" class="java.lang.Integer"/>
+    <field name="inicial2" class="java.lang.Boolean"/>
+    <field name="inicial2Edad" class="java.lang.Integer"/>
+    <field name="primerEGB" class="java.lang.Boolean"/>
+    <field name="edad1roEGB" class="java.lang.Integer"/>
+    <field name="perdidaAnio" class="java.lang.Boolean"/>
+    <field name="gradoCausaPerdidaAnio" class="java.lang.String"/>
+    <field name="desercionEscolar" class="java.lang.Boolean"/>
+    <field name="gradoCausaDesercionEscolar" class="java.lang.String"/>
+    <field name="cambioInstitucion" class="java.lang.Boolean"/>
+    <field name="gradoCausaCambioInstitucion" class="java.lang.String"/>
+    <field name="problemasAprendizaje" class="java.lang.Boolean"/>
+    <field name="problemasAprendizajeEspecificar" class="java.lang.String"/>
+    <field name="evaluacionPsicologicaUOtrosAnterior" class="java.lang.Boolean"/>
+    <field name="causaEvaluacionPsicologicaUOtrosAnterior" class="java.lang.String"/>
+    <field name="recibeApoyo" class="java.lang.Boolean"/>
+    <field name="causaLugarTiempoRecibeApoyo" class="java.lang.String"/>
+    <field name="aprovechamientoGeneral" class="com.test.TUdipsaiApi.Model.PsicologiaEducativa$AprovechamientoGeneral"/>
+    <field name="actividadEscolar" class="java.lang.String"/>
+    <field name="observaciones" class="java.lang.String"/>
+
+
+
+
+    <pageHeader>
+        <band height="60" splitType="Stretch">
+            <!-- Contenedor general para las tres columnas -->
+            <rectangle>
+                <reportElement x="0" y="0" width="555" height="60" forecolor="#000000"/> <!-- Borde negro general -->
+            </rectangle>
+
+            <!-- Primera columna (Logo y nombre de la universidad) -->
+            <frame>
+                <reportElement x="0" y="0" width="198" height="60" forecolor="#000000"/> <!-- Añadir borde con color negro -->
+                <image>
+                    <reportElement x="10" y="10" width="50" height="50"/>
+                    <imageExpression><![CDATA[new java.net.URL($P{backgroundImage})]]></imageExpression>
+                </image>
+                <staticText>
+                    <reportElement x="70" y="10" width="120" height="50"/>
+                    <textElement markup="html" verticalAlignment="Middle"> <!-- Indicar que se puede usar HTML -->
+                        <font size="10" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[Universidad<br/>Católica<br/>de Cuenca]]></text> <!-- Agregar saltos de línea con <br/> -->
+                </staticText>
+            </frame>
+
+            <!-- Línea negra entre la primera y segunda columna -->
+            <line>
+                <reportElement x="198" y="0" width="1" height="60" forecolor="#000000"/> <!-- Línea negra vertical -->
+            </line>
+
+            <!-- Segunda columna (Título del reporte) -->
+            <frame>
+                <reportElement x="198" y="0" width="198" height="60" forecolor="#000000"/> <!-- Añadir borde con color negro -->
+                <staticText>
+                    <reportElement x="0" y="10" width="198" height="40"/>
+                    <textElement textAlignment="Center" verticalAlignment="Middle">
+                        <font size="14" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[HISTORIA CLÍNICA UNIFICADA]]></text>
+                </staticText>
+            </frame>
+
+            <!-- Línea negra entre la segunda y tercera columna -->
+            <line>
+                <reportElement x="396" y="0" width="1" height="60" forecolor="#000000"/> <!-- Línea negra vertical -->
+            </line>
+
+            <!-- Tercera columna (Código, versión, fecha y número de página) -->
+            <frame>
+                <reportElement x="396" y="0" width="198" height="60" forecolor="#000000"/> <!-- Mantener el marco en su lugar -->
+
+                <!-- CÓDIGO -->
+                <staticText>
+                    <reportElement x="5" y="5" width="193" height="12"/> <!-- Ajustar ancho y posición -->
+                    <textElement textAlignment="Left"> <!-- Alinear el texto a la izquierda -->
+                        <font size="8" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[CÓDIGO: F – VS – 66]]></text>
+                </staticText>
+
+                <!-- VERSIÓN -->
+                <staticText>
+                    <reportElement x="5" y="18" width="193" height="12"/> <!-- Ajustar ancho y posición -->
+                    <textElement textAlignment="Left"> <!-- Alinear el texto a la izquierda -->
+                        <font size="8" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[VERSIÓN: 01]]></text>
+                </staticText>
+
+                <!-- FECHA DINÁMICA -->
+                <textField>
+                    <reportElement x="5" y="31" width="193" height="12"/> <!-- Ajustar ancho y posición -->
+                    <textElement textAlignment="Left"> <!-- Alinear el texto a la izquierda -->
+                        <font size="8" isBold="true"/>
+                    </textElement>
+                    <!-- Usar SimpleDateFormat para generar la fecha actual -->
+                    <textFieldExpression><![CDATA[new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date())]]></textFieldExpression>
+                </textField>
+
+                <!-- PÁGINA -->
+                <textField>
+                    <reportElement x="5" y="44" width="193" height="12"/> <!-- Ajustar ancho y posición -->
+                    <textElement textAlignment="Left"> <!-- Alinear el texto a la izquierda -->
+                        <font size="8" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA["Página " + $V{PAGE_NUMBER}]]></textFieldExpression>
+                </textField>
+            </frame>
+        </band>
+    </pageHeader>
+
+    <!-- Banda de detalles -->
+    <detail>
+
+        <!-- Nueva banda con diseño ajustado e imagen del paciente -->
+        <band height="570">
+            <!-- Contenedor General -->
+            <rectangle>
+                <reportElement x="0" y="0" width="555" height="500" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+            </rectangle>
+
+            <!-- Sección A. DATOS PERSONALES -->
+            <staticText>
+                <reportElement x="10" y="5" width="535" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[A. DATOS PERSONALES]]></text>
+            </staticText>
+
+            <!-- Fecha de Apertura -->
+            <rectangle>
+                <reportElement x="10" y="25" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="27" width="120" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Fecha de Apertura:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="140" y="27" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.fechaApertura}]]></textFieldExpression>
+            </textField>
+
+            <!-- Imagen del Paciente -->
+            <rectangle>
+                <reportElement x="380" y="25" width="150" height="160" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="380" y="10" width="150" height="15"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[Imagen del Paciente:]]></text>
+            </staticText>
+            <image scaleImage="FillFrame" onErrorType="Blank">
+                <reportElement x="380" y="30" width="150" height="150"/>
+                <imageExpression class="java.io.InputStream">
+                    <![CDATA[$P{imagenPaciente} != null ? $P{imagenPaciente} : new java.net.URL("https://thumbs.dreamstime.com/b/icono-de-usuario-personas-vectoriales-vector-perfil-ilustraci%C3%B3n-persona-comercial-s%C3%ADmbolo-grupo-usuarios-masculino-195160429.jpg").openStream()]]>
+                </imageExpression>
+            </image>
+
+            <!-- Nombres y Apellidos -->
+            <rectangle>
+                <reportElement x="10" y="50" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="52" width="120" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Nombres y Apellidos:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="140" y="52" width="220" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.nombresApellidos}]]></textFieldExpression>
+            </textField>
+
+            <!-- Ciudad -->
+            <rectangle>
+                <reportElement x="10" y="70" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="72" width="120" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Ciudad:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="140" y="72" width="220" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.ciudad}]]></textFieldExpression>
+            </textField>
+
+            <!-- Fecha de Nacimiento -->
+            <rectangle>
+                <reportElement x="10" y="90" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="92" width="120" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Fecha de Nacimiento:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="140" y="92" width="220" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.fechaNacimiento}]]></textFieldExpression>
+            </textField>
+
+            <!-- Edad -->
+            <rectangle>
+                <reportElement x="10" y="110" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="112" width="120" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Edad:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="140" y="112" width="50" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.edad}]]></textFieldExpression>
+            </textField>
+
+            <!-- Cédula -->
+            <rectangle>
+                <reportElement x="10" y="130" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="132" width="120" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Cédula:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="140" y="132" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.cedula}]]></textFieldExpression>
+            </textField>
+
+            <!-- Domicilio -->
+            <rectangle>
+                <reportElement x="10" y="150" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="152" width="120" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Domicilio:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="140" y="152" width="220" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.domicilio}]]></textFieldExpression>
+            </textField>
+
+            <!-- Teléfono -->
+            <rectangle>
+                <reportElement x="10" y="170" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="172" width="120" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Teléfono:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="140" y="172" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.telefono}]]></textFieldExpression>
+            </textField>
+
+            <!-- Celular -->
+            <rectangle>
+                <reportElement x="10" y="190" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="192" width="120" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Celular:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="140" y="192" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.celular}]]></textFieldExpression>
+            </textField>
+
+            <!-- Proyecto -->
+            <rectangle>
+                <reportElement x="10" y="210" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="212" width="120" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Proyecto:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="140" y="212" width="220" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.proyecto}]]></textFieldExpression>
+            </textField>
+
+            <!-- Año de Educación -->
+            <rectangle>
+                <reportElement x="10" y="230" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="232" width="120" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Año de Educación:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="140" y="232" width="220" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.anioEducacion}]]></textFieldExpression>
+            </textField>
+
+            <!-- Paralelo -->
+            <rectangle>
+                <reportElement x="10" y="250" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="252" width="120" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Paralelo:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="140" y="252" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.paralelo}]]></textFieldExpression>
+            </textField>
+
+            <!-- Pertenece a Inclusión -->
+            <rectangle>
+                <reportElement x="10" y="270" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="272" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Pertenece a Inclusión:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="160" y="272" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.perteneceInclusion}]]></textFieldExpression>
+            </textField>
+
+            <!-- Tiene Discapacidad -->
+            <rectangle>
+                <reportElement x="10" y="290" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="292" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Tiene Discapacidad:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="160" y="292" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.tieneDiscapacidad}]]></textFieldExpression>
+            </textField>
+
+            <!-- Portador de Carnet -->
+            <rectangle>
+                <reportElement x="10" y="310" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="312" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Portador de Carnet:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="160" y="312" width="50" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.portadorCarnet} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Diagnóstico -->
+            <rectangle>
+                <reportElement x="380" y="310" width="200" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="385" y="312" width="100" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Diagnóstico:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="480" y="312" width="80" height="15"/> <!-- Ancho ajustado -->
+                <textFieldExpression><![CDATA[$F{paciente.diagnostico}]]></textFieldExpression>
+            </textField>
+
+            <!-- Observaciones -->
+            <rectangle>
+                <reportElement x="10" y="330" width="540" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="332" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Observaciones:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="160" y="332" width="385" height="15"/> <!-- Ancho ajustado -->
+                <textFieldExpression><![CDATA[$F{paciente.observaciones}]]></textFieldExpression>
+            </textField>
+
+            <!-- Tipo de Discapacidad -->
+            <rectangle>
+                <reportElement x="10" y="350" width="540" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="352" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Tipo de Discapacidad:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="160" y="352" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.tipoDiscapacidad}]]></textFieldExpression>
+            </textField>
+
+            <!-- Detalle de Discapacidad -->
+            <rectangle>
+                <reportElement x="10" y="370" width="540" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="372" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Detalle de Discapacidad:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="160" y="372" width="385" height="15"/> <!-- Ancho ajustado -->
+                <textFieldExpression><![CDATA[$F{paciente.detalleDiscapacidad}]]></textFieldExpression>
+            </textField>
+
+            <!-- Porcentaje de Discapacidad -->
+            <rectangle>
+                <reportElement x="10" y="390" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="392" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Porcentaje de Discapacidad:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="160" y="392" width="50" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.porcentajeDiscapacidad}]]></textFieldExpression>
+            </textField>
+
+            <!-- Institución Educativa -->
+            <rectangle>
+                <reportElement x="10" y="410" width="540" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="412" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Institución Educativa:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="160" y="412" width="385" height="15"/> <!-- Ancho ajustado -->
+                <textFieldExpression><![CDATA[$F{paciente.institucionEducativa.nombreInstitucion}]]></textFieldExpression>
+            </textField>
+
+            <!-- Jornada -->
+            <rectangle>
+                <reportElement x="10" y="430" width="540" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="432" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Jornada:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="160" y="432" width="385" height="15"/> <!-- Ancho ajustado -->
+                <textFieldExpression><![CDATA[$F{paciente.jornada.nombreJornada}]]></textFieldExpression>
+            </textField>
+
+            <!-- Sede -->
+            <rectangle>
+                <reportElement x="10" y="450" width="540" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="452" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Sede:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="160" y="452" width="385" height="15"/> <!-- Ancho ajustado -->
+                <textFieldExpression><![CDATA[$F{paciente.sede.nombre}]]></textFieldExpression>
+            </textField>
+        </band>
+
+        <!-- Banda para la Sección B -->
+        <band height="450">
+            <!-- Contenedor General -->
+            <rectangle>
+                <reportElement x="0" y="0" width="555" height="390" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+            </rectangle>
+
+            <!-- Sección B. INFORMACIÓN ACADÉMICA -->
+            <staticText>
+                <reportElement x="10" y="5" width="535" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[B. INFORMACIÓN ACADÉMICA]]></text>
+            </staticText>
+
+            <!-- Asignaturas que le Gustan -->
+            <rectangle>
+                <reportElement x="10" y="25" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="27" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Asignaturas que le Gustan:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="27" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{asignaturasGustan}]]></textFieldExpression>
+            </textField>
+
+            <!-- Asignaturas que le Disgustan -->
+            <rectangle>
+                <reportElement x="10" y="50" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="52" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Asignaturas que le Disgustan:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="52" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{asignaturasDisgustan}]]></textFieldExpression>
+            </textField>
+
+            <!-- Relación con Docentes -->
+            <rectangle>
+                <reportElement x="10" y="75" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="77" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Relación con Docentes:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="77" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{relacionDocentes}]]></textFieldExpression>
+            </textField>
+
+            <!-- Causa Relación con Docentes -->
+            <rectangle>
+                <reportElement x="10" y="100" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="102" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Causa Relación con Docentes:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="102" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{causaRelacionDocentes}]]></textFieldExpression>
+            </textField>
+
+            <!-- Gusta Ir a la Institución -->
+            <rectangle>
+                <reportElement x="10" y="125" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="127" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Gusta Ir a la Institución:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="127" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{gustaIrInstitucion} != null ? ($F{gustaIrInstitucion} ? "Sí" : "No") : "No especificado"]]></textFieldExpression>
+            </textField>
+
+            <!-- Causa Gusta Ir a la Institución -->
+            <rectangle>
+                <reportElement x="10" y="150" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="152" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Causa Gusta Ir a la Institución:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="152" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{causaGustaIrInstitucion}]]></textFieldExpression>
+            </textField>
+
+            <!-- Relación con el Grupo -->
+            <rectangle>
+                <reportElement x="10" y="175" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="177" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Relación con el Grupo:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="177" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{relacionConGrupo}]]></textFieldExpression>
+            </textField>
+
+            <!-- Causa Relación con el Grupo -->
+            <rectangle>
+                <reportElement x="10" y="200" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="202" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Causa Relación con el Grupo:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="202" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{causaRelacionConGrupo}]]></textFieldExpression>
+            </textField>
+
+            <!-- Inclusión Educativa -->
+            <rectangle>
+                <reportElement x="10" y="225" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="227" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Inclusión Educativa:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="227" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{inclusionEducativa} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Causa Inclusión Educativa -->
+            <rectangle>
+                <reportElement x="10" y="250" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="252" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Causa Inclusión Educativa:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="252" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{causaInclusionEducativa}]]></textFieldExpression>
+            </textField>
+
+            <!-- Adaptaciones Curriculares -->
+            <rectangle>
+                <reportElement x="10" y="275" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="277" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Adaptaciones Curriculares:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="277" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{adaptacionesCurriculares} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Grado de Adaptación -->
+            <rectangle>
+                <reportElement x="10" y="300" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="302" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Grado de Adaptación:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="302" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{gradoAdaptacion}]]></textFieldExpression>
+            </textField>
+
+            <!-- Especifique Asignaturas -->
+            <rectangle>
+                <reportElement x="10" y="325" width="360" height="60" forecolor="#B0B0B0"/> <!-- Ajustado para incluir el nuevo campo -->
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="327" width="200" height="20"/> <!-- Aumentar un poco la altura del label -->
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Especifique Asignaturas:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="220" y="327" width="500" height="100"/> <!-- Amplio espacio horizontal y vertical -->
+                <textFieldExpression><![CDATA[$F{especifiqueAsignaturas}]]></textFieldExpression>
+            </textField>
+
+        </band>
+
+
+        <!-- Banda para la Sección C -->
+        <band height="850">
+            <!-- Contenedor General -->
+            <rectangle>
+                <reportElement x="0" y="0" width="555" height="720" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+            </rectangle>
+
+            <!-- Sección C. HISTORIAL ESCOLAR -->
+            <staticText>
+                <reportElement x="10" y="5" width="535" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[C. HISTORIAL ESCOLAR]]></text>
+            </staticText>
+
+            <!-- Asistencia a CDI -->
+            <rectangle>
+                <reportElement x="10" y="25" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="27" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Asistencia a CDI:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="27" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{cdi} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Edad de Ingreso a CDI -->
+            <rectangle>
+                <reportElement x="10" y="50" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="52" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Edad de Ingreso a CDI:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="52" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{cdiEdad}]]></textFieldExpression>
+            </textField>
+
+            <!-- Asistencia a Inicial 1 -->
+            <rectangle>
+                <reportElement x="10" y="75" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="77" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Asistencia a Inicial 1:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="77" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{inicial1} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Edad de Ingreso a Inicial 1 -->
+            <rectangle>
+                <reportElement x="10" y="100" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="102" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Edad de Ingreso a Inicial 1:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="102" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{inicial1Edad}]]></textFieldExpression>
+            </textField>
+
+            <!-- Asistencia a Inicial 2 -->
+            <rectangle>
+                <reportElement x="10" y="125" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="127" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Asistencia a Inicial 2:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="127" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{inicial2} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Edad de Ingreso a Inicial 2 -->
+            <rectangle>
+                <reportElement x="10" y="150" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="152" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Edad de Ingreso a Inicial 2:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="152" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{inicial2Edad}]]></textFieldExpression>
+            </textField>
+
+            <!-- Asistencia a 1ro EGB -->
+            <rectangle>
+                <reportElement x="10" y="175" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="177" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Asistencia a 1ro EGB:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="177" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{primerEGB} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Edad de Ingreso a 1ro EGB -->
+            <rectangle>
+                <reportElement x="10" y="200" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="202" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Edad de Ingreso a 1ro EGB:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="202" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{edad1roEGB}]]></textFieldExpression>
+            </textField>
+
+            <!-- Pérdida de Año -->
+            <rectangle>
+                <reportElement x="10" y="225" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="227" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Pérdida de Año:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="227" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{perdidaAnio} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Grado y Causa de Pérdida de Año -->
+            <rectangle>
+                <reportElement x="10" y="250" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="252" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Grado y Causa de Pérdida de Año:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="252" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{gradoCausaPerdidaAnio}]]></textFieldExpression>
+            </textField>
+
+            <!-- Deserción Escolar -->
+            <rectangle>
+                <reportElement x="10" y="275" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="277" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Deserción Escolar:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="277" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{desercionEscolar} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Grado y Causa de Deserción Escolar -->
+            <rectangle>
+                <reportElement x="10" y="300" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="302" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Grado y Causa de Deserción Escolar:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="302" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{gradoCausaDesercionEscolar}]]></textFieldExpression>
+            </textField>
+
+            <!-- Cambio de Institución -->
+            <rectangle>
+                <reportElement x="10" y="325" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="327" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Cambio de Institución:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="327" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{cambioInstitucion} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Grado y Causa de Cambio de Institución -->
+            <rectangle>
+                <reportElement x="10" y="350" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="352" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Grado y Causa de Cambio de Institución:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="352" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{gradoCausaCambioInstitucion}]]></textFieldExpression>
+            </textField>
+
+            <!-- Problemas de Aprendizaje -->
+            <rectangle>
+                <reportElement x="10" y="375" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="377" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Problemas de Aprendizaje:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="377" width="200" height="15"/>
+                <textFieldExpression><![CDATA[$F{problemasAprendizaje} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Especificar Problemas de Aprendizaje -->
+            <rectangle>
+                <reportElement x="10" y="400" width="360" height="60" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="402" width="200" height="20"/> <!-- Aumentar un poco la altura del label -->
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Especificar Problemas de Aprendizaje:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="220" y="402" width="500" height="100"/> <!-- Amplio espacio horizontal y vertical -->
+                <textFieldExpression><![CDATA[$F{problemasAprendizajeEspecificar}]]></textFieldExpression>
+            </textField>
+
+            <!-- Evaluación Psicológica u Otros Anterior -->
+            <rectangle>
+                <reportElement x="10" y="540" width="360" height="20" forecolor="#B0B0B0"/> <!-- Ajuste de la posición Y -->
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="542" width="150" height="15"/> <!-- Ajuste de la posición Y -->
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Evaluación Psicológica u Otros Anterior:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="165" y="542" width="200" height="15"/> <!-- Ajuste de la posición Y -->
+                <textFieldExpression><![CDATA[$F{evaluacionPsicologicaUOtrosAnterior} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+
+            <!-- Causa Evaluación Psicológica u Otros Anterior -->
+            <rectangle>
+                <reportElement x="10" y="450" width="360" height="60" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="452" width="200" height="20"/> <!-- Aumentar un poco la altura del label -->
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Causa Evaluación Psicológica u Otros Anterior:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="220" y="452" width="500" height="200"/> <!-- Amplio espacio horizontal y vertical -->
+                <textFieldExpression><![CDATA[$F{causaEvaluacionPsicologicaUOtrosAnterior}]]></textFieldExpression>
+            </textField>
+
+            <!-- Título para Actividad Escolar -->
+            <rectangle>
+                <reportElement x="10" y="580" width="360" height="60" forecolor="#B0B0B0"/> <!-- Ajuste de la posición Y -->
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="582" width="200" height="20"/> <!-- Ajuste de la posición Y -->
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Actividad Escolar:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="220" y="582" width="500" height="100"/> <!-- Amplio espacio horizontal y vertical -->
+                <textFieldExpression><![CDATA[$F{actividadEscolar}]]></textFieldExpression>
+            </textField>
+
+            <!-- Observaciones -->
+            <rectangle>
+                <reportElement x="10" y="650" width="360" height="60" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="652" width="200" height="20"/> <!-- Aumentar un poco la altura del label -->
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Observaciones:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="220" y="652" width="500" height="100"/> <!-- Amplio espacio horizontal y vertical -->
+                <textFieldExpression><![CDATA[$F{observaciones}]]></textFieldExpression>
+            </textField>
+
+        </band>
+
+        <band height="100"> <!-- Altura de la banda ajustada -->
+            <!-- Título: Profesional Responsable -->
+            <staticText>
+                <reportElement x="200" y="10" width="200" height="20"/> <!-- Ajusta la posición y tamaño -->
+                <textElement textAlignment="Center">
+                    <font size="10" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+                </textElement>
+                <text><![CDATA[PROFESIONAL RESPONSABLE]]></text>
+            </staticText>
+
+            <!-- Línea punteada para nombre -->
+            <staticText>
+                <reportElement x="30" y="50" width="200" height="15"/> <!-- Ajusta la posición y tamaño -->
+                <textElement textAlignment="Center">
+                    <font size="10"/>
+                </textElement>
+                <text><![CDATA[........................................]]></text>
+            </staticText>
+
+            <!-- Línea punteada para firma -->
+            <staticText>
+                <reportElement x="320" y="50" width="200" height="15"/> <!-- Ajusta la posición y tamaño -->
+                <textElement textAlignment="Center">
+                    <font size="10"/>
+                </textElement>
+                <text><![CDATA[........................................]]></text>
+            </staticText>
+
+            <!-- Etiqueta: NOMBRE -->
+            <staticText>
+                <reportElement x="100" y="70" width="100" height="15"/> <!-- Ajusta la posición y tamaño -->
+                <textElement textAlignment="Center">
+                    <font size="10" isBold="true"/>
+                </textElement>
+                <text><![CDATA[NOMBRE]]></text>
+            </staticText>
+
+            <!-- Etiqueta: FIRMA -->
+            <staticText>
+                <reportElement x="390" y="70" width="100" height="15"/> <!-- Ajusta la posición y tamaño -->
+                <textElement textAlignment="Center">
+                    <font size="10" isBold="true"/>
+                </textElement>
+                <text><![CDATA[FIRMA]]></text>
+            </staticText>
+        </band>
+
+    </detail>
+
+    <!-- Pie de página -->
+    <pageFooter>
+        <band height="40" splitType="Stretch">
+            <!-- Texto de UDIPSAI -->
+            <textField isStretchWithOverflow="true">
+                <reportElement x="0" y="0" width="555" height="20"/>
+                <textElement textAlignment="Center">
+                    <font size="10" isItalic="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Unidad de Diagnóstico, Investigación Psicopedagógica y Apoyo a la Inclusión (UDIPSAI)"]]></textFieldExpression>
+            </textField>
+
+        </band>
+    </pageFooter>
+</jasperReport>

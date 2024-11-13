@@ -14,4 +14,5 @@ public class PermisosDTO {
     private Boolean psicologiaClinica;
     private Boolean psicologiaEducativa;
     private Boolean pacientes;
+    private Boolean sede;
 }

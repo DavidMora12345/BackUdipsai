@@ -1,13 +1,17 @@
 package com.test.TUdipsaiApi.Controller;
 
+import com.test.TUdipsaiApi.Model.Documento;
 import com.test.TUdipsaiApi.Model.Especialistas;
 import com.test.TUdipsaiApi.Model.Paciente;
 import com.test.TUdipsaiApi.Model.Seguimiento;
+import com.test.TUdipsaiApi.Service.DocumentoService;
 import com.test.TUdipsaiApi.Service.SeguimientoService;
 import com.test.TUdipsaiApi.dto.SeguimientoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,6 +23,9 @@ public class SeguimientoController {
 
     @Autowired
     private SeguimientoService seguimientoService;
+
+    @Autowired
+    private DocumentoService documentoService;
 
     @GetMapping
     public List<SeguimientoDTO> getAllSeguimientos() {
@@ -63,6 +70,67 @@ public class SeguimientoController {
         return ResponseEntity.noContent().build();
     }
 
+    @PostMapping("/{id}/documento")
+    public ResponseEntity<?> subirFichaCompromiso(@PathVariable Integer id, @RequestParam("file") MultipartFile file) {
+        try {
+            Optional<Seguimiento> seguimientoOpt = seguimientoService.getSeguimientoById(id).map(this::convertToEntity);
+            if (seguimientoOpt.isPresent()) {
+                Seguimiento seguimiento = seguimientoOpt.get();
+                Documento documento = documentoService.saveDocumento(file);
+                seguimiento.setDocumento(documento);
+                seguimientoService.saveSeguimiento(seguimientoService.convertToDTO(seguimiento));
+                return ResponseEntity.ok("Ficha compromiso subida exitosamente con ID: " + documento.getId());
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Seguimiento no encontrado con ID: " + id);
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al subir ficha compromiso: " + e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/documento/{seguimientoId}")
+    public ResponseEntity<?> eliminarFichaCompromisoPorSeguimientoId(@PathVariable Integer seguimientoId) {
+        try {
+            Optional<Seguimiento> seguimientoOpt = seguimientoService.getSeguimientoById(seguimientoId).map(this::convertToEntity);
+            if (seguimientoOpt.isPresent()) {
+                Seguimiento seguimiento = seguimientoOpt.get();
+                Documento documento = seguimiento.getDocumento();
+                if (documento != null) {
+                    seguimiento.setDocumento(null);
+                    seguimientoService.saveSeguimiento(seguimientoService.convertToDTO(seguimiento));
+                    documentoService.deleteDocumento(documento.getId());
+                    return ResponseEntity.ok("Ficha compromiso eliminada exitosamente");
+                } else {
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El seguimiento con ID: " + seguimientoId + " no tiene ficha compromiso asociada");
+                }
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Seguimiento no encontrado con ID: " + seguimientoId);
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al eliminar ficha compromiso: " + e.getMessage());
+        }
+    }
+
+    @GetMapping("/{id}/documento")
+    public ResponseEntity<?> listarFichaCompromiso(@PathVariable Integer id) {
+        try {
+            Optional<Seguimiento> seguimientoOpt = seguimientoService.getSeguimientoById(id).map(this::convertToEntity);
+            if (seguimientoOpt.isPresent()) {
+                Seguimiento seguimiento = seguimientoOpt.get();
+                Documento documento = seguimiento.getDocumento();
+                if (documento != null) {
+                    return ResponseEntity.ok(documento.getId());
+                } else {
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No hay ficha compromiso para el seguimiento con ID: " + id);
+                }
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Seguimiento no encontrado con ID: " + id);
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al listar ficha compromiso: " + e.getMessage());
+        }
+    }
+
     private Seguimiento convertToEntity(SeguimientoDTO dto) {
         Seguimiento entity = new Seguimiento();
         entity.setId(dto.getId());
@@ -77,6 +145,14 @@ public class SeguimientoController {
         Paciente paciente = new Paciente();
         paciente.setId(dto.getPaciente().getId());
         entity.setPaciente(paciente);
+
+        if (dto.getDocumento() != null && dto.getDocumento().getId() != null) {
+            Documento documento = documentoService.getDocumentoById(dto.getDocumento().getId())
+                    .orElseThrow(() -> new RuntimeException("Documento not found"));
+            entity.setDocumento(documento);
+        } else {
+            entity.setDocumento(null);
+        }
 
         return entity;
     }

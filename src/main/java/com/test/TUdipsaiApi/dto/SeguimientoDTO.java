@@ -14,4 +14,9 @@ public class SeguimientoDTO {
     private Date fecha;
     private String observacion;
     private Integer estado;
+    private DocumentoIdDTO documento;
+
+    public void setDocumentoId(Long id) {
+        this.documento = new DocumentoIdDTO(id);
+    }
 }

@@ -108,4 +108,45 @@ public class Paciente {
     @JoinColumn(name = "sede_id", referencedColumnName = "id")
     private Sede sede;
 
+    @ManyToOne
+    @JoinColumn(name = "ficha_compromiso", referencedColumnName = "id")
+    private Documento fichaCompromiso;
+
+
+    public Paciente(Paciente otro) {
+        this.id = otro.id;
+        this.fechaApertura = otro.fechaApertura;
+        this.pacienteEstado = otro.pacienteEstado;
+        this.nombresApellidos = otro.nombresApellidos;
+        this.ciudad = otro.ciudad;
+        this.fechaNacimiento = otro.fechaNacimiento;
+        this.edad = otro.edad;
+        this.cedula = otro.cedula;
+        this.domicilio = otro.domicilio;
+        this.imagen = otro.imagen;
+        this.telefono = otro.telefono;
+        this.celular = otro.celular;
+        this.institucionEducativa = otro.institucionEducativa;
+        this.proyecto = otro.proyecto;
+        this.jornada = otro.jornada;
+        this.anioEducacion = otro.anioEducacion;
+        this.paralelo = otro.paralelo;
+        this.perteneceInclusion = otro.perteneceInclusion;
+        this.tieneDiscapacidad = otro.tieneDiscapacidad;
+        this.portadorCarnet = otro.portadorCarnet;
+        this.diagnostico = otro.diagnostico;
+        this.motivoConsulta = otro.motivoConsulta;
+        this.observaciones = otro.observaciones;
+        this.tipoDiscapacidad = otro.tipoDiscapacidad;
+        this.detalleDiscapacidad = otro.detalleDiscapacidad;
+        this.porcentajeDiscapacidad = otro.porcentajeDiscapacidad;
+        this.perteneceAProyecto = otro.perteneceAProyecto;
+        this.fichaDiagnostica = otro.fichaDiagnostica;
+        this.sede = otro.sede;
+        this.fichaCompromiso = otro.fichaCompromiso;
+    }
+
+    public Paciente() {
+    }
+
 }

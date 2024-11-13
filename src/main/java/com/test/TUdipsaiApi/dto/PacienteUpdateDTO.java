@@ -24,7 +24,7 @@ public class PacienteUpdateDTO {
     private String edad;
     private String cedula;
     private String domicilio;
-    private byte[] imagen;
+    private String imagen;
     private String telefono;
     private String celular;
     private Integer institucionEducativa;
@@ -43,5 +43,6 @@ public class PacienteUpdateDTO {
     private Integer porcentajeDiscapacidad;
     private Boolean perteneceAProyecto;
     private Integer sede;
+    private Long fichaCompromiso;
 
 }

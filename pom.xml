@@ -9,9 +9,10 @@
     </parent>
     <groupId>com.test</groupId>
     <artifactId>TUdipsaiApi</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>TUdipsaiApi</name>
     <description>Api para UDIPSAI</description>
+    <!--<packaging> war</packaging> -->
     <properties>
         <java.version>21</java.version>
         <maven.compiler.source>21</maven.compiler.source>
@@ -79,11 +80,19 @@
             <artifactId>kernel</artifactId>
             <version>7.1.17</version>
         </dependency>
+
         <dependency>
             <groupId>com.itextpdf</groupId>
-            <artifactId>layout</artifactId>
-            <version>7.1.17</version>
+            <artifactId>itextpdf</artifactId>
+            <version>5.5.13.2</version> <!-- o cualquier versión estable -->
         </dependency>
+
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.15</version>
+        </dependency>
+
         <!-- JUnit 5 -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -91,12 +100,68 @@
             <version>5.10.0</version>
             <scope>test</scope>
         </dependency>
+        <!-- Dependencia principal de JasperReports -->
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.10.0</version>
-            <scope>test</scope>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports</artifactId>
+            <version>6.20.0</version>
         </dependency>
+
+        <!-- Soporte para exportación a PDF -->
+        <dependency>
+            <groupId>com.lowagie</groupId>
+            <artifactId>itext</artifactId>
+            <version>2.1.7</version>
+        </dependency>
+
+        <!-- JasperReports font extensions (opcional) -->
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports-fonts</artifactId>
+            <version>6.20.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <!-- Dependencia de Selenium -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>4.1.0</version>
+        </dependency>
+        <!-- Dependencia de WebDriverManager para manejar ChromeDriver automáticamente -->
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>5.5.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents.client5</groupId>
+            <artifactId>httpclient5</artifactId>
+            <version>5.2.3</version> <!-- Asegúrate de usar una versión que coincida con tu código -->
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents.core5</groupId>
+            <artifactId>httpcore5</artifactId>
+            <version>5.2.3</version> <!-- Asegúrate de que la versión de httpcore5 coincida con httpclient5 -->
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>pdfbox</artifactId>
+            <version>2.0.27</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>pdfbox-tools</artifactId>
+            <version>2.0.27</version>
+        </dependency>
+
+
+
     </dependencies>
     <build>
         <plugins>
@@ -129,5 +194,6 @@
                 </configuration>
             </plugin>
         </plugins>
+        <!-- <finalName>ApiUdipsai</finalName> -->
     </build>
 </project>

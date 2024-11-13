@@ -1,5 +1,6 @@
 package com.test.TUdipsaiApi.Service;
 
+import com.test.TUdipsaiApi.Model.Documento;
 import com.test.TUdipsaiApi.Model.Seguimiento;
 import com.test.TUdipsaiApi.Model.Especialistas;
 import com.test.TUdipsaiApi.Model.Paciente;
@@ -8,6 +9,7 @@ import com.test.TUdipsaiApi.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -17,6 +19,9 @@ public class SeguimientoService {
 
     @Autowired
     private SeguimientoRepositorio seguimientoRepository;
+
+    @Autowired
+    private DocumentoService documentoService;
 
     public List<SeguimientoDTO> getAllSeguimientos() {
         return seguimientoRepository.findByEstado(1).stream()
@@ -73,8 +78,11 @@ public class SeguimientoService {
             especialistaDTO.setEspecialistaAsignado(seguimiento.getEspecialista().getEspecialistaAsignado());
             especialistaDTO.setInicioPasantia(seguimiento.getEspecialista().getInicioPasantia());
             especialistaDTO.setFinPasantia(seguimiento.getEspecialista().getFinPasantia());
-            especialistaDTO.setImagen(seguimiento.getEspecialista().getImagen());
-            seguimientoDTO.setEspecialista(especialistaDTO);
+            // Convertir byte[] a String Base64
+            if (seguimiento.getEspecialista().getImagen() != null) {
+                String base64Image = Base64.getEncoder().encodeToString(seguimiento.getEspecialista().getImagen());
+                especialistaDTO.setImagen(base64Image);  // Asignar la imagen en formato Base64
+            }            seguimientoDTO.setEspecialista(especialistaDTO);
         }
 
         if (seguimiento.getPaciente() != null) {
@@ -88,7 +96,13 @@ public class SeguimientoService {
             pacienteDTO.setEdad(seguimiento.getPaciente().getEdad());
             pacienteDTO.setCedula(seguimiento.getPaciente().getCedula());
             pacienteDTO.setDomicilio(seguimiento.getPaciente().getDomicilio());
-            pacienteDTO.setImagen(seguimiento.getPaciente().getImagen());
+
+            // Convertir byte[] a String Base64
+            if (seguimiento.getPaciente().getImagen() != null) {
+                String base64Image = Base64.getEncoder().encodeToString(seguimiento.getPaciente().getImagen());
+                pacienteDTO.setImagen(base64Image);  // Asignar la imagen en formato Base64
+            }
+
             pacienteDTO.setTelefono(seguimiento.getPaciente().getTelefono());
             pacienteDTO.setCelular(seguimiento.getPaciente().getCelular());
             pacienteDTO.setProyecto(seguimiento.getPaciente().getProyecto());
@@ -106,6 +120,13 @@ public class SeguimientoService {
             pacienteDTO.setPerteneceAProyecto(seguimiento.getPaciente().getPerteneceAProyecto());
 
             seguimientoDTO.setPaciente(pacienteDTO);
+        }
+
+
+        if (seguimiento.getDocumento() != null) {
+            DocumentoIdDTO documentoIdDTO = new DocumentoIdDTO();
+            documentoIdDTO.setId(seguimiento.getDocumento().getId());
+            seguimientoDTO.setDocumento(documentoIdDTO);
         }
 
         return seguimientoDTO;
@@ -128,6 +149,14 @@ public class SeguimientoService {
             Paciente paciente = new Paciente();
             paciente.setId(seguimientoDTO.getPaciente().getId());
             seguimiento.setPaciente(paciente);
+        }
+
+        if (seguimientoDTO.getDocumento() != null && seguimientoDTO.getDocumento().getId() != null) {
+            Documento documento = documentoService.getDocumentoById(seguimientoDTO.getDocumento().getId())
+                    .orElseThrow(() -> new RuntimeException("Documento not found"));
+            seguimiento.setDocumento(documento);
+        } else {
+            seguimiento.setDocumento(null);
         }
 
         return seguimiento;

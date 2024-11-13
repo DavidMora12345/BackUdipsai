@@ -7,6 +7,8 @@ import com.test.TUdipsaiApi.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -20,6 +22,9 @@ public class TestService {
     @Autowired
     private DocumentoRepositorio documentoRepositorio;
 
+    @Autowired
+    private DocumentoService documentoService;
+
     public List<TestDTO> getAllTests() {
         return testRepositorio.findByActivo(1).stream()
                 .map(this::convertToDTO)
@@ -30,18 +35,21 @@ public class TestService {
         return testRepositorio.findById(id).map(this::convertToDTO);
     }
 
-    public Test saveTest(TestDTO testDTO) {
+    public Test saveTest(TestDTO testDTO) throws IOException {
         Test test = convertToEntity(testDTO);
-
+        byte[] compressedData = documentoService.comprimirArchivo(testDTO.getContenido());
+        String fileUrl = documentoService.guardarArchivoEnDisco(compressedData);
         Documento documento = new Documento();
-        documento.setContenido(testDTO.getContenido());
+        documento.setUrl(fileUrl);
         documento = documentoRepositorio.save(documento);
         test.setDocumentoId(documento.getId());
 
         return testRepositorio.save(test);
     }
 
-    public Test updateTest(Long id, TestDTO testDTO) {
+
+
+    public Test updateTest(Long id, TestDTO testDTO) throws IOException {
         Optional<Test> optionalTest = testRepositorio.findById(id);
         if (optionalTest.isPresent()) {
             Test test = optionalTest.get();
@@ -57,16 +65,18 @@ public class TestService {
                 test.setEspecialista(convertDTOToEspecialista(testDTO.getEspecialista()));
             }
 
+            byte[] compressedData = documentoService.comprimirArchivo(testDTO.getContenido());
+            String fileUrl = documentoService.guardarArchivoEnDisco(compressedData);
             Documento documento = new Documento();
-            documento.setContenido(testDTO.getContenido());
+            documento.setUrl(fileUrl);
             documento = documentoRepositorio.save(documento);
             test.setDocumentoId(documento.getId());
-
             return testRepositorio.save(test);
         } else {
-            throw new RuntimeException("Test not found");
+            throw new RuntimeException("Test no encontrado");
         }
     }
+
 
     public void deleteTest(Long id) {
         Optional<Test> optionalTest = testRepositorio.findById(id);
@@ -140,7 +150,13 @@ public class TestService {
         dto.setEdad(paciente.getEdad());
         dto.setCedula(paciente.getCedula());
         dto.setDomicilio(paciente.getDomicilio());
-        dto.setImagen(paciente.getImagen());
+
+        // Convertir byte[] a String Base64
+        if (paciente.getImagen() != null) {
+            String base64Image = Base64.getEncoder().encodeToString(paciente.getImagen());
+            dto.setImagen(base64Image);  // Asignar imagen en formato Base64
+        }
+
         dto.setTelefono(paciente.getTelefono());
         dto.setCelular(paciente.getCelular());
         dto.setProyecto(paciente.getProyecto());
@@ -182,7 +198,13 @@ public class TestService {
         paciente.setEdad(dto.getEdad());
         paciente.setCedula(dto.getCedula());
         paciente.setDomicilio(dto.getDomicilio());
-        paciente.setImagen(dto.getImagen());
+
+        // Convertir String Base64 a byte[]
+        if (dto.getImagen() != null) {
+            byte[] imageBytes = Base64.getDecoder().decode(dto.getImagen());
+            paciente.setImagen(imageBytes);  // Asignar imagen como byte[]
+        }
+
         paciente.setTelefono(dto.getTelefono());
         paciente.setCelular(dto.getCelular());
         paciente.setProyecto(dto.getProyecto());
@@ -210,6 +232,7 @@ public class TestService {
         return paciente;
     }
 
+
     private EspecialistasDTO convertEspecialistaToDTO(Especialistas especialista) {
         if (especialista == null) {
             return null;
@@ -226,8 +249,10 @@ public class TestService {
         dto.setEspecialistaAsignado(especialista.getEspecialistaAsignado());
         dto.setInicioPasantia(especialista.getInicioPasantia());
         dto.setFinPasantia(especialista.getFinPasantia());
-        dto.setImagen(especialista.getImagen());
-        return dto;
+        if (especialista.getImagen() != null) {
+            String base64Image = Base64.getEncoder().encodeToString(especialista.getImagen());
+            dto.setImagen(base64Image);
+        }        return dto;
     }
 
     private Especialistas convertDTOToEspecialista(EspecialistasDTO dto) {
@@ -246,8 +271,14 @@ public class TestService {
         especialista.setEspecialistaAsignado(dto.getEspecialistaAsignado());
         especialista.setInicioPasantia(dto.getInicioPasantia());
         especialista.setFinPasantia(dto.getFinPasantia());
-        especialista.setImagen(dto.getImagen());
-        return especialista;
+
+        // Convertir Base64 String a byte[] y asignarlo al objeto especialista
+        if (dto.getImagen() != null) {
+            byte[] imageBytes = Base64.getDecoder().decode(dto.getImagen());
+            especialista.setImagen(imageBytes);  // Asignar la imagen como byte[]
+        }
+
+        return especialista;  // Aquí devolvemos el objeto especialista, no el DTO
     }
 
     private InstitucionEducativaDTO convertInstitucionEducativaToDTO(InstitucionEducativa institucionEducativa) {

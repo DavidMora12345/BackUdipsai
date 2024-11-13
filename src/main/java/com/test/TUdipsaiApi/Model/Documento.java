@@ -14,7 +14,6 @@ public class Documento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Lob
-    @Column(name = "contenido", columnDefinition = "BLOB")
-    private byte[] contenido;
+    @Column(name = "url", nullable = false)
+    private String url;
 }

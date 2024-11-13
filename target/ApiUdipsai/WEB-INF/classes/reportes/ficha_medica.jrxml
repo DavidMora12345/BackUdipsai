@@ -1,0 +1,1802 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ficha_medica" pageWidth="595" pageHeight="1450" columnWidth="555" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="10" uuid="34923ed3-1b8d-41fd-946c-0fc43968b6f7">
+
+
+    <!-- Estilos personalizados -->
+    <style name="Title" fontName="Arial" fontSize="20" isBold="true" pdfFontName="Helvetica-Bold"/>
+    <style name="SubTitle" fontName="Arial" fontSize="16" isBold="true" pdfFontName="Helvetica-Bold"/>
+
+    <style name="Text" fontName="Arial" fontSize="12" pdfFontName="Helvetica"/>
+    <style name="DetailText" fontName="Arial" fontSize="10" pdfFontName="Helvetica"/>
+
+    <!-- Definición de parámetros -->
+    <parameter name="backgroundImage" class="java.lang.String"/>
+    <parameter name="genogramaFamiliar" class="java.io.InputStream"/>
+    <parameter name="imagenPaciente" class="java.io.InputStream"/>
+    <parameter name="vivenJuntos" class="java.lang.String"/>
+    <parameter name="embarazoDeseado" class="java.lang.String"/>
+    <parameter name="controlEmbarazo" class="java.lang.String"/>
+    <parameter name="presentoAmenazaAborto" class="java.lang.String"/>
+    <parameter name="lloroAlNacer" class="java.lang.String"/>
+    <parameter name="presentoAnoxiaAlNacer" class="java.lang.String"/>
+    <parameter name="presentoHipoxiaAlNacer" class="java.lang.String"/>
+    <parameter name="presentoIctericiaAlNacer" class="java.lang.String"/>
+    <parameter name="presentoCianosisAlNacer" class="java.lang.String"/>
+    <parameter name="complicacionesEnElParto" class="java.lang.String"/>
+    <parameter name="estuvoEnIncubadora" class="java.lang.String"/>
+    <parameter name="esquemaVacunacionCompleto" class="java.lang.String"/>
+    <parameter name="caeOPerdeEquilibrioFacilmente" class="java.lang.String"/>
+
+
+
+
+    <!-- Definición de campos -->
+    <field name="id" class="java.lang.Integer"/>
+    <field name="paciente.fechaApertura" class="java.util.Date"/>
+    <field name="paciente.nombresApellidos" class="java.lang.String"/>
+    <field name="paciente.ciudad" class="java.lang.String"/>
+    <field name="paciente.fechaNacimiento" class="java.util.Date"/>
+    <field name="paciente.edad" class="java.lang.String"/>
+    <field name="paciente.cedula" class="java.lang.String"/>
+    <field name="paciente.domicilio" class="java.lang.String"/>
+    <field name="paciente.telefono" class="java.lang.String"/>
+    <field name="paciente.celular" class="java.lang.String"/>
+    <field name="paciente.institucionEducativa.nombreInstitucion" class="java.lang.String"/>
+    <field name="paciente.proyecto" class="java.lang.String"/>
+    <field name="paciente.jornada.nombreJornada" class="java.lang.String"/>
+    <field name="paciente.anioEducacion" class="java.lang.String"/>
+    <field name="paciente.paralelo" class="java.lang.String"/>
+    <field name="paciente.perteneceInclusion" class="java.lang.String"/>
+    <field name="paciente.tieneDiscapacidad" class="java.lang.String"/>
+    <field name="paciente.portadorCarnet" class="java.lang.Boolean"/>
+    <field name="paciente.diagnostico" class="java.lang.String"/>
+    <field name="paciente.motivoConsulta" class="java.lang.String"/>
+    <field name="paciente.observaciones" class="java.lang.String"/>
+    <field name="paciente.tipoDiscapacidad" class="java.lang.String"/>
+    <field name="paciente.detalleDiscapacidad" class="java.lang.String"/>
+    <field name="paciente.porcentajeDiscapacidad" class="java.lang.Integer"/>
+    <field name="paciente.perteneceAProyecto" class="java.lang.Boolean"/>
+    <field name="paciente.sede.nombre" class="java.lang.String"/>
+    <field name="estado" class="java.lang.Integer"/>
+    <field name="fuenteDeInformacion" class="java.lang.String"/>
+    <field name="fecha" class="java.time.LocalDate"/>
+    <field name="motivoConsulta" class="java.lang.String"/>
+    <field name="elEstudianteViveCon" class="com.test.TUdipsaiApi.Model.FichaMedica$ElEstudianteViveCon"/>
+    <field name="elEstudianteViveConOtro" class="java.lang.String"/>
+    <field name="nombreDelPadre" class="java.lang.String"/>
+    <field name="edadPadre" class="java.lang.Integer"/>
+    <field name="ocupacionPadre" class="java.lang.String"/>
+    <field name="instruccionPadre" class="java.lang.String"/>
+    <field name="estadoCivilPadre" class="java.lang.String"/>
+    <field name="lugarResidenciaPadre" class="java.lang.String"/>
+    <field name="nombreDeLaMadre" class="java.lang.String"/>
+    <field name="edadMadre" class="java.lang.Integer"/>
+    <field name="ocupacionMadre" class="java.lang.String"/>
+    <field name="instruccionMadre" class="java.lang.String"/>
+    <field name="estadoCivilMadre" class="java.lang.String"/>
+    <field name="lugarResidenciaMadre" class="java.lang.String"/>
+    <field name="numeroHermanos" class="java.lang.Integer"/>
+    <field name="lugarQueOcupa" class="java.lang.String"/>
+    <field name="direccionDomiciliaria" class="java.lang.String"/>
+    <field name="vivenJuntos" class="java.lang.Boolean"/>
+    <field name="otrosCompromisos" class="java.lang.String"/>
+    <field name="tipoFamilia" class="com.test.TUdipsaiApi.Model.FichaMedica$TipoFamilia"/>
+    <field name="hijosOtrosFamiliaresVivenCasa" class="java.lang.String"/>
+    <field name="embarazoDeseado" class="java.lang.Boolean"/>
+    <field name="controlEmbarazo" class="java.lang.Boolean"/>
+    <field name="causaControlEmbarazo" class="java.lang.String"/>
+    <field name="enfermedadesMadre" class="java.lang.String"/>
+    <field name="consumoMedicamentosOExposicionSustanciasToxicas" class="java.lang.String"/>
+    <field name="presentoAmenazaAborto" class="java.lang.Boolean"/>
+    <field name="mesAmenazaAborto" class="java.lang.String"/>
+    <field name="causaAmenazaAborto" class="java.lang.String"/>
+    <field name="estadoEmocional" class="java.lang.String"/>
+    <field name="dondeNacioNinio" class="com.test.TUdipsaiApi.Model.FichaMedica$DondeNacioNinio"/>
+    <field name="ciudadNacimientoNinio" class="java.lang.String"/>
+    <field name="duracionEmbarazo" class="com.test.TUdipsaiApi.Model.FichaMedica$DuracionEmbarazo"/>
+    <field name="tipoParto" class="com.test.TUdipsaiApi.Model.FichaMedica$TipoParto"/>
+    <field name="partoSegunElComienzo" class="com.test.TUdipsaiApi.Model.FichaMedica$PartoSegunElComienzo"/>
+    <field name="partoSegunFinalizacion" class="com.test.TUdipsaiApi.Model.FichaMedica$PartoSegunFinalizacion"/>
+    <field name="lloroAlNacer" class="java.lang.Boolean"/>
+    <field name="pesoAlNacer" class="java.math.BigDecimal"/>
+    <field name="tallaAlNacer" class="java.math.BigDecimal"/>
+    <field name="presentoAnoxiaAlNacer" class="java.lang.Boolean"/>
+    <field name="presentoHipoxiaAlNacer" class="java.lang.Boolean"/>
+    <field name="presentoIctericiaAlNacer" class="java.lang.Boolean"/>
+    <field name="presentoCianosisAlNacer" class="java.lang.Boolean"/>
+    <field name="malformacionCongenita" class="java.lang.String"/>
+    <field name="problemasDeAlimentacion" class="java.lang.String"/>
+    <field name="complicacionesEnElParto" class="java.lang.Boolean"/>
+    <field name="cualComplicacionParto" class="java.lang.String"/>
+    <field name="estuvoEnIncubadora" class="java.lang.Boolean"/>
+    <field name="tiempoEstuvoEnIncubadora" class="java.lang.String"/>
+    <field name="causaEstuvoEnIncubadora" class="java.lang.String"/>
+    <field name="esquemaVacunacionCompleto" class="java.lang.Boolean"/>
+    <field name="controlCefalico" class="java.lang.String"/>
+    <field name="sedestacion" class="java.lang.String"/>
+    <field name="hipedestacion" class="java.lang.String"/>
+    <field name="caminaConApoyo" class="java.lang.String"/>
+    <field name="caminaSolo" class="java.lang.String"/>
+    <field name="subeEscaleras" class="java.lang.String"/>
+    <field name="controlEsfinteres" class="java.lang.String"/>
+    <field name="salta" class="java.lang.String"/>
+    <field name="corre" class="java.lang.String"/>
+    <field name="gateo" class="java.lang.String"/>
+    <field name="prefiereManoIzquierdaDerecha" class="java.lang.String"/>
+    <field name="caeOPerdeEquilibrioFacilmente" class="java.lang.String"/>
+    <field name="dejoPechoMaterno" class="java.lang.String"/>
+    <field name="biberon" class="java.lang.String"/>
+    <field name="alimentoPorSiSoloCuchara" class="java.lang.String"/>
+    <field name="edadIntegroDietaFamiliar" class="java.lang.String"/>
+    <field name="enfermedadesConTratamiento" class="java.lang.String"/>
+    <field name="alergias" class="java.lang.String"/>
+    <field name="intervencionesQuirurgicas" class="java.lang.String"/>
+    <field name="medicamentosRequeridosOConsumo" class="java.lang.String"/>
+    <field name="enfermedadesDiscapacidadesFamiliares" class="java.lang.String"/>
+    <field name="trastornosPsicologicosFamiliares" class="java.lang.String"/>
+    <field name="problemasAprendizajeFamiliares" class="java.lang.String"/>
+    <field name="parentesco" class="java.lang.String"/>
+    <field name="personaQDeriva" class="java.lang.String"/>
+
+
+    <pageHeader>
+        <band height="60" splitType="Stretch">
+            <!-- Contenedor general para las tres columnas -->
+            <rectangle>
+                <reportElement x="0" y="0" width="555" height="60" forecolor="#000000"/> <!-- Borde negro general -->
+            </rectangle>
+
+            <!-- Primera columna (Logo y nombre de la universidad) -->
+            <frame>
+                <reportElement x="0" y="0" width="198" height="60" forecolor="#000000"/> <!-- Añadir borde con color negro -->
+                <image>
+                    <reportElement x="10" y="10" width="50" height="50"/>
+                    <imageExpression><![CDATA[new java.net.URL($P{backgroundImage})]]></imageExpression>
+                </image>
+                <staticText>
+                    <reportElement x="70" y="10" width="120" height="50"/>
+                    <textElement markup="html" verticalAlignment="Middle"> <!-- Indicar que se puede usar HTML -->
+                        <font size="10" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[Universidad<br/>Católica<br/>de Cuenca]]></text> <!-- Agregar saltos de línea con <br/> -->
+                </staticText>
+            </frame>
+
+            <!-- Línea negra entre la primera y segunda columna -->
+            <line>
+                <reportElement x="198" y="0" width="1" height="60" forecolor="#000000"/> <!-- Línea negra vertical -->
+            </line>
+
+            <!-- Segunda columna (Título del reporte) -->
+            <frame>
+                <reportElement x="198" y="0" width="198" height="60" forecolor="#000000"/> <!-- Añadir borde con color negro -->
+                <staticText>
+                    <reportElement x="0" y="10" width="198" height="40"/>
+                    <textElement textAlignment="Center" verticalAlignment="Middle">
+                        <font size="14" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[HISTORIA CLÍNICA UNIFICADA]]></text>
+                </staticText>
+            </frame>
+
+            <!-- Línea negra entre la segunda y tercera columna -->
+            <line>
+                <reportElement x="396" y="0" width="1" height="60" forecolor="#000000"/> <!-- Línea negra vertical -->
+            </line>
+
+            <!-- Tercera columna (Código, versión, fecha y número de página) -->
+            <frame>
+                <reportElement x="396" y="0" width="198" height="60" forecolor="#000000"/> <!-- Mantener el marco en su lugar -->
+
+                <!-- CÓDIGO -->
+                <staticText>
+                    <reportElement x="5" y="5" width="193" height="12"/> <!-- Ajustar ancho y posición -->
+                    <textElement textAlignment="Left"> <!-- Alinear el texto a la izquierda -->
+                        <font size="8" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[CÓDIGO: F – VS – 66]]></text>
+                </staticText>
+
+                <!-- VERSIÓN -->
+                <staticText>
+                    <reportElement x="5" y="18" width="193" height="12"/> <!-- Ajustar ancho y posición -->
+                    <textElement textAlignment="Left"> <!-- Alinear el texto a la izquierda -->
+                        <font size="8" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[VERSIÓN: 01]]></text>
+                </staticText>
+
+                <!-- FECHA DINÁMICA -->
+                <textField>
+                    <reportElement x="5" y="31" width="193" height="12"/> <!-- Ajustar ancho y posición -->
+                    <textElement textAlignment="Left"> <!-- Alinear el texto a la izquierda -->
+                        <font size="8" isBold="true"/>
+                    </textElement>
+                    <!-- Usar SimpleDateFormat para generar la fecha actual -->
+                    <textFieldExpression><![CDATA[new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date())]]></textFieldExpression>
+                </textField>
+
+                <!-- PÁGINA -->
+                <textField>
+                    <reportElement x="5" y="44" width="193" height="12"/> <!-- Ajustar ancho y posición -->
+                    <textElement textAlignment="Left"> <!-- Alinear el texto a la izquierda -->
+                        <font size="8" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA["Página " + $V{PAGE_NUMBER}]]></textFieldExpression>
+                </textField>
+            </frame>
+        </band>
+    </pageHeader>
+
+    <detail>
+        <band height="570" splitType="Stretch">
+            <!-- Contenedor General -->
+            <rectangle>
+                <reportElement x="0" y="0" width="555" height="570" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+            </rectangle>
+
+            <!-- Sección A. DATOS PERSONALES -->
+            <staticText>
+                <reportElement x="10" y="5" width="535" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[A. DATOS PERSONALES]]></text>
+            </staticText>
+
+            <!-- Fecha de Apertura -->
+            <rectangle>
+                <reportElement x="10" y="25" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="27" width="120" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Fecha de Apertura:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="140" y="27" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.fechaApertura}]]></textFieldExpression>
+            </textField>
+
+            <!-- Imagen del Paciente -->
+            <rectangle>
+                <reportElement x="380" y="25" width="150" height="160" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="380" y="10" width="150" height="15"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[Imagen del Paciente:]]></text>
+            </staticText>
+            <image scaleImage="FillFrame" onErrorType="Blank">
+                <reportElement x="380" y="30" width="150" height="150"/>
+                <imageExpression class="java.io.InputStream">
+                    <![CDATA[$P{imagenPaciente} != null ? $P{imagenPaciente} : new java.net.URL("https://thumbs.dreamstime.com/b/icono-de-usuario-personas-vectoriales-vector-perfil-ilustraci%C3%B3n-persona-comercial-s%C3%ADmbolo-grupo-usuarios-masculino-195160429.jpg").openStream()]]>
+                </imageExpression>
+            </image>
+
+            <!-- Nombres y Apellidos -->
+            <rectangle>
+                <reportElement x="10" y="50" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="52" width="120" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Nombres y Apellidos:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="140" y="52" width="220" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.nombresApellidos}]]></textFieldExpression>
+            </textField>
+
+            <!-- Ciudad -->
+            <rectangle>
+                <reportElement x="10" y="70" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="72" width="120" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Ciudad:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="140" y="72" width="220" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.ciudad}]]></textFieldExpression>
+            </textField>
+
+            <!-- Fecha de Nacimiento -->
+            <rectangle>
+                <reportElement x="10" y="90" width="360" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="92" width="120" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Fecha de Nacimiento:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="140" y="92" width="220" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.fechaNacimiento}]]></textFieldExpression>
+            </textField>
+
+            <!-- Edad -->
+            <rectangle>
+                <reportElement x="10" y="110" width="360" height="25" forecolor="#B0B0B0"/> <!-- Altura aumentada a 25 -->
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="112" width="120" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Edad:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="140" y="112" width="50" height="25"/> <!-- Altura aumentada a 25 -->
+                <textFieldExpression><![CDATA[$F{paciente.edad}]]></textFieldExpression>
+            </textField>
+
+            <!-- Cédula -->
+            <rectangle>
+                <reportElement x="10" y="135" width="360" height="20" forecolor="#B0B0B0"/> <!-- y=135 -->
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="137" width="120" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Cédula:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="140" y="137" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.cedula}]]></textFieldExpression>
+            </textField>
+
+            <!-- Domicilio -->
+            <rectangle>
+                <reportElement x="10" y="155" width="360" height="20" forecolor="#B0B0B0"/> <!-- y=155 -->
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="157" width="120" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Domicilio:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="140" y="157" width="220" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.domicilio}]]></textFieldExpression>
+            </textField>
+
+            <!-- Teléfono -->
+            <rectangle>
+                <reportElement x="10" y="175" width="360" height="20" forecolor="#B0B0B0"/> <!-- y=175 -->
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="177" width="120" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Teléfono:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="140" y="177" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.telefono}]]></textFieldExpression>
+            </textField>
+
+            <!-- Celular -->
+            <rectangle>
+                <reportElement x="10" y="195" width="360" height="20" forecolor="#B0B0B0"/> <!-- y=195 -->
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="197" width="120" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Celular:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="140" y="197" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.celular}]]></textFieldExpression>
+            </textField>
+
+            <!-- Proyecto -->
+            <rectangle>
+                <reportElement x="10" y="215" width="360" height="20" forecolor="#B0B0B0"/> <!-- y=215 -->
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="217" width="120" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Proyecto:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="140" y="217" width="220" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.proyecto}]]></textFieldExpression>
+            </textField>
+
+            <!-- Año de Educación -->
+            <rectangle>
+                <reportElement x="10" y="235" width="360" height="20" forecolor="#B0B0B0"/> <!-- y=235 -->
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="237" width="120" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Año de Educación:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="140" y="237" width="220" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.anioEducacion}]]></textFieldExpression>
+            </textField>
+
+            <!-- Paralelo -->
+            <rectangle>
+                <reportElement x="10" y="255" width="360" height="20" forecolor="#B0B0B0"/> <!-- y=255 -->
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="257" width="120" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Paralelo:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="140" y="257" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.paralelo}]]></textFieldExpression>
+            </textField>
+
+            <!-- Pertenece a Inclusión -->
+            <rectangle>
+                <reportElement x="10" y="275" width="360" height="20" forecolor="#B0B0B0"/> <!-- y=275 -->
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="277" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Pertenece a Inclusión:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="160" y="277" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.perteneceInclusion}]]></textFieldExpression>
+            </textField>
+
+            <!-- Tiene Discapacidad -->
+            <rectangle>
+                <reportElement x="10" y="295" width="360" height="20" forecolor="#B0B0B0"/> <!-- y=295 -->
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="297" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Tiene Discapacidad:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="160" y="297" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.tieneDiscapacidad}]]></textFieldExpression>
+            </textField>
+
+            <!-- Portador de Carnet -->
+            <rectangle>
+                <reportElement x="10" y="315" width="360" height="20" forecolor="#B0B0B0"/> <!-- y=315 -->
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="317" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Portador de Carnet:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="160" y="317" width="50" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.portadorCarnet} ? "Sí" : "No"]]></textFieldExpression>
+            </textField>
+
+            <!-- Diagnóstico -->
+            <rectangle>
+                <reportElement x="380" y="315" width="200" height="20" forecolor="#B0B0B0"/> <!-- y=315 -->
+            </rectangle>
+            <staticText>
+                <reportElement x="385" y="317" width="100" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Diagnóstico:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="480" y="317" width="80" height="15"/> <!-- y=317 -->
+                <textFieldExpression><![CDATA[$F{paciente.diagnostico}]]></textFieldExpression>
+            </textField>
+
+            <!-- Observaciones -->
+            <rectangle>
+                <reportElement x="10" y="335" width="540" height="20" forecolor="#B0B0B0"/> <!-- y=335 -->
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="337" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Observaciones:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="160" y="337" width="385" height="15"/> <!-- y=337 -->
+                <textFieldExpression><![CDATA[$F{paciente.observaciones}]]></textFieldExpression>
+            </textField>
+
+            <!-- Tipo de Discapacidad -->
+            <rectangle>
+                <reportElement x="10" y="355" width="540" height="20" forecolor="#B0B0B0"/> <!-- y=355 -->
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="357" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Tipo de Discapacidad:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="160" y="357" width="150" height="15"/>
+                <textFieldExpression><![CDATA[$F{paciente.tipoDiscapacidad}]]></textFieldExpression>
+            </textField>
+
+            <!-- Detalle de Discapacidad -->
+            <rectangle>
+                <reportElement x="10" y="375" width="540" height="20" forecolor="#B0B0B0"/> <!-- y=375 -->
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="377" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Detalle de Discapacidad:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="160" y="377" width="385" height="15"/> <!-- y=377 -->
+                <textFieldExpression><![CDATA[$F{paciente.detalleDiscapacidad}]]></textFieldExpression>
+            </textField>
+
+            <!-- Porcentaje de Discapacidad -->
+            <rectangle>
+                <reportElement x="10" y="395" width="360" height="20" forecolor="#B0B0B0"/> <!-- y=395 -->
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="397" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Porcentaje de Discapacidad:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="160" y="397" width="50" height="15"/> <!-- y=397 -->
+                <textFieldExpression><![CDATA[$F{paciente.porcentajeDiscapacidad}]]></textFieldExpression>
+            </textField>
+
+            <!-- Institución Educativa -->
+            <rectangle>
+                <reportElement x="10" y="415" width="540" height="20" forecolor="#B0B0B0"/> <!-- y=415 -->
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="417" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Institución Educativa:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="160" y="417" width="385" height="15"/> <!-- y=417 -->
+                <textFieldExpression><![CDATA[$F{paciente.institucionEducativa.nombreInstitucion}]]></textFieldExpression>
+            </textField>
+
+            <!-- Jornada -->
+            <rectangle>
+                <reportElement x="10" y="435" width="540" height="20" forecolor="#B0B0B0"/> <!-- y=435 -->
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="437" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Jornada:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="160" y="437" width="385" height="15"/> <!-- y=437 -->
+                <textFieldExpression><![CDATA[$F{paciente.jornada.nombreJornada}]]></textFieldExpression>
+            </textField>
+
+            <!-- Sede -->
+            <rectangle>
+                <reportElement x="10" y="455" width="540" height="20" forecolor="#B0B0B0"/> <!-- y=455 -->
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="457" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Sede:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="160" y="457" width="385" height="15"/> <!-- y=457 -->
+                <textFieldExpression><![CDATA[$F{paciente.sede.nombre}]]></textFieldExpression>
+            </textField>
+
+            <!-- Fuente de Información -->
+            <rectangle>
+                <reportElement x="10" y="475" width="540" height="20" forecolor="#B0B0B0"/> <!-- y=475 -->
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="477" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Fuente de Información:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="160" y="477" width="385" height="15"/> <!-- y=477 -->
+                <textFieldExpression><![CDATA[$F{fuenteDeInformacion}]]></textFieldExpression>
+            </textField>
+
+            <!-- Fecha -->
+            <rectangle>
+                <reportElement x="10" y="495" width="540" height="20" forecolor="#B0B0B0"/> <!-- y=495 -->
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="497" width="150" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Fecha:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="160" y="497" width="385" height="15"/> <!-- y=497 -->
+                <textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+            </textField>
+
+            <!-- Parentesco -->
+            <rectangle>
+                <reportElement x="10" y="515" width="360" height="20" forecolor="#B0B0B0"/> <!-- y=515 -->
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="517" width="120" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Parentesco:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="140" y="517" width="220" height="15"/> <!-- y=517 -->
+                <textFieldExpression><![CDATA[$F{parentesco}]]></textFieldExpression>
+            </textField>
+
+            <!-- Persona que Deriva -->
+            <rectangle>
+                <reportElement x="10" y="535" width="360" height="20" forecolor="#B0B0B0"/> <!-- y=535 -->
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="537" width="120" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Persona que Deriva:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="140" y="537" width="220" height="15"/> <!-- y=537 -->
+                <textFieldExpression><![CDATA[$F{personaQDeriva}]]></textFieldExpression>
+            </textField>
+        </band>
+
+
+        <band height="80" splitType="Stretch">
+            <!-- Rectángulo que enmarca el contenido -->
+            <rectangle>
+                <reportElement x="10" y="10" width="540" height="70" forecolor="#B0B0B0"/>
+            </rectangle>
+
+            <!-- Título dentro del rectángulo -->
+            <staticText>
+                <reportElement x="20" y="15" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[B. MOTIVO DE CONSULTA:]]></text>
+            </staticText>
+
+            <!-- Campo de texto con sangría para el contenido -->
+            <textField isStretchWithOverflow="true">
+                <reportElement x="20" y="35" width="520" height="0" positionType="Float"/> <!-- Altura ajustada a 0 -->
+                <textElement textAlignment="Justified" verticalAlignment="Top">
+                    <paragraph leftIndent="0"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{motivoConsulta}]]></textFieldExpression>
+            </textField>
+
+        </band>
+
+
+
+
+        <!-- DESDE AQUI VA EL NUEVO FORMULARIO MEJOR ESTRUCTURADO -->
+
+        <band height="920" splitType="Stretch">
+            <!-- Contenedor General -->
+            <rectangle>
+                <reportElement x="0" y="0" width="555" height="880" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+            </rectangle>
+
+            <!-- Sección A. DATOS PERSONALES -->
+            <staticText>
+                <reportElement x="10" y="5" width="535" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[A. DATOS FAMILIARES]]></text>
+            </staticText>
+
+            <!-- Sección El Estudiante Vive Con -->
+            <rectangle>
+                <reportElement x="10" y="40" width="535" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="42" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[El Estudiante Vive Con:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="220" y="42" width="305" height="15"/> <!-- Ajustado el ancho a 305 -->
+                <textFieldExpression><![CDATA[$F{elEstudianteViveCon}]]></textFieldExpression>
+            </textField>
+
+            <rectangle>
+                <reportElement x="10" y="70" width="535" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="72" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[El Estudiante Vive Con (Otro):]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="220" y="72" width="305" height="15"/> <!-- Ajustado el ancho a 305 -->
+                <textFieldExpression><![CDATA[$F{elEstudianteViveConOtro}]]></textFieldExpression>
+            </textField>
+
+            <!-- Sección Datos del Padre -->
+            <rectangle>
+                <reportElement x="10" y="100" width="535" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="102" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Nombre del Padre:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="220" y="102" width="305" height="15"/> <!-- Ajustado el ancho a 305 -->
+                <textFieldExpression><![CDATA[$F{nombreDelPadre}]]></textFieldExpression>
+            </textField>
+
+            <rectangle>
+                <reportElement x="10" y="130" width="535" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="132" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Edad del Padre:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="220" y="132" width="305" height="15"/> <!-- Ajustado el ancho a 305 -->
+                <textFieldExpression><![CDATA[$F{edadPadre}]]></textFieldExpression>
+            </textField>
+
+            <rectangle>
+                <reportElement x="10" y="160" width="535" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="162" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Ocupación del Padre:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="220" y="162" width="305" height="15"/> <!-- Ajustado el ancho a 305 -->
+                <textFieldExpression><![CDATA[$F{ocupacionPadre}]]></textFieldExpression>
+            </textField>
+
+            <rectangle>
+                <reportElement x="10" y="190" width="535" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="192" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Instrucción del Padre:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="220" y="192" width="305" height="15"/> <!-- Ajustado el ancho a 305 -->
+                <textFieldExpression><![CDATA[$F{instruccionPadre}]]></textFieldExpression>
+            </textField>
+
+            <rectangle>
+                <reportElement x="10" y="220" width="535" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="222" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Estado Civil del Padre:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="220" y="222" width="305" height="15"/> <!-- Ajustado el ancho a 305 -->
+                <textFieldExpression><![CDATA[$F{estadoCivilPadre}]]></textFieldExpression>
+            </textField>
+
+            <rectangle>
+                <reportElement x="10" y="250" width="535" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="252" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Lugar de Residencia del Padre:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="220" y="252" width="305" height="15"/> <!-- Ajustado el ancho a 305 -->
+                <textFieldExpression><![CDATA[$F{lugarResidenciaPadre}]]></textFieldExpression>
+            </textField>
+
+            <!-- Sección Datos de la Madre -->
+            <rectangle>
+                <reportElement x="10" y="280" width="535" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="282" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Nombre de la Madre:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="220" y="282" width="305" height="15"/> <!-- Ajustado el ancho a 305 -->
+                <textFieldExpression><![CDATA[$F{nombreDeLaMadre}]]></textFieldExpression>
+            </textField>
+
+            <rectangle>
+                <reportElement x="10" y="310" width="535" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="312" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Edad de la Madre:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="220" y="312" width="305" height="15"/> <!-- Ajustado el ancho a 305 -->
+                <textFieldExpression><![CDATA[$F{edadMadre}]]></textFieldExpression>
+            </textField>
+
+            <rectangle>
+                <reportElement x="10" y="340" width="535" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="342" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Ocupación de la Madre:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="220" y="342" width="305" height="15"/> <!-- Ajustado el ancho a 305 -->
+                <textFieldExpression><![CDATA[$F{ocupacionMadre}]]></textFieldExpression>
+            </textField>
+
+            <rectangle>
+                <reportElement x="10" y="370" width="535" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="372" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Instrucción de la Madre:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="220" y="372" width="305" height="15"/> <!-- Ajustado el ancho a 305 -->
+                <textFieldExpression><![CDATA[$F{instruccionMadre}]]></textFieldExpression>
+            </textField>
+
+            <rectangle>
+                <reportElement x="10" y="400" width="535" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="402" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Estado Civil de la Madre:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="220" y="402" width="305" height="15"/> <!-- Ajustado el ancho a 305 -->
+                <textFieldExpression><![CDATA[$F{estadoCivilMadre}]]></textFieldExpression>
+            </textField>
+
+            <rectangle>
+                <reportElement x="10" y="430" width="535" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="432" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Lugar de Residencia de la Madre:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="220" y="432" width="305" height="15"/> <!-- Ajustado el ancho a 305 -->
+                <textFieldExpression><![CDATA[$F{lugarResidenciaMadre}]]></textFieldExpression>
+            </textField>
+
+            <rectangle>
+                <reportElement x="10" y="460" width="535" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="462" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Número de Hermanos:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="220" y="462" width="305" height="15"/> <!-- Ajustado el ancho a 305 -->
+                <textFieldExpression><![CDATA[$F{numeroHermanos}]]></textFieldExpression>
+            </textField>
+
+            <rectangle>
+                <reportElement x="10" y="490" width="535" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="492" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Lugar que Ocupa:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="220" y="492" width="305" height="15"/> <!-- Ajustado el ancho a 305 -->
+                <textFieldExpression><![CDATA[$F{lugarQueOcupa}]]></textFieldExpression>
+            </textField>
+
+            <!-- Sección Datos Domiciliarios y Familia -->
+            <rectangle>
+                <reportElement x="10" y="520" width="535" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="522" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Dirección Domiciliaria:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="220" y="522" width="305" height="15"/> <!-- Ajustado el ancho a 305 -->
+                <textFieldExpression><![CDATA[$F{direccionDomiciliaria}]]></textFieldExpression>
+            </textField>
+
+            <rectangle>
+                <reportElement x="10" y="550" width="535" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="552" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Viven Juntos:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="220" y="552" width="305" height="15"/> <!-- Ajustado el ancho a 305 -->
+                <textFieldExpression><![CDATA[$P{vivenJuntos}]]></textFieldExpression>
+            </textField>
+
+            <rectangle>
+                <reportElement x="10" y="580" width="535" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="582" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Otros Compromisos:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="220" y="582" width="305" height="15"/> <!-- Ajustado el ancho a 305 -->
+                <textFieldExpression><![CDATA[$F{otrosCompromisos}]]></textFieldExpression>
+            </textField>
+
+            <!-- Sección "Hijos u Otros Familiares que Viven en Casa" -->
+            <rectangle>
+                <reportElement x="10" y="610" width="535" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="612" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Hijos u Otros Familiares que Viven en Casa:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="220" y="612" width="305" height="15"/> <!-- Ajustado el ancho a 305 -->
+                <textFieldExpression><![CDATA[$F{hijosOtrosFamiliaresVivenCasa}]]></textFieldExpression>
+            </textField>
+
+            <!-- Sección "Tipo de Familia" -->
+            <rectangle>
+                <reportElement x="10" y="640" width="535" height="20" forecolor="#B0B0B0"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="15" y="642" width="200" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Tipo de Familia:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="220" y="642" width="305" height="15"/> <!-- Ajustado el ancho a 305 -->
+                <textFieldExpression><![CDATA[$F{tipoFamilia}]]></textFieldExpression>
+            </textField>
+
+            <!-- Ajustar el campo "Genograma Familiar" centrado -->
+            <staticText>
+                <reportElement x="125" y="680" width="305" height="20"/> <!-- Centrado horizontalmente en la hoja -->
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="12" isBold="true"/> <!-- Texto en negrita -->
+                </textElement>
+                <text><![CDATA[Genograma Familiar]]></text>
+            </staticText>
+
+            <!-- Añadir contorno a la imagen del genograma familiar centrado -->
+            <rectangle>
+                <reportElement x="125" y="710" width="305" height="150" forecolor="#B0B0B0"/> <!-- Centrado horizontalmente en la hoja -->
+            </rectangle>
+            <image scaleImage="FillFrame" onErrorType="Blank">
+                <reportElement x="125" y="710" width="305" height="150"/>
+                <imageExpression class="java.io.InputStream">
+                    <![CDATA[$P{genogramaFamiliar} != null ? $P{genogramaFamiliar} : null]]>
+                </imageExpression>
+            </image>
+        </band>
+
+
+
+        <band height="800" splitType="Stretch">
+            <!-- Contenedor General -->
+            <rectangle>
+                <reportElement x="0" y="0" width="555" height="750" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+            </rectangle>
+
+            <!-- Sección A. DATOS PERSONALES -->
+            <staticText>
+                <reportElement x="10" y="5" width="535" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[D. DESARROLLO EVOLUTIVO]]></text>
+            </staticText>
+
+            <frame>
+                <reportElement x="10" y="30" width="535" height="750" forecolor="#B0B0B0"/> <!-- Ajustado el alto a 750 -->
+                <line>
+                    <reportElement x="0" y="0" width="535" height="1"/> <!-- Ajustado el ancho a 535 -->
+                </line>
+
+                <!-- Sección Embarazo -->
+                <rectangle>
+                    <reportElement x="10" y="10" width="525" height="15" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="12" width="275" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Embarazo Deseado:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="12" width="245" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textFieldExpression><![CDATA[$P{embarazoDeseado}]]></textFieldExpression>
+                </textField>
+
+
+                <rectangle>
+                    <reportElement x="10" y="30" width="525" height="15" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="32" width="275" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Control del Embarazo:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="32" width="245" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textFieldExpression><![CDATA[$P{controlEmbarazo}]]></textFieldExpression>
+                </textField>
+
+                <rectangle>
+                    <reportElement x="10" y="50" width="525" height="15" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="52" width="275" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Causa del Control del Embarazo:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="52" width="245" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textFieldExpression><![CDATA[$F{causaControlEmbarazo}]]></textFieldExpression>
+                </textField>
+
+                <rectangle>
+                    <reportElement x="10" y="70" width="525" height="15" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="72" width="275" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Enfermedades de la Madre:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="72" width="245" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textFieldExpression><![CDATA[$F{enfermedadesMadre}]]></textFieldExpression>
+                </textField>
+
+                <!-- Sección Complicaciones y Estado Emocional -->
+                <rectangle>
+                    <reportElement x="10" y="90" width="525" height="15" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="92" width="275" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Consumo de Medicamentos o Exposición a Sustancias Tóxicas:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="92" width="245" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textFieldExpression><![CDATA[$F{consumoMedicamentosOExposicionSustanciasToxicas}]]></textFieldExpression>
+                </textField>
+
+                <rectangle>
+                    <reportElement x="10" y="110" width="525" height="15" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="112" width="275" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Presentó Amenaza de Aborto:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="112" width="245" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textFieldExpression><![CDATA[$P{presentoAmenazaAborto}]]></textFieldExpression>
+                </textField>
+
+                <rectangle>
+                    <reportElement x="10" y="130" width="525" height="15" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="132" width="275" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Mes Amenaza Aborto:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="132" width="245" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textFieldExpression><![CDATA[$F{mesAmenazaAborto}]]></textFieldExpression>
+                </textField>
+
+                <rectangle>
+                    <reportElement x="10" y="150" width="525" height="15" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="152" width="275" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Causa Amenaza Aborto:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="152" width="245" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textFieldExpression><![CDATA[$F{causaAmenazaAborto}]]></textFieldExpression>
+                </textField>
+
+                <rectangle>
+                    <reportElement x="10" y="170" width="525" height="15" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="172" width="275" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Estado Emocional:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="172" width="245" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textFieldExpression><![CDATA[$F{estadoEmocional}]]></textFieldExpression>
+                </textField>
+
+                <rectangle>
+                    <reportElement x="10" y="190" width="525" height="15" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="192" width="275" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Donde Nació el Niño:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="192" width="245" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textFieldExpression><![CDATA[$F{dondeNacioNinio}]]></textFieldExpression>
+                </textField>
+
+                <!-- Sección Datos de Nacimiento -->
+                <rectangle>
+                    <reportElement x="10" y="210" width="525" height="15" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="212" width="275" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Ciudad de Nacimiento del Niño:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="212" width="245" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textFieldExpression><![CDATA[$F{ciudadNacimientoNinio}]]></textFieldExpression>
+                </textField>
+
+                <rectangle>
+                    <reportElement x="10" y="230" width="525" height="15" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="232" width="275" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Duración del Embarazo:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="232" width="245" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textFieldExpression><![CDATA[$F{duracionEmbarazo}]]></textFieldExpression>
+                </textField>
+
+                <rectangle>
+                    <reportElement x="10" y="250" width="525" height="15" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="252" width="275" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Tipo de Parto:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="252" width="245" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textFieldExpression><![CDATA[$F{tipoParto}]]></textFieldExpression>
+                </textField>
+
+                <rectangle>
+                    <reportElement x="10" y="270" width="525" height="15" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="272" width="275" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Parto Según el Comienzo:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="272" width="245" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textFieldExpression><![CDATA[$F{partoSegunElComienzo}]]></textFieldExpression>
+                </textField>
+
+                <rectangle>
+                    <reportElement x="10" y="290" width="525" height="15" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="292" width="275" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Parto Según la Finalización:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="292" width="245" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textFieldExpression><![CDATA[$F{partoSegunFinalizacion}]]></textFieldExpression>
+                </textField>
+
+                <rectangle>
+                    <reportElement x="10" y="310" width="525" height="15" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="312" width="275" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Lloró al Nacer:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="312" width="245" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textFieldExpression><![CDATA[$P{lloroAlNacer}]]></textFieldExpression>
+                </textField>
+
+                <!-- Sección Datos del Nacimiento -->
+                <rectangle>
+                    <reportElement x="10" y="330" width="525" height="15" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="332" width="275" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Peso al Nacer:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="332" width="245" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textFieldExpression><![CDATA[$F{pesoAlNacer}]]></textFieldExpression>
+                </textField>
+
+                <rectangle>
+                    <reportElement x="10" y="350" width="525" height="15" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="352" width="275" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Talla al Nacer:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="352" width="245" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textFieldExpression><![CDATA[$F{tallaAlNacer}]]></textFieldExpression>
+                </textField>
+
+                <rectangle>
+                    <reportElement x="10" y="370" width="525" height="15" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="372" width="275" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Presentó Anoxia al Nacer:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="372" width="245" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textFieldExpression><![CDATA[$P{presentoAnoxiaAlNacer}]]></textFieldExpression>
+                </textField>
+
+                <rectangle>
+                    <reportElement x="10" y="390" width="525" height="15" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="392" width="275" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Presentó Hipoxia al Nacer:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="392" width="245" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textFieldExpression><![CDATA[$P{presentoHipoxiaAlNacer}]]></textFieldExpression>
+                </textField>
+
+                <rectangle>
+                    <reportElement x="10" y="410" width="525" height="15" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="412" width="275" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Presentó Ictericia al Nacer:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="412" width="245" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textFieldExpression><![CDATA[$P{presentoIctericiaAlNacer}]]></textFieldExpression>
+                </textField>
+
+                <rectangle>
+                    <reportElement x="10" y="430" width="525" height="15" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="432" width="275" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Presentó Cianosis al Nacer:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="432" width="245" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textFieldExpression><![CDATA[$P{presentoCianosisAlNacer}]]></textFieldExpression>
+                </textField>
+
+                <!-- Sección Complicaciones al Nacer -->
+                <rectangle>
+                    <reportElement x="10" y="450" width="525" height="15" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="452" width="275" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Malformación Congénita:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="452" width="245" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textFieldExpression><![CDATA[$F{malformacionCongenita}]]></textFieldExpression>
+                </textField>
+
+                <rectangle>
+                    <reportElement x="10" y="470" width="525" height="15" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="472" width="275" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Problemas de Alimentación:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="472" width="245" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textFieldExpression><![CDATA[$F{problemasDeAlimentacion}]]></textFieldExpression>
+                </textField>
+
+                <rectangle>
+                    <reportElement x="10" y="490" width="525" height="15" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="492" width="275" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Complicaciones en el Parto:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="492" width="245" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textFieldExpression><![CDATA[$P{complicacionesEnElParto}]]></textFieldExpression>
+                </textField>
+
+                <rectangle>
+                    <reportElement x="10" y="510" width="525" height="15" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="512" width="275" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Cuál Complicación del Parto:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="512" width="245" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textFieldExpression><![CDATA[$F{cualComplicacionParto}]]></textFieldExpression>
+                </textField>
+
+                <rectangle>
+                    <reportElement x="10" y="530" width="525" height="15" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="532" width="275" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Estuvo en Incubadora:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="532" width="245" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textFieldExpression><![CDATA[$P{estuvoEnIncubadora}]]></textFieldExpression>
+                </textField>
+
+                <rectangle>
+                    <reportElement x="10" y="550" width="525" height="15" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="552" width="275" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Tiempo Estuvo en Incubadora:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="552" width="245" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textFieldExpression><![CDATA[$F{tiempoEstuvoEnIncubadora}]]></textFieldExpression>
+                </textField>
+
+                <!-- Sección Datos Post-nacimiento -->
+                <rectangle>
+                    <reportElement x="10" y="570" width="525" height="15" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="572" width="275" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Causa Estuvo en Incubadora:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="572" width="245" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textFieldExpression><![CDATA[$F{causaEstuvoEnIncubadora}]]></textFieldExpression>
+                </textField>
+
+                <rectangle>
+                    <reportElement x="10" y="590" width="525" height="15" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="592" width="275" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Esquema de Vacunación Completo:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="592" width="245" height="15"/> <!-- Ajustado el alto a 15 -->
+                    <textFieldExpression><![CDATA[$P{esquemaVacunacionCompleto}]]></textFieldExpression>
+                </textField>
+
+            </frame>
+        </band>
+
+
+
+
+        <band height="800" splitType="Stretch">
+            <!-- Contenedor General -->
+            <rectangle>
+                <reportElement x="0" y="0" width="555" height="580" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+            </rectangle>
+
+            <!-- Título de la Sección -->
+            <staticText>
+                <reportElement x="10" y="5" width="535" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[E.CRECIMIENTO Y DESARROLLO]]></text>
+            </staticText>
+
+            <frame>
+                <reportElement x="10" y="25" width="535" height="750" forecolor="#B0B0B0"/> <!-- Ancho del frame ajustado a 535 y posición ajustada -->
+
+                <!-- Sección Control Cefálico -->
+                <rectangle>
+                    <reportElement x="10" y="10" width="525" height="15" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="12" width="275" height="15"/> <!-- Altura ajustada a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Control Cefálico:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="12" width="245" height="15"/> <!-- Altura ajustada a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <textFieldExpression><![CDATA[$F{controlCefalico}]]></textFieldExpression>
+                </textField>
+
+                <rectangle>
+                    <reportElement x="10" y="30" width="525" height="15" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="32" width="275" height="15"/> <!-- Altura ajustada a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Sedestación:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="32" width="245" height="15"/> <!-- Altura ajustada a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <textFieldExpression><![CDATA[$F{sedestacion}]]></textFieldExpression>
+                </textField>
+
+                <!-- Sección Desarrollo Motor -->
+                <rectangle>
+                    <reportElement x="10" y="50" width="525" height="15" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="52" width="275" height="15"/> <!-- Altura ajustada a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Hipedestación:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="52" width="245" height="15"/> <!-- Altura ajustada a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <textFieldExpression><![CDATA[$F{hipedestacion}]]></textFieldExpression>
+                </textField>
+
+                <rectangle>
+                    <reportElement x="10" y="70" width="525" height="15" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="72" width="275" height="15"/> <!-- Altura ajustada a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Camina con Apoyo:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="72" width="245" height="15"/> <!-- Altura ajustada a 15 -->
+                    <textFieldExpression><![CDATA[$F{caminaConApoyo}]]></textFieldExpression>
+                </textField>
+
+                <rectangle>
+                    <reportElement x="10" y="90" width="525" height="15" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="92" width="275" height="15"/> <!-- Altura ajustada a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Camina Solo:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="92" width="245" height="15"/> <!-- Altura ajustada a 15 -->
+                    <textFieldExpression><![CDATA[$F{caminaSolo}]]></textFieldExpression>
+                </textField>
+
+                <rectangle>
+                    <reportElement x="10" y="110" width="525" height="15" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="112" width="275" height="15"/> <!-- Altura ajustada a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Sube Escaleras:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="112" width="245" height="15"/> <!-- Altura ajustada a 15 -->
+                    <textFieldExpression><![CDATA[$F{subeEscaleras}]]></textFieldExpression>
+                </textField>
+
+                <rectangle>
+                    <reportElement x="10" y="130" width="525" height="15" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="132" width="275" height="15"/> <!-- Altura ajustada a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Control de Esfínteres:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="132" width="245" height="15"/> <!-- Altura ajustada a 15 -->
+                    <textFieldExpression><![CDATA[$F{controlEsfinteres}]]></textFieldExpression>
+                </textField>
+
+                <rectangle>
+                    <reportElement x="10" y="150" width="525" height="15" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="152" width="275" height="15"/> <!-- Altura ajustada a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Salta:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="152" width="245" height="15"/> <!-- Altura ajustada a 15 -->
+                    <textFieldExpression><![CDATA[$F{salta}]]></textFieldExpression>
+                </textField>
+
+                <rectangle>
+                    <reportElement x="10" y="170" width="525" height="15" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="172" width="275" height="15"/> <!-- Altura ajustada a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Corre:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="172" width="245" height="15"/> <!-- Altura ajustada a 15 -->
+                    <textFieldExpression><![CDATA[$F{corre}]]></textFieldExpression>
+                </textField>
+
+                <rectangle>
+                    <reportElement x="10" y="190" width="525" height="15" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="192" width="275" height="15"/> <!-- Altura ajustada a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Gateo:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="192" width="245" height="15"/> <!-- Altura ajustada a 15 -->
+                    <textFieldExpression><![CDATA[$F{gateo}]]></textFieldExpression>
+                </textField>
+
+                <!-- Sección Desarrollo Neurológico -->
+                <rectangle>
+                    <reportElement x="10" y="210" width="525" height="15" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="212" width="275" height="15"/> <!-- Altura ajustada a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Prefiere Mano Izquierda o Derecha:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="212" width="245" height="15"/> <!-- Altura ajustada a 15 -->
+                    <textFieldExpression><![CDATA[$F{prefiereManoIzquierdaDerecha}]]></textFieldExpression>
+                </textField>
+
+                <rectangle>
+                    <reportElement x="10" y="230" width="525" height="15" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="232" width="275" height="15"/> <!-- Altura ajustada a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Cae o Pierde el Equilibrio Fácilmente:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="232" width="245" height="15"/> <!-- Altura ajustada a 15 -->
+                    <textFieldExpression><![CDATA[$P{caeOPerdeEquilibrioFacilmente}]]></textFieldExpression>
+                </textField>
+
+                <rectangle>
+                    <reportElement x="10" y="250" width="525" height="15" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="252" width="275" height="15"/> <!-- Altura ajustada a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Dejó Pecho Materno:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="252" width="245" height="15"/> <!-- Altura ajustada a 15 -->
+                    <textFieldExpression><![CDATA[$F{dejoPechoMaterno}]]></textFieldExpression>
+                </textField>
+
+                <rectangle>
+                    <reportElement x="10" y="270" width="525" height="15" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="272" width="275" height="15"/> <!-- Altura ajustada a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Biberón:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="272" width="245" height="15"/> <!-- Altura ajustada a 15 -->
+                    <textFieldExpression><![CDATA[$F{biberon}]]></textFieldExpression>
+                </textField>
+
+                <rectangle>
+                    <reportElement x="10" y="290" width="525" height="15" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="292" width="275" height="15"/> <!-- Altura ajustada a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Alimento por Sí Solo con Cuchara:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="292" width="245" height="15"/> <!-- Altura ajustada a 15 -->
+                    <textFieldExpression><![CDATA[$F{alimentoPorSiSoloCuchara}]]></textFieldExpression>
+                </textField>
+
+                <rectangle>
+                    <reportElement x="10" y="310" width="525" height="15" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="312" width="275" height="15"/> <!-- Altura ajustada a 15 -->
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Edad que Integró Dieta Familiar:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="312" width="245" height="15"/> <!-- Altura ajustada a 15 -->
+                    <textFieldExpression><![CDATA[$F{edadIntegroDietaFamiliar}]]></textFieldExpression>
+                </textField>
+            </frame>
+        </band>
+
+        <band height="550">
+            <!-- Contenedor General -->
+            <rectangle>
+                <reportElement x="0" y="0" width="555" height="520" forecolor="#B0B0B0"/> <!-- Altura ajustada -->
+            </rectangle>
+
+            <!-- Título de la Sección -->
+            <staticText>
+                <reportElement x="10" y="5" width="535" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[F. ANTECEDENTES MEDICOS DEL PACIENTE]]></text>
+            </staticText>
+
+            <frame>
+                <reportElement x="10" y="40" width="535" height="440" forecolor="#B0B0B0"/> <!-- Altura del frame ajustada -->
+
+                <!-- Sección Enfermedades con Tratamiento -->
+                <rectangle>
+                    <reportElement x="10" y="10" width="525" height="140" forecolor="#B0B0B0"/> <!-- Altura incrementada -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="12" width="500" height="15"/>
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Enfermedades con Tratamiento:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="15" y="30" width="500" height="110" positionType="Float"/> <!-- Altura incrementada -->
+                    <textElement textAlignment="Left" verticalAlignment="Top">
+                        <paragraph leftIndent="0"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{enfermedadesConTratamiento}]]></textFieldExpression>
+                </textField>
+
+                <!-- Sección Alergias -->
+                <rectangle>
+                    <reportElement x="10" y="160" width="525" height="60" forecolor="#B0B0B0"/> <!-- Altura incrementada -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="162" width="275" height="20"/>
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Alergias:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="162" width="245" height="40"/> <!-- Ancho ajustado a 245, altura incrementada -->
+                    <textElement textAlignment="Left"/>
+                    <textFieldExpression><![CDATA[$F{alergias}]]></textFieldExpression>
+                </textField>
+
+                <!-- Sección Intervenciones Quirúrgicas -->
+                <rectangle>
+                    <reportElement x="10" y="230" width="525" height="140" forecolor="#B0B0B0"/> <!-- Altura incrementada -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="232" width="500" height="15"/>
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Intervenciones Quirúrgicas:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="15" y="250" width="500" height="110" positionType="Float"/> <!-- Altura incrementada -->
+                    <textElement textAlignment="Left" verticalAlignment="Top">
+                        <paragraph leftIndent="0"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{intervencionesQuirurgicas}]]></textFieldExpression>
+                </textField>
+
+                <!-- Sección Medicamentos Requeridos o Consumo -->
+                <rectangle>
+                    <reportElement x="10" y="390" width="525" height="80" forecolor="#B0B0B0"/> <!-- Altura incrementada -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="392" width="275" height="20"/>
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Medicamentos Requeridos o Consumo:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="392" width="245" height="20"/> <!-- Ancho ajustado a 245, altura mantenida -->
+                    <textElement textAlignment="Left"/>
+                    <textFieldExpression><![CDATA[$F{medicamentosRequeridosOConsumo}]]></textFieldExpression>
+                </textField>
+            </frame>
+        </band>
+
+
+        <band height="400" splitType="Stretch">
+            <!-- Contenedor General -->
+            <rectangle>
+                <reportElement x="0" y="0" width="555" height="380" forecolor="#B0B0B0"/> <!-- Líneas más suaves -->
+            </rectangle>
+
+            <!-- Sección A. DATOS PERSONALES -->
+            <staticText>
+                <reportElement x="10" y="5" width="535" height="15"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[G.ANTECEDENTES FAMILIARES]]></text>
+            </staticText>
+
+            <frame>
+                <reportElement x="10" y="40" width="535" height="340" forecolor="#B0B0B0"/> <!-- Ancho del frame ajustado a 535 -->
+
+                <!-- Sección Enfermedades o Discapacidades Familiares -->
+                <rectangle>
+                    <reportElement x="10" y="10" width="525" height="80" forecolor="#B0B0B0"/> <!-- Líneas más suaves, altura aumentada -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="12" width="275" height="20"/>
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Enfermedades o Discapacidades Familiares:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="12" width="245" height="70"/> <!-- Ancho ajustado a 245, altura aumentada -->
+                    <textElement textAlignment="Left"/>
+                    <textFieldExpression><![CDATA[$F{enfermedadesDiscapacidadesFamiliares}]]></textFieldExpression>
+                </textField>
+
+                <!-- Sección Trastornos Psicológicos Familiares -->
+                <rectangle>
+                    <reportElement x="10" y="100" width="525" height="80" forecolor="#B0B0B0"/> <!-- Líneas más suaves, altura aumentada -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="102" width="275" height="20"/>
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Trastornos Psicológicos Familiares:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="102" width="245" height="70"/> <!-- Ancho ajustado a 245, altura aumentada -->
+                    <textElement textAlignment="Left"/>
+                    <textFieldExpression><![CDATA[$F{trastornosPsicologicosFamiliares}]]></textFieldExpression>
+                </textField>
+
+                <!-- Sección Problemas de Aprendizaje Familiares -->
+                <rectangle>
+                    <reportElement x="10" y="190" width="525" height="80" forecolor="#B0B0B0"/> <!-- Líneas más suaves, altura aumentada -->
+                </rectangle>
+                <staticText>
+                    <reportElement x="15" y="192" width="275" height="20"/>
+                    <textElement textAlignment="Left"/>
+                    <text><![CDATA[Problemas de Aprendizaje Familiares:]]></text>
+                </staticText>
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="290" y="192" width="245" height="70"/> <!-- Ancho ajustado a 245, altura aumentada -->
+                    <textElement textAlignment="Left"/>
+                    <textFieldExpression><![CDATA[$F{problemasAprendizajeFamiliares}]]></textFieldExpression>
+                </textField>
+            </frame>
+        </band>
+
+    </detail>
+    <!-- Pie de página -->
+    <pageFooter>
+        <band height="40" splitType="Stretch">
+            <!-- Texto de UDIPSAI -->
+            <textField isStretchWithOverflow="true">
+                <reportElement x="0" y="0" width="555" height="20"/>
+                <textElement textAlignment="Center">
+                    <font size="10" isItalic="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Unidad de Diagnóstico, Investigación Psicopedagógica y Apoyo a la Inclusión (UDIPSAI)"]]></textFieldExpression>
+            </textField>
+
+        </band>
+    </pageFooter>
+
+</jasperReport>

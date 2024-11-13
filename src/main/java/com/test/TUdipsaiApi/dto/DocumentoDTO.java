@@ -7,14 +7,15 @@ import lombok.Setter;
 @Setter
 public class DocumentoDTO {
     private Long id;
-    private byte[] contenido;
+    private String url;
 
-
-    public DocumentoDTO(Long id, byte[] contenido) {
+    // Constructor que acepta un URL
+    public DocumentoDTO(Long id, String url) {
         this.id = id;
-        this.contenido = contenido;
+        this.url = url;
     }
 
+    // Constructor vacío
     public DocumentoDTO() {
     }
 }

@@ -54,4 +54,8 @@ public class Especialistas {
     @Column(name = "imagen", columnDefinition = "LONGBLOB")
     private byte[] imagen;
 
+    @ManyToOne
+    @JoinColumn(name = "sede_id", referencedColumnName = "id")
+    private Sede sede;
+
 }
